@@ -2,6 +2,7 @@ import { GitdbService } from 'src/app/services/gitdb.service'
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hero } from 'src/app/domain/hero';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -15,14 +16,12 @@ export class HomePageComponent implements OnInit {
   constructor(
     private readonly dbService: GitdbService,
     private readonly route: Router
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
-      // this.dbService.getAllHeroes().subscribe((h) => {
-      //   this.heroes = h;
-      // });
+    this.dbService.getAllHeroes().subscribe((h) => {
+      this.heroes = h;
+    });
   }
 
   navigate() {

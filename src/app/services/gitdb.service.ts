@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
-import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom, forkJoin, from, map, mergeAll, mergeMap, of, tap, toArray } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom, forkJoin, from, map, merge, mergeAll, mergeMap, of, tap, toArray, zip, zipWith } from 'rxjs';
 import { Token } from '@angular/compiler';
 
 declare var GitHub: any;
@@ -11,22 +11,26 @@ declare var GitHub: any;
 })
 export class GitdbService {
   private static readonly TOKEN: string = 'auth-token';
+  private static readonly USERNAME: string = 'username';
 
   private gh: any;
   private repo: any;
+  private user: string = '';
 
   private tokenSubject: BehaviorSubject<string> = new BehaviorSubject('');
   token$: Observable<string> = this.tokenSubject.asObservable();
 
+  private usernameSubject: BehaviorSubject<string> = new BehaviorSubject('');
+  username$: Observable<string> = this.usernameSubject.asObservable();
+
   private heroCacheSubject: ReplaySubject<Hero[] | null> = new ReplaySubject(1);
   private heroCache$ = this.heroCacheSubject.asObservable();
 
-  token = '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'
 
   constructor(private readonly route: Router) {
     this.token$.subscribe((token) => {
       this.gh = new GitHub({
-        token: this.token
+        token: token
       });
     });
 
@@ -35,7 +39,20 @@ export class GitdbService {
       this.tokenSubject.next(token);
     }
 
+    const user = sessionStorage.getItem(GitdbService.USERNAME);
+    if (user !== undefined && user !== null) {
+      this.usernameSubject.next(user);
+    }
+
     this.heroCacheSubject.next(null);
+
+    this.heroCache$.subscribe((a) => {
+      console.log(a);
+    });
+
+    this.getHero('Oliver').subscribe((a) => {
+      console.log(a);
+    });
   }
 
   setToken(token: string) {
@@ -54,7 +71,7 @@ export class GitdbService {
           `Updated ${hero.name}.json on ${new Date().toUTCString()}`
         );
       }),
-      tap((res) => {
+      tap(() => {
         this.heroCacheSubject.next(null);
       }),
     ).subscribe();
@@ -73,9 +90,7 @@ export class GitdbService {
 
   getAllHeroes(): Observable<Hero[]> {
     return from(this.createRepo()).pipe(
-      map(() => {
-        return this.heroCache$;
-      }),
+      map(() => this.heroCache$),
       mergeMap((heroes) => {
         return heroes.pipe(
           mergeMap((h) => {
@@ -86,15 +101,29 @@ export class GitdbService {
     );
   }
 
+  getImageString(name: string): Observable<string> {
+    return this.username$.pipe(
+      map((u) => `https://raw.githubusercontent.com/${u}/5e-db/main/images/${name}.png`),
+    )
+  }
+
+  setName(user: string) {
+    this.usernameSubject.next(user);
+    sessionStorage.setItem(GitdbService.USERNAME, user);
+  }
+
   private retrieveHeros(): Observable<Hero[]> {
     return from(this.repo.getContents('main', `heroes/`))
       .pipe(
-        map((data: any) => {
+        map( (data: any) => {
           return data.data.map((c: any) => {
             const name = c.name as string
-            return this.getHero(name.replace('.json', ''));
+            const a = this.getHero(name.replace('.json', ''));
+            console.log(a);
+            return a
           });
         }),
+        tap((h) => console.log(h)),
         mergeMap((heroes) => forkJoin<Hero[]>(heroes)),
         tap((heroes) => this.heroCacheSubject.next(heroes))
       );
@@ -102,7 +131,8 @@ export class GitdbService {
 
   async createRepo() {
     if (this.repo === undefined || this.repo === null) {
-      this.repo = await this.gh.getRepo('JimJebadiah', '5e-db');
+      const user = await firstValueFrom(this.username$);
+      this.repo = await this.gh.getRepo(user, '5e-db');
     }
   }
 }

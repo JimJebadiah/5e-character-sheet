@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './views/home-page/home-page.component';
 import { noTokenGuard } from './views/token-page/token-guard';
 import { TokenPageComponent } from './views/token-page/token-page.component';
+import { CharacterSheetPageComponent } from './views/character-sheet-page/character-sheet-page.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, canActivate: [noTokenGuard]},
-  {path: 'token', component: TokenPageComponent}
+  {path: 'token', component: TokenPageComponent},
+  {path: 'character/:name', component: CharacterSheetPageComponent}
 ];
 
 @NgModule({

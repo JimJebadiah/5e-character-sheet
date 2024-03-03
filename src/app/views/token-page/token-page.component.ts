@@ -10,17 +10,21 @@ import { GitdbService } from 'src/app/services/gitdb.service';
 export class TokenPageComponent implements OnInit {
 
   form: FormGroup;
+  user: FormControl<string | null>;
   control: FormControl<string | null>;
 
   token: string = '';
+  username: string = '';
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly gitService: GitdbService
   ) {
     this.control = fb.control<string>('');
+    this.user = fb.control<string>('');
     this.form = fb.group({
-      control: this.control
+      control: this.control,
+      user: this.user
     });
   }
 
@@ -28,13 +32,18 @@ export class TokenPageComponent implements OnInit {
       this.control.valueChanges.subscribe((newValue) => {
         this.token = newValue!;
       });
+
+      this.user.valueChanges.subscribe((user) => {
+        this.username = user!;
+      });
   }
 
   canSubmit() {
-    return this.token !== '';
+    return this.token !== '' && this.username !== '';
   }
 
   onSubmit() {
+    this.gitService.setName(this.username);
     this.gitService.setToken(this.token);
   }
 }

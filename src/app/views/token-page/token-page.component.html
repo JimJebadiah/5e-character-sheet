@@ -5,9 +5,13 @@
         </mat-card-header>
         <mat-card-content class="token-content">
           <form [formGroup]="form">
-            <mat-form-field class="token-input">
+            <mat-form-field class="token-input username">
+              <mat-label>GitHub Username</mat-label>
+              <input matInput required formControlName="user">
+            </mat-form-field>
+            <mat-form-field class="token-input password">
               <mat-label>GitHub Token</mat-label>
-              <input matInput required formControlName="control">
+              <input matInput required formControlName="control" type="password">
             </mat-form-field>
           </form>
           <button

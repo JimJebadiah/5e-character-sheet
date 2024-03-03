@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page.component';
 import { CharacterModule } from './character/character.module';
 import { CreateCharacterModule } from './create-character/create-character.module';
+import { HeaderModule } from 'src/app/components/header/header.module';
 
 
 
@@ -11,7 +12,8 @@ import { CreateCharacterModule } from './create-character/create-character.modul
   imports: [
     CommonModule,
     CharacterModule,
-    CreateCharacterModule
+    CreateCharacterModule,
+    HeaderModule
   ],
   exports: [HomePageComponent]
 })

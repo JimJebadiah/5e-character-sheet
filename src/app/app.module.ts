@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomePageComponent } from './views/home-page/home-page.component';
 import { HomePageModule } from './views/home-page/home-page.module';
 import { TokenPageModule } from './views/token-page/token-page.module';
+import { CharacterSheetPageModule } from './views/character-sheet-page/character-sheet-page.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TokenPageModule } from './views/token-page/token-page.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HomePageModule,
-    TokenPageModule
+    TokenPageModule,
+    CharacterSheetPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
