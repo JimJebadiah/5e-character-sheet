@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { GitdbService } from './services/gitdb.service';
+import { Hero } from './domain/hero';
 
 @Component({
   selector: 'app-root',

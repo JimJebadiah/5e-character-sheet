@@ -1,0 +1,25 @@
+<div class="token-page-container">
+    <mat-card class="token-card">
+        <mat-card-header class="token-card-header">
+            <mat-card-title>Add token</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="token-content">
+          <form [formGroup]="form">
+            <mat-form-field class="token-input">
+              <mat-label>GitHub Token</mat-label>
+              <input matInput required formControlName="control">
+            </mat-form-field>
+          </form>
+          <button
+            class="token-submit-button"
+            mat-raised-button
+            color="accent"
+            (click)="onSubmit()"
+            [disabled]="!canSubmit()"
+          >
+            <mat-icon>start</mat-icon>
+            Submit
+          </button>
+        </mat-card-content>
+    </mat-card>
+</div>

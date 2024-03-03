@@ -1,0 +1,27 @@
+.card() {
+  width: 450px;
+  height: 600px;
+  @media screen and (max-width: 480px) {
+    .card-mobile();
+  }
+}
+
+.card-mobile() {
+  width: 300px;
+  height: 400px;
+}
+
+.card-grid() {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 50px;
+  grid-auto-rows: auto;
+  padding-bottom: 50px;
+  @media screen and (max-width: 480px) {
+    .card-grid-mobile();
+  }
+}
+
+.card-grid-mobile() {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
