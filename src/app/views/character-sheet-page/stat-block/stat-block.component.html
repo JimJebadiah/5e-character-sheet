@@ -1,1 +1,17 @@
-<p>stat-block works!</p>
+<mat-card class="stat-card">
+  <div class="header">
+    Stats
+  </div>
+  <div class="body">
+    <div class="attributes">
+      <div class="attribute" *ngFor="let attribute of attributes">
+        <div class="attribute-box">
+          <span class="stat-name"><b>{{attribute.toUpperCase()}}</b></span>
+          <span class="stat-value">{{getAttribute(attribute)?.value}}</span>
+          <hr />
+          <span class="stat-mod">{{getAttributeMod(attribute)}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

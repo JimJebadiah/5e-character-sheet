@@ -1,3 +1,15 @@
-<div class="sheet-container">
-  <app-header [title]="hero.name" [subtitle]="subtitle()"></app-header>
-</div>
+<ng-container *ngIf="loaded">
+  <app-header [title]="hero.name"></app-header>
+  <div class="sheet-container">
+
+    <div class="subtitles">
+      <p class="subtitle" *ngFor="let s of subtitles()">{{s}}</p>
+    </div>
+    <hr />
+
+    <div class="grid">
+      <app-stat-block [hero]="hero"></app-stat-block>
+    </div>
+
+  </div>
+</ng-container>

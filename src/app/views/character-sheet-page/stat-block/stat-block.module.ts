@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatBlockComponent } from './stat-block.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -9,7 +10,9 @@ import { StatBlockComponent } from './stat-block.component';
     StatBlockComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    MatCardModule
+  ],
+  exports: [StatBlockComponent]
 })
 export class StatBlockModule { }

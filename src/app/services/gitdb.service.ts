@@ -45,14 +45,6 @@ export class GitdbService {
     }
 
     this.heroCacheSubject.next(null);
-
-    this.heroCache$.subscribe((a) => {
-      console.log(a);
-    });
-
-    this.getHero('Oliver').subscribe((a) => {
-      console.log(a);
-    });
   }
 
   setToken(token: string) {
@@ -108,6 +100,7 @@ export class GitdbService {
   }
 
   setName(user: string) {
+    console.log(user);
     this.usernameSubject.next(user);
     sessionStorage.setItem(GitdbService.USERNAME, user);
   }

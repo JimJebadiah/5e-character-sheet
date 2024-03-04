@@ -1,7 +1,9 @@
 <div class="header-container">
   <div class="header">
     <p class="title">{{title}}</p>
-    <p class="subtitle">{{subtitle}}</p>
+    <div class="subtitles">
+      <p class="subtitle" *ngFor="let s of subtitles">{{s}}</p>
+    </div>
     <hr />
   </div>
 </div>

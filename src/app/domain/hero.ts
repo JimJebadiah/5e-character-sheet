@@ -80,7 +80,7 @@ export class Hero {
         this.abilities = json.abilities?.map((a) => new Ability(a)) ?? [];
 
         this.attributes = new Map<Attributes, Attribute>();
-        if (this.attributes.size >= 6) {
+        if (json.attributes.length >= 6) {
             this.attributes.set(Attributes.STR, new Attribute(json.attributes.filter((a) => a.name === Attributes.STR)[0]));
             this.attributes.set(Attributes.DEX, new Attribute(json.attributes.filter((a) => a.name === Attributes.DEX)[0]));
             this.attributes.set(Attributes.CON, new Attribute(json.attributes.filter((a) => a.name === Attributes.CON)[0]));
@@ -91,7 +91,7 @@ export class Hero {
     }
 
     getAttrMod(attribute: Attributes): number {
-        return this.attributes.get(attribute)!.value;
+        return this.attributes.get(attribute)!.modifier ;
     }
 
     getProfBonus() {
