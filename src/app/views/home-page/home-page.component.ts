@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePageComponent implements OnInit {
 
-  heroes: Hero[] = [Hero.empty('John'), Hero.empty('Mark'), Hero.empty('John'), Hero.empty('John'),Hero.empty('John')];
+  heroes: Hero[] = [];
 
   constructor(
     private readonly dbService: GitdbService,

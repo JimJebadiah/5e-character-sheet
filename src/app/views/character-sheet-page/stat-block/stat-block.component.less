@@ -3,6 +3,9 @@
 
 .stat-card {
   .card-container(fit-content);
+  @media screen and (max-width: 480px) {
+    .card-container(@card-mobile-width);
+  }
 
   .header {
     .card-header();

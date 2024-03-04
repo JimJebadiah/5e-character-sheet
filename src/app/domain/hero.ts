@@ -10,6 +10,7 @@ export interface HeroJSON {
     name: string,
     class: string,
     level: number,
+    race: string,
     maxHp: number,
     hp: number,
     tempHp: number,
@@ -35,6 +36,7 @@ export class Hero {
     name: string;
     class: string;
     level: number;
+    race: string;
     maxHp: number;
     hp: number;
     tempHp: number;
@@ -60,6 +62,7 @@ export class Hero {
         this.name = json.name;
         this.class = json.class;
         this.level = json.level;
+        this.race = json.race;
         this.maxHp = json.maxHp;
         this.hp = json.hp;
         this.tempHp = json.tempHp;
@@ -140,6 +143,7 @@ export class Hero {
             name: this.name,
             class: this.class,
             level: this.level,
+            race: this.race,
             maxHp: this.maxHp,
             hp: this.hp,
             tempHp: this.tempHp,
@@ -167,6 +171,7 @@ export class Hero {
             name: name,
             class: '',
             level: 0,
+            race: '',
             maxHp: 0,
             hp: 0,
             tempHp: 0,

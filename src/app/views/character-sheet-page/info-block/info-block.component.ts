@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
 
@@ -12,5 +13,7 @@ export class InfoBlockComponent {
 
   constructor(private readonly dbService: GitdbService) {}
 
-  
+  getImageString(): Observable<string> {
+    return this.dbService.getImageString(this.hero.name!);
+  }
 }

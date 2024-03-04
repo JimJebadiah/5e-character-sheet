@@ -1,6 +1,13 @@
 .sheet-container {
   padding: 0 2.5%;
 
+  .grid {
+    display: flex;
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+    }
+  }
+
   .subtitles {
     display: flex;
     justify-content: space-between;
