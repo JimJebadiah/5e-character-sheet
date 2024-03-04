@@ -2,12 +2,17 @@
   <div class="attributes-header">Attributes</div>
   <div class="attributes-body">
     <div class="attribute" *ngFor="let attribute of attributes">
-      <div class="attribute-box">
+      <div
+        class="attribute-box"
+        appEditableNumber
+        [getter]="getAttrGetterFunction(attribute)"
+        [setter]="getAttributeSetterFunction(attribute)"
+      >
         <span class="stat-name" [class.proficient]="isProficient(attribute)">
           <b>{{attribute.toUpperCase()}}</b>
         </span>
         <span class="stat-value">
-          {{getAttribute(attribute).value}}
+          {{getAttributeValue(attribute)}}
         </span>
         <hr />
         <span class="stat-mod" [ngClass]="valueStyle(attribute)">

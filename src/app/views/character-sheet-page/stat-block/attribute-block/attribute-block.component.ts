@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { Attributes, attributes } from 'src/app/domain/attribute';
 import { Hero } from 'src/app/domain/hero';
 
@@ -12,8 +13,17 @@ export class AttributeBlockComponent {
 
   attributes = attributes;
 
+  constructor() {
+    this.getAttrGetterFunction.bind(this);
+    this.getAttributeSetterFunction.bind(this);
+  }
+
   getAttribute(attr: Attributes) {
     return this.hero.attributes.get(attr)!;
+  }
+
+  getAttributeValue(attr: Attributes) {
+    return this.getAttribute(attr).value;
   }
 
   getAttributeMod(attr: Attributes) {
@@ -36,5 +46,17 @@ export class AttributeBlockComponent {
     if (mod > 0) return 'positive';
     else if (mod == 0) return 'zero';
     else return 'negative';
+  }
+
+  getAttrGetterFunction(attr: Attributes): Getter {
+    return () => this.getAttributeValue(attr);
+  }
+
+  getAttributeSetterFunction(attr: Attributes): Setter {
+    return (val: number) => {
+      const attribute = this.getAttribute(attr);
+      attribute.value = val;
+      this.hero.attributes.set(attr, attribute);
+    }
   }
 }
