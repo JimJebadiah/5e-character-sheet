@@ -1,55 +1,51 @@
 @import '../../../card-common.less';
+@import './stat-common.less';
 
 .stat-card {
+  .card-container(fit-content);
+
   .header {
     .card-header();
   }
 
   .body {
-    .attributes {
-      padding: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 
-      .attribute {
-        .center();
+  .col2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
 
+  .prof-bonus-card {
+    .card-container(250px);
+    @media screen and (max-width: 480px) {
+      .card-container(300px);
+    }
 
-        .attribute-box {
-          .center();
-          flex-direction: column;
-          width: 175px;
-          height: 175px;
-          border-radius: 5%;
-          background-color: var(--white);
-          margin: 10px 0;
-          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: large;
+    flex-grow: 1;
+    margin-top: 0;
+    margin-bottom: 10px;
+    min-height: 60px;
+    max-height: 60px;
 
-          hr {
-            width: 50%;
-            color: rgba(0, 0, 0, 0.25);
-          }
+    span {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
 
-          .stat-name {
-            margin-top: 15px;
-            font-size: x-large;
-            flex-grow: 1;
-          }
-
-          .stat-value {
-            font-size: x-large;
-          }
-
-          .stat-mod {
-            margin-bottom: 35px;
-            font-size: large;
-          }
-        }
-      }
+    .mat-mdc-checkbox {
+      --mdc-checkbox-disabled-selected-icon-color: var(--primary);
+      --mdc-checkbox-disabled-unselected-icon-color: var(--primary);
     }
   }
-}
-
-.center() {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

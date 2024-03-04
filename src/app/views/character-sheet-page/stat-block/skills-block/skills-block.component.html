@@ -1,0 +1,15 @@
+<mat-card class="skills">
+  <div class="skills-header">Skills</div>
+  <div class="skills-body">
+    <div class="skill" *ngFor="let skill of skills">
+      <div class="skill-box">
+        <span class="skill-name" [class.proficient]="isProficient(skill)">
+          {{getSkill(skill).getName()}}
+        </span>
+        <span class="skill-value">
+          {{getSkillValue(skill)}}
+        </span>
+      </div>
+    </div>
+  </div>
+</mat-card>

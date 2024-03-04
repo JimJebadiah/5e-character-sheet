@@ -1,0 +1,52 @@
+@import '../../../../card-common.less';
+@import '../stat-common.less';
+
+.attributes {
+  .card-container(250px);
+  @media screen and (max-width: 480px) {
+    .card-container(300px);
+  }
+
+  .attributes-header {
+    .card-header();
+  }
+
+  .attributes-body {
+    margin: 20px auto;
+
+    .attribute {
+      .center();
+
+      .attribute-box {
+        .center();
+        flex-direction: column;
+        width: 150px;
+        height: 150px;
+        border-radius: 5%;
+        background-color: var(--white);
+        margin: 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+        hr {
+          width: 50%;
+          color: rgba(0, 0, 0, 0.25);
+        }
+
+        .stat-name {
+          margin-top: 15px;
+          font-size: x-large;
+          flex-grow: 1;
+        }
+
+        .stat-value {
+          font-size: x-large;
+        }
+
+        .stat-mod {
+          margin-bottom: 35px;
+          font-size: large;
+        }
+      }
+    }
+  }
+}

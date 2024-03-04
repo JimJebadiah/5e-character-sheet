@@ -1,0 +1,19 @@
+<mat-card class="attributes">
+  <div class="attributes-header">Attributes</div>
+  <div class="attributes-body">
+    <div class="attribute" *ngFor="let attribute of attributes">
+      <div class="attribute-box">
+        <span class="stat-name" [class.proficient]="isProficient(attribute)">
+          <b>{{attribute.toUpperCase()}}</b>
+        </span>
+        <span class="stat-value">
+          {{getAttribute(attribute).value}}
+        </span>
+        <hr />
+        <span class="stat-mod" [ngClass]="valueStyle(attribute)">
+          {{getAttributeMod(attribute)}}
+        </span>
+      </div>
+    </div>
+  </div>
+</mat-card>

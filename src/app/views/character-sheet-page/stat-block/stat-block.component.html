@@ -3,15 +3,19 @@
     Stats
   </div>
   <div class="body">
-    <div class="attributes">
-      <div class="attribute" *ngFor="let attribute of attributes">
-        <div class="attribute-box">
-          <span class="stat-name"><b>{{attribute.toUpperCase()}}</b></span>
-          <span class="stat-value">{{getAttribute(attribute)?.value}}</span>
-          <hr />
-          <span class="stat-mod">{{getAttributeMod(attribute)}}</span>
-        </div>
-      </div>
+    <div class="col1">
+      <app-attribute-block [hero]="hero"></app-attribute-block>
+    </div>
+    <div class="col2">
+      <app-skills-block [hero]="hero"></app-skills-block>
+      <mat-card class="prof-bonus-card">
+        <span>Proficiency Bonus</span>
+        <span class="positive">{{proficency()}}</span>
+      </mat-card>
+      <mat-card class="prof-bonus-card">
+        <span>Inspiration</span>
+        <mat-checkbox color="primary" [checked]="inspired()"></mat-checkbox>
+      </mat-card>
     </div>
   </div>
 </mat-card>

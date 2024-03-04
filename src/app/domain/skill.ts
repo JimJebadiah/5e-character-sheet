@@ -1,7 +1,7 @@
-import { Attributes } from "./attribute";
+import { Attributes, attributes } from "./attribute";
 import { Hero } from "./hero";
 
-export enum SKILLS {
+export enum Skills {
     ACROBATICS = 'acrobatics',
     ANIMAL_HANDLING = 'animal handling',
     ARCANA = 'arcana',
@@ -18,8 +18,30 @@ export enum SKILLS {
     PERSUASION = 'persuasion',
     RELIGION = 'religion',
     SLEIGHT_OF_HAND = 'sleight of hand',
-    STEALTH = 'stealth'
+    STEALTH = 'stealth',
+    SURVIVAL = 'survival',
 }
+
+export const skills = [
+  Skills.ACROBATICS,
+  Skills.ANIMAL_HANDLING,
+  Skills.ARCANA,
+  Skills.ATHLETICS,
+  Skills.DECEPTION,
+  Skills.HISTORY,
+  Skills.INSIGHT,
+  Skills.INTIMIDATION,
+  Skills.INVESTIGATION,
+  Skills.MEDICINE,
+  Skills.NATURE,
+  Skills.PERCEPTION,
+  Skills.PERFORMANCE,
+  Skills.PERSUASION,
+  Skills.RELIGION,
+  Skills.SLEIGHT_OF_HAND,
+  Skills.STEALTH,
+  Skills.SURVIVAL,
+]
 
 export interface SkillJSON {
     readonly name: string,
@@ -31,11 +53,18 @@ export class Skill {
     readonly name: string;
     readonly attribute: Attributes;
     proficient: boolean;
-    
+
     constructor(json: SkillJSON) {
-        this.name = json.name;
-        this.attribute = json.attribute as Attributes;
-        this.proficient = json.proficient;
+      console.log(json.attribute + ' ' + json.name);
+      this.name = json.name;
+      this.attribute = attributes.find((attr) => attr === json.attribute)!;
+      this.proficient = json.proficient;
+    }
+
+    getName() {
+      return this.name.split(' ').map((s) => {
+        return s[0].toUpperCase() + s.slice(1);
+      }).join(' ');
     }
 
     getModifier(hero: Hero): number {

@@ -7,6 +7,15 @@ export enum Attributes {
     CHA = 'charisma'
 }
 
+export const attributes = [
+  Attributes.STR,
+  Attributes.DEX,
+  Attributes.CON,
+  Attributes.INT,
+  Attributes.WIS,
+  Attributes.CHA,
+]
+
 export interface AttributeJSON {
     readonly name: string,
     value: number;
@@ -17,7 +26,7 @@ export class Attribute {
     readonly name: string;
     value: number;
     readonly proficient: boolean;
-    
+
     constructor(json: AttributeJSON) {
         this.name = json.name;
         this.value = json.value;

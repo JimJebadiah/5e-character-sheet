@@ -1,9 +1,9 @@
 import { Ability, AbilityJSON } from "./ability";
-import { AttributeJSON, Attributes, Attribute } from "./attribute";
+import { AttributeJSON, Attributes, Attribute, attributes } from "./attribute";
 import { Dice } from "./dice";
 import { Feat, FeatJSON } from "./feat";
 import { Item, ItemJSON } from "./item";
-import { Skill, SkillJSON } from "./skill";
+import { Skill, SkillJSON, Skills, skills } from "./skill";
 import { Weapon, WeaponJSON, makeWeapon } from "./weapon";
 
 export interface HeroJSON {
@@ -48,7 +48,7 @@ export class Hero {
     inspiration: boolean;
     proficiencyBonus: number;
     attributes: Map<Attributes, Attribute>;
-    skills: Skill[];
+    skills: Map<Skills, Skill>;
     inventory: Item[];
     weapons: Weapon[];
     languages: string[];
@@ -72,7 +72,6 @@ export class Hero {
         this.alignment = json.alignment;
         this.inspiration = json.inspiration;
         this.proficiencyBonus = json.proficiencyBonus;
-        this.skills = json.skills?.map((s) => new Skill(s)) ?? [];
         this.inventory = json.inventory?.map((i) => new Item(i)) ?? [];
         this.weapons = json.weapons?.map((w) => makeWeapon(w)) ?? [];
         this.languages = json.languages;
@@ -80,14 +79,20 @@ export class Hero {
         this.abilities = json.abilities?.map((a) => new Ability(a)) ?? [];
 
         this.attributes = new Map<Attributes, Attribute>();
-        if (json.attributes.length >= 6) {
-            this.attributes.set(Attributes.STR, new Attribute(json.attributes.filter((a) => a.name === Attributes.STR)[0]));
-            this.attributes.set(Attributes.DEX, new Attribute(json.attributes.filter((a) => a.name === Attributes.DEX)[0]));
-            this.attributes.set(Attributes.CON, new Attribute(json.attributes.filter((a) => a.name === Attributes.CON)[0]));
-            this.attributes.set(Attributes.INT, new Attribute(json.attributes.filter((a) => a.name === Attributes.INT)[0]));
-            this.attributes.set(Attributes.WIS, new Attribute(json.attributes.filter((a) => a.name === Attributes.WIS)[0]));
-            this.attributes.set(Attributes.CHA, new Attribute(json.attributes.filter((a) => a.name === Attributes.CHA)[0]));
-        }
+        let i = 0;
+        json.attributes.forEach(() => {
+          const attr = attributes[i];
+          this.attributes.set(attr, new Attribute(json.attributes.filter((a) => a.name === attr)[0]));
+          i++;
+        });
+
+        this.skills = new Map<Skills, Skill>();
+        i = 0;
+        json.skills.forEach(() => {
+          const skill = skills[i];
+          this.skills.set(skill, new Skill(json.skills.filter((s) => s.name === skill)[0]));
+          i++;
+        });
     }
 
     getAttrMod(attribute: Attributes): number {
@@ -95,7 +100,7 @@ export class Hero {
     }
 
     getProfBonus() {
-        return 0;
+        return this.proficiencyBonus;
     }
 
     damage(amnt: number) {
@@ -147,7 +152,7 @@ export class Hero {
             alignment: this.alignment,
             inspiration: this.inspiration,
             proficiencyBonus: this.proficiencyBonus,
-            skills: this.skills.map((s) => s.json),
+            skills: [ ...this.skills.values() ].map((v) => v.json),
             inventory: this.inventory.map((i) => i.json),
             weapons: this.weapons.map((w) => w.json),
             feats: this.feats.map((f) => f.json),

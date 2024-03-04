@@ -1,0 +1,41 @@
+@import '../../../../card-common.less';
+@import '../stat-common.less';
+
+.skills {
+  .card-container(250px);
+  @media screen and (max-width: 480px) {
+    .card-container(300px);
+  }
+
+  .skills-header {
+    .card-header();
+  }
+
+  .skills-body {
+    margin: 5px 0;
+
+    .skill {
+      .center();
+
+      .skill-box {
+        background-color: var(--white);
+        width: 90%;
+        height: 40px;
+        border-radius: 5%;
+        background-color: var(--white);
+        margin: 5px 0;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: larger;
+
+        span {
+          padding: 0 15px;
+        }
+      }
+    }
+  }
+}
