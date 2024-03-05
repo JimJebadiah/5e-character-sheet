@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CharacterSheetPageComponent } from './character-sheet-page.component';
-import { HeaderModule } from 'src/app/components/header/header.module';
-import { StatBlockModule } from './stat-block/stat-block.module';
-import { InfoBlockModule } from './info-block/info-block.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { HeaderModule } from "src/app/components/header/header.module";
+import { CharacterSheetPageComponent } from "./character-sheet-page.component";
+import { InfoBlockModule } from "./info-block/info-block.module";
+import { StatBlockModule } from "./stat-block/stat-block.module";
+
 
 
 
@@ -15,7 +17,8 @@ import { InfoBlockModule } from './info-block/info-block.module';
     CommonModule,
     HeaderModule,
     InfoBlockModule,
-    StatBlockModule
+    StatBlockModule,
+    RouterModule
   ]
 })
 export class CharacterSheetPageModule { }

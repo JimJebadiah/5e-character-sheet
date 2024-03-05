@@ -1,46 +1,28 @@
-import { EditableNumberDialogComponent } from './../../components/editable-number-dialog/editable-number-dialog.component';
+import { Renderer2 } from '@angular/core';
+import { EditableNumberDialogComponent } from '../../components/editable-dialog/editable-number-dialog/editable-number-dialog.component';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Hero } from 'src/app/domain/hero';
+import { AbstractEditableDirective } from '../abstract-editable-directive';
+import { ComponentType } from '@angular/cdk/portal';
 
-export type Setter = (val: number) => void;
-export type Getter = () => number;
+export type Setter<T> = (val: T) => void;
+export type Getter<T> = () => T;
 
 @Directive({
   selector: '[appEditableNumber]'
 })
-export class EditableNumberDirective {
-
-  @HostListener('click')
-  onClick() {
-    this.open();
-  }
-
-  @HostListener('mouseenter')
-  onEnter() {
-    this.ref.nativeElement.style.cursor = 'pointer';
-  }
-
-  @HostListener('mouseleave')
-  onLeave() {
-    this.ref.nativeElement.style.cursor = 'auto';
-  }
-
-  @Input() setter!: Setter;
-  @Input() getter!: Getter;
+export class EditableNumberDirective extends AbstractEditableDirective<number> {
 
   constructor(
-    private readonly matDialog: MatDialog,
-    private readonly ref: ElementRef
-  ) {}
-
-  open() {
-    this.matDialog.open(EditableNumberDialogComponent, {
-      data: {
-        getter: this.getter,
-        setter: this.setter
-      }
-    });
+    ref: ElementRef,
+    renderer: Renderer2,
+    matDialog: MatDialog
+  ) {
+    super(ref, renderer, matDialog);
   }
 
+  protected override dialog(): ComponentType<any> {
+    return EditableNumberDialogComponent;
+  }
 }

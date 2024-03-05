@@ -5,6 +5,7 @@ import { StatBlockComponent } from './stat-block.component';
 import { MatCardModule } from '@angular/material/card';
 import { AttributeBlockModule } from './attribute-block/attribute-block.module';
 import { SkillsBlockModule } from './skills-block/skills-block.module';
+import { EditableModule } from 'src/app/directives/editable.module';
 
 
 
@@ -17,7 +18,8 @@ import { SkillsBlockModule } from './skills-block/skills-block.module';
     MatCardModule,
     AttributeBlockModule,
     SkillsBlockModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    EditableModule
   ],
   exports: [StatBlockComponent]
 })

@@ -1,5 +1,8 @@
 <mat-card class="info-card">
   <div class="header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
     {{hero.name}}
   </div>
   <div class="body">
@@ -11,19 +14,19 @@
       <span>Level</span>
       <span>{{hero.level}}</span>
     </div>
-    <div class="info">
+    <div class="info" appEditableString [getter]="getString('class')" [setter]="setString('class')">
       <span>Class</span>
       <span>{{hero.class}}</span>
     </div>
-    <div class="info">
+    <div class="info" appEditableString [getter]="getString('race')" [setter]="setString('race')">
       <span>Race</span>
       <span>{{hero.race}}</span>
     </div>
-    <div class="info">
+    <div class="info" appEditableString [getter]="getString('background')" [setter]="setString('background')">
       <span>Background</span>
       <span>{{hero.background}}</span>
     </div>
-    <div class="info">
+    <div class="info" appEditableString [getter]="getString('alignment')" [setter]="setString('alignment')">
       <span>Alignment</span>
       <span>{{hero.alignment}}</span>
     </div>

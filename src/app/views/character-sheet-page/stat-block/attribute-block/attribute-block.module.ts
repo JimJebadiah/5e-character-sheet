@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AttributeBlockComponent } from './attribute-block.component';
 import { MatCardModule } from '@angular/material/card';
-import { EditableNumberModule } from 'src/app/directives/editable-number/editable-number.module';
+import { EditableModule } from 'src/app/directives/editable.module';
 
 
 
@@ -13,7 +13,7 @@ import { EditableNumberModule } from 'src/app/directives/editable-number/editabl
   imports: [
     CommonModule,
     MatCardModule,
-    EditableNumberModule
+    EditableModule
   ],
   exports: [AttributeBlockComponent],
 })

@@ -48,11 +48,11 @@ export class AttributeBlockComponent {
     else return 'negative';
   }
 
-  getAttrGetterFunction(attr: Attributes): Getter {
+  getAttrGetterFunction(attr: Attributes): Getter<number> {
     return () => this.getAttributeValue(attr);
   }
 
-  getAttributeSetterFunction(attr: Attributes): Setter {
+  getAttributeSetterFunction(attr: Attributes): Setter<number> {
     return (val: number) => {
       const attribute = this.getAttribute(attr);
       attribute.value = val;

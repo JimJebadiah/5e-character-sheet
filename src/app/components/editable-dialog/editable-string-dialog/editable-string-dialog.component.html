@@ -1,0 +1,17 @@
+<mat-card class="edit-number-container">
+  <div class="header">Edit</div>
+  <div class="body">
+    <div class="content">
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Value</mat-label>
+          <input matInput formControlName="control" required />
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="buttons">
+      <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="confirm()" [disabled]="!canSubmit()">Confirm</button>
+    </div>
+  </div>
+</mat-card>
