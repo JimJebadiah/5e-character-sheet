@@ -2,7 +2,7 @@
 @import './stat-common.less';
 
 .stat-card {
-  .card-container(fit-content);
+  .block-container(fit-content);
   @media screen and (max-width: 480px) {
     .card-container(@card-mobile-width);
   }
@@ -15,6 +15,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    overflow-y: scroll;
   }
 
   .col2 {
