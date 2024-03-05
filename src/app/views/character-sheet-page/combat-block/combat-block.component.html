@@ -1,1 +1,83 @@
-<p>combat-block works!</p>
+<mat-card class="combat-card">
+  <div class="header">
+    Combat
+  </div>
+  <div class="body">
+    <!-- Make this a component -->
+    <div class="armor-init-speed">
+      <div class="armor">
+        <mat-card>
+          <div class="header">
+            Armor Class
+          </div>
+          <div class="armor-body ais-body">
+            <div class="box square" appEditableNumber [getter]="getNumber('ac')" [setter]="setNumber('ac')">
+              {{hero.ac}}
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="initiative">
+        <mat-card>
+          <div class="header">
+            Initiative
+          </div>
+          <div class="initiative-body ais-body">
+            <div class="box square" [ngClass]="valueStyle()">
+              {{formatInit()}}
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="speed">
+        <mat-card>
+          <div class="header">
+            Speed
+          </div>
+          <div class="speed-body ais-body">
+            <div class="box square" appEditableNumber [getter]="getNumber('speed')" [setter]="setNumber('speed')" [step]="5">
+              {{hero.speed}}
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <!-- Make this a component -->
+    <div class="hp">
+      <mat-card>
+        <div class="header">
+          Health
+        </div>
+        <div class="hp-body">
+          <div class="hp-body-curr">
+            <div class="pillar damage">Damage</div>
+            <div class="box">
+              {{hero.hp}}
+            </div>
+            <div class="pillar heal">Heal</div>
+          </div>
+          <hr />
+          <div class="bottom">
+            <div class="hit-dice">
+              <span>{{hero.hitDiceCount}} {{hero.hitDice}}</span>
+              <span class="pipe">|</span>
+              <span>Hit Dice</span>
+            </div>
+            <div class="box small">
+              {{hero.maxHp}}
+            </div>
+            <div class="death-saves">
+              <div class="row" *ngFor="let i of [0, 1]">
+                <div class="col" *ngFor="let j of [0, 1, 2]">
+                  <mat-checkbox></mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <!-- Make a Weapon component -->
+  </div>
+</mat-card>
+

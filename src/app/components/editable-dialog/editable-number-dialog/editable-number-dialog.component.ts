@@ -9,18 +9,22 @@ import { AbstractEditableDialog } from '../abstract-editable-dialog';
   styleUrls: ['./editable-number-dialog.component.less']
 })
 export class EditableNumberDialogComponent extends AbstractEditableDialog<number, EditableNumberDialogComponent> {
+
+  private step: number;
+
   constructor(
     ref: MatDialogRef<EditableNumberDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>}
+    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>, step: number}
   ) {
     super(ref, data);
+    this.step = data.step;
   }
 
   minus() {
-    this.value--;
+    this.value -= this.step;
   }
 
   plus() {
-    this.value++;
+    this.value += this.step;
   }
 }

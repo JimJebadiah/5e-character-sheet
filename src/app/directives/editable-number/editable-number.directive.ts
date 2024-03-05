@@ -14,6 +14,8 @@ export type Getter<T> = () => T;
 })
 export class EditableNumberDirective extends AbstractEditableDirective<number> {
 
+  @Input() step: number = 1;
+
   constructor(
     ref: ElementRef,
     renderer: Renderer2,
@@ -24,5 +26,12 @@ export class EditableNumberDirective extends AbstractEditableDirective<number> {
 
   protected override dialog(): ComponentType<any> {
     return EditableNumberDialogComponent;
+  }
+
+  protected override data() {
+    return {
+      ...super.data(),
+      step: this.step
+    }
   }
 }

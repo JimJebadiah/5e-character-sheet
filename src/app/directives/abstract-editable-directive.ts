@@ -39,6 +39,13 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
 
   protected abstract dialog(): ComponentType<any>;
 
+  protected data(): object {
+    return {
+      getter: this.getter,
+      setter: this.setter
+    }
+  }
+
   ngAfterViewInit(): void {
     console.log(this.ref.nativeElement);
     this.overlay = document.createElement('div');
@@ -52,10 +59,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
 
   open() {
     this.matDialog.open(this.dialog(), {
-      data: {
-        getter: this.getter,
-        setter: this.setter
-      },
+      data: this.data(),
       autoFocus: false,
     });
   }
