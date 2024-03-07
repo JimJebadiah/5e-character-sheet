@@ -1,48 +1,16 @@
-@import '../../../card-common.less';
+@import '../editable-dialog-common.less';
 
-.edit-number-container {
-  .card-container(250px);
-  margin: 0;
-  height: 250px;
+.value {
+  font-weight: bold;
+  font-size: xxx-large;
+  width: 48px;
+  text-align: center;
+}
 
-  .header {
-    .card-header();
-  }
+.plus {
+  margin-left: 15px;
+}
 
-  .body {
-    .center();
-    flex-direction: column;
-
-    .content {
-      .center();
-      justify-content: center;
-      margin: 25px;
-
-      .value {
-        font-weight: bold;
-        font-size: xxx-large;
-        width: 48px;
-        text-align: center;
-      }
-
-      .plus {
-        margin-left: 15px;
-      }
-
-      .minus {
-        margin-right: 15px;
-      }
-    }
-
-    .buttons {
-      .center();
-      margin-top: 25px;
-      width: 90%;
-      gap: 15px;
-
-      button {
-        width: 60%;
-      }
-    }
-  }
+.minus {
+  margin-right: 15px;
 }

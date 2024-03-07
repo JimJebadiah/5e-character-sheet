@@ -9,13 +9,15 @@ import { EditableStringDialogComponent } from './editable-string-dialog/editable
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { EditableNumberStepDialogComponent } from './editable-number-step-dialog/editable-number-step-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     EditableNumberDialogComponent,
-    EditableStringDialogComponent
+    EditableStringDialogComponent,
+    EditableNumberStepDialogComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { MatInputModule } from '@angular/material/input';
   ],
   exports: [
     EditableNumberDialogComponent,
-    EditableStringDialogComponent
+    EditableStringDialogComponent,
+    EditableNumberStepDialogComponent
   ]
 })
 export class EditableDialogModule { }

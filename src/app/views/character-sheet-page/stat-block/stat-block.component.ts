@@ -12,11 +12,6 @@ import { Hero } from 'src/app/domain/hero';
 export class StatBlockComponent {
   @Input() hero!: Hero;
 
-  constructor() {
-    this.getProf.bind(this);
-    this.setProf.bind(this);
-  }
-
   proficency() {
     const bonus = this.hero.getProfBonus();
     return bonus >= 0 ? `+${bonus}` : bonus;
@@ -24,13 +19,5 @@ export class StatBlockComponent {
 
   inspired() {
     return this.hero.inspiration;
-  }
-
-  getProf(): Getter<number> {
-    return () => this.hero.getProfBonus();
-  }
-
-  setProf(): Setter<number> {
-    return (val) => this.hero.proficiencyBonus = val;
   }
 }

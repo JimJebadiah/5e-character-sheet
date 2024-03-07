@@ -2,49 +2,9 @@
 
 .combat-card {
   .block-container(500px);
+
   @media screen and (max-width: 480px) {
     .card-container(@card-mobile-width);
-  }
-
-  .header {
-    .card-header();
-  }
-
-  .armor-init-speed {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    @media screen and (max-width: 480px) {
-      flex-direction: column;
-      align-items: center;
-    }
-
-
-    .armor {
-      .card-container(29%);
-      @media screen and (max-width: 480px) {
-        .card-container(50%);
-      }
-    }
-
-    .ais-body {
-      .center();
-    }
-
-    .initiative {
-      .card-container(29%);
-      @media screen and (max-width: 480px) {
-        .card-container(50%);
-      }
-    }
-
-    .speed {
-      .card-container(29%);
-      @media screen and (max-width: 480px) {
-        .card-container(50%);
-      }
-    }
   }
 
   .hp {
@@ -67,63 +27,12 @@
     }
   }
 
-  .body {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    overflow-y: scroll;
+  app-ais-block {
+    width: 100%;
   }
 
-  .bottom {
-    display: flex;
-  }
-
-  .hit-dice {
-    .center();
-    flex-direction: row-reverse;
-
-    .pipe {
-      margin: 15px;
-    }
-  }
-
-  .box {
-    .box(200px, 125px);
-    font-size: xxx-large;
-  }
-
-  .death-saves {
-    .row {
-      display: flex;
-
-      .col {
-        display: flex;
-      }
-    }
-  }
-
-  .small {
-    width: 75px;
-    height: 50px;
-    font-size: x-large;
-  }
-
-  .square {
-    .box(125px, 125px);
-  }
-
-  .pillar {
-    .box(70px, 125px);
-    writing-mode: vertical-rl;
-    margin: 15px 0;
-  }
-
-  .damage {
-    color: var(--bad);
-  }
-
-  .heal {
-    color: var(--good);
+  app-hp-block {
+    width: 100%;
   }
 }
 
@@ -134,4 +43,62 @@
   border-radius: 5%;
   background-color: var(--white);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.header {
+  .card-header();
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.bottom {
+  display: flex;
+}
+
+.box {
+  .box(200px, 85px);
+  font-size: xxx-large;
+}
+
+.death-saves {
+  .row {
+    display: flex;
+
+    .col {
+      display: flex;
+    }
+  }
+}
+
+.small {
+  width: 75px;
+  height: 50px;
+  font-size: x-large;
+}
+
+.square {
+  .box(100px, 100px);
+  margin: 15px;
+}
+
+.pillar {
+  .box(50px, 125px);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin: 15px 0;
+}
+
+.damage {
+  color: var(--bad);
+}
+
+.heal {
+  color: var(--good);
 }

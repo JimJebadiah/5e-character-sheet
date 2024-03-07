@@ -16,9 +16,7 @@ export class InfoBlockComponent {
   constructor(
     private readonly dbService: GitdbService,
     private readonly router: Router,
-  ) {
-    this.getString.bind(this);
-  }
+  ) {}
 
   getImageString(): Observable<string> {
     return this.dbService.getImageString(this.hero.name!);
@@ -26,14 +24,5 @@ export class InfoBlockComponent {
 
   goBack() {
     this.router.navigate(['']);
-  }
-
-  getString(field: keyof Hero): Getter<string> {
-    const val = (this.hero as any)[field];
-    return () => val;
-  }
-
-  setString(field: keyof Hero): Setter<string> {
-    return (val: string) => (this.hero as any)[field] = val;
   }
 }

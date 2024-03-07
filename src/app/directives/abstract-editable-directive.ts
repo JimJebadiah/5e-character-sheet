@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Rend
 import { Setter, Getter } from "./editable-number/editable-number.directive";
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from "@angular/cdk/portal";
+import { Hero } from "../domain/hero";
 
 @Directive()
 export abstract class AbstractEditableDirective<T> implements AfterViewInit {
@@ -26,8 +27,11 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     );
   }
 
-  @Input() setter!: Setter<T>;
-  @Input() getter!: Getter<T>;
+  @Input() hero?: Hero;
+  @Input() field?: keyof Hero;
+
+  @Input() eGetter?: Getter<T>;
+  @Input() eSetter?: Setter<T>;
 
   overlay: HTMLDivElement | null = null;
 
@@ -41,8 +45,8 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
 
   protected data(): object {
     return {
-      getter: this.getter,
-      setter: this.setter
+      getter: this.eGetter ?? this.getter(),
+      setter: this.eSetter ?? this.setter()
     }
   }
 
@@ -63,4 +67,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
       autoFocus: false,
     });
   }
+
+  abstract getter(): Getter<T>;
+  abstract setter(): Setter<T>;
 }

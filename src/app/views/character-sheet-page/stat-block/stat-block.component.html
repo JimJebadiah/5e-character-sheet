@@ -8,7 +8,11 @@
     </div>
     <div class="col2">
       <app-skills-block [hero]="hero"></app-skills-block>
-      <mat-card class="prof-bonus-card" appEditableNumber [getter]="getProf()" [setter]="setProf()">
+      <mat-card class="prof-bonus-card"
+        appEditableNumber
+        [hero]="hero"
+        [field]="'proficiencyBonus'"
+      >
         <span>Proficiency Bonus</span>
         <span class="positive">{{proficency()}}</span>
       </mat-card>

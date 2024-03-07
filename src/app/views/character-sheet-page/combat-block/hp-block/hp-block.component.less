@@ -1,0 +1,87 @@
+@import '../combat-block.component.less';
+
+.hp {
+  .card-container(unset);
+
+  .hp-body-curr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hp-body {
+    .center();
+    flex-direction: column;
+  }
+
+  hr {
+    color: rgba(0, 0, 0, 0.25);
+    width: 90%;
+  }
+
+  .temp-hp {
+    margin-top: 10px;
+    height: 30px;
+    font-size: small;
+    font-weight: normal;
+
+    mat-icon {
+      color:rgba(0, 0, 0, 0.6) !important;
+    }
+  }
+}
+
+.bottom {
+  .center();
+  width: 100%;;
+  padding-bottom: 15px;
+
+  .bottom-container {
+    .center();
+    width: 33.333%;
+  }
+
+  .hit-dice {
+    .box(70px, 70px);
+    flex-direction: column;
+
+    hr {
+      width: 75%;
+    }
+  }
+
+  .max-hp {
+    .box(100px, 50px);
+    font-size: larger;
+  }
+
+  .death-saves {
+  }
+}
+
+
+.damage {
+  margin-right: 10px;
+  mat-icon {
+    color: var(--bad) !important;
+  }
+}
+
+.heal {
+  margin-left: 10px;
+  mat-icon {
+    color: var(--good) !important;
+  }
+}
+
+.fine {
+  color: var(--good);
+}
+
+.bloodied {
+  color: var(--mid);
+}
+
+.mortally-wounded {
+  color: var(--bad);
+}

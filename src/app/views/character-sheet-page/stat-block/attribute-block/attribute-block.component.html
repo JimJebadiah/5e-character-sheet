@@ -5,8 +5,8 @@
       <div
         class="attribute-box"
         appEditableNumber
-        [getter]="getAttrGetterFunction(attribute)"
-        [setter]="getAttributeSetterFunction(attribute)"
+        [eGetter]="getAttrGetterFunction(attribute)"
+        [eSetter]="getAttributeSetterFunction(attribute)"
       >
         <span class="stat-name" [class.proficient]="isProficient(attribute)">
           <b>{{attribute.toUpperCase()}}</b>

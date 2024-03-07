@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CombatBlockComponent } from './combat-block.component';
+import { AisBlockComponent } from './ais-block.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { EditableModule } from 'src/app/directives/editable.module';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HpBlockModule } from './hp-block/hp-block.module';
-import { AisBlockModule } from './ais-block/ais-block.module';
 
 
 
 @NgModule({
   declarations: [
-    CombatBlockComponent
+    AisBlockComponent
   ],
   imports: [
     CommonModule,
@@ -20,11 +18,9 @@ import { AisBlockModule } from './ais-block/ais-block.module';
     MatIconModule,
     MatCheckboxModule,
     EditableModule,
-    HpBlockModule,
-    AisBlockModule
   ],
   exports: [
-    CombatBlockComponent
+    AisBlockComponent
   ]
 })
-export class CombatBlockModule { }
+export class AisBlockModule { }

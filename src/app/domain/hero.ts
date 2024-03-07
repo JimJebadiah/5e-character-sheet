@@ -1,3 +1,4 @@
+import { Getter, Setter } from "../directives/editable-number/editable-number.directive";
 import { Ability, AbilityJSON } from "./ability";
 import { AttributeJSON, Attributes, Attribute, attributes } from "./attribute";
 import { Dice } from "./dice";
@@ -106,17 +107,20 @@ export class Hero {
         return this.proficiencyBonus;
     }
 
-    damage(amnt: number) {
+    damage(): Setter<number> {
+      return (amnt) => {
         if (this.tempHp > 0) {
-            this.tempHp -= amnt;
+          this.tempHp -= amnt;
 
-            if (this.tempHp < 0) {
-                this.hp += this.tempHp;
-            }
+          if (this.tempHp < 0) {
+              this.hp += this.tempHp;
+              this.tempHp = 0;
+          }
         } else {
             this.hp -= amnt;
         }
         if (this.hp < 0) this.hp = 0;
+      }
     }
 
     recover(amnt: number) {
@@ -193,4 +197,23 @@ export class Hero {
             attributes: []
         });
     }
+
+
+  getNumber(field: keyof Hero): Getter<number> {
+    const val = (this as any)[field] as number;
+    return () => val;
+  }
+
+  setNumber(field: keyof Hero): Setter<number> {
+    return (val: number) => (this as any)[field] = val;
+  }
+
+  getString(field: keyof Hero): Getter<string> {
+    const val = (this as any)[field] as string;
+    return () => val;
+  }
+
+  setString(field: keyof Hero): Setter<string> {
+    return (val: string) => (this as any)[field] = val;
+  }
 }

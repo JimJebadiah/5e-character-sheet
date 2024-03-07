@@ -15,6 +15,8 @@ export type Getter<T> = () => T;
 export class EditableNumberDirective extends AbstractEditableDirective<number> {
 
   @Input() step: number = 1;
+  @Input() max: number = Number.MAX_SAFE_INTEGER;
+  @Input() min: number = Number.MIN_SAFE_INTEGER;
 
   constructor(
     ref: ElementRef,
@@ -31,7 +33,17 @@ export class EditableNumberDirective extends AbstractEditableDirective<number> {
   protected override data() {
     return {
       ...super.data(),
-      step: this.step
+      step: this.step,
+      max: this.max,
+      min: this.min
     }
+  }
+
+  override getter(): Getter<number> {
+    return this.hero!.getNumber(this.field!);
+  }
+
+  override setter(): Setter<number> {
+    return this.hero!.setNumber(this.field!);
   }
 }

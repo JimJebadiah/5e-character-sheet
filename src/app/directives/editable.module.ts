@@ -6,12 +6,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { EditableDialogModule } from '../components/editable-dialog/editable-dialog.module';
 import { EditableStringDirective } from './editable-string/editable-string.directive';
+import { EditableNumberStepDirective } from './editable-number-step/editable-number-step.directive';
 
 
 @NgModule({
   declarations: [
     EditableNumberDirective,
-    EditableStringDirective
+    EditableStringDirective,
+    EditableNumberStepDirective
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { EditableStringDirective } from './editable-string/editable-string.direc
   ],
   exports: [
     EditableNumberDirective,
-    EditableStringDirective
+    EditableStringDirective,
+    EditableNumberStepDirective
   ]
 })
 export class EditableModule { }

@@ -17,19 +17,35 @@
         <span>Level</span>
         <span>{{hero.level}}</span>
       </div>
-      <div class="info" appEditableString [getter]="getString('class')" [setter]="setString('class')">
+      <div class="info"
+        appEditableString
+        [hero]="hero"
+        [field]="'class'"
+      >
         <span>Class</span>
         <span>{{hero.class}}</span>
       </div>
-      <div class="info" appEditableString [getter]="getString('race')" [setter]="setString('race')">
+      <div class="info"
+        appEditableString
+        [hero]="hero"
+        [field]="'race'"
+      >
         <span>Race</span>
         <span>{{hero.race}}</span>
       </div>
-      <div class="info" appEditableString [getter]="getString('background')" [setter]="setString('background')">
-        <span>Background</span>
+      <div class="info"
+        appEditableString
+        [hero]="hero"
+        [field]="'background'"
+      >
+       <span>Background</span>
         <span>{{hero.background}}</span>
       </div>
-      <div class="info" appEditableString [getter]="getString('alignment')" [setter]="setString('alignment')">
+      <div class="info"
+        appEditableString
+        [hero]="hero"
+        [field]="'alignment'"
+      >
         <span>Alignment</span>
         <span>{{hero.alignment}}</span>
       </div>

@@ -1,0 +1,65 @@
+<div class="hp">
+  <mat-card>
+    <div class="header">
+      Health
+    </div>
+    <div class="hp-body">
+      <div class="hp-body-curr">
+        <div class="pillar damage"
+          appEditableNumberStep
+          [hero]="hero"
+          [field]="'hp'"
+          [eSetter]="hero.damage()"
+        >
+          <mat-icon svgIcon="sword"></mat-icon>
+        </div>
+        <div class="hp-box">
+          <div class="box">
+            <span [ngClass]="healthStyling()">{{hero.hp}}</span>
+            <span *ngIf="hero.tempHp > 0">+{{hero.tempHp}}</span>
+          </div>
+          <div class="box temp-hp"
+            appEditableNumberStep
+            [hero]="hero"
+            [field]="'tempHp'"
+            [min]="0"
+          >
+            <mat-icon>health_and_safety</mat-icon>
+          </div>
+        </div>
+        <div class="pillar heal"
+          appEditableNumberStep
+          [hero]="hero"
+          [field]="'hp'"
+          [max]="hero.maxHp"
+        >
+          <mat-icon>healing</mat-icon>
+        </div>
+      </div>
+      <hr />
+      <div class="bottom">
+        <div class="bottom-container">
+          <div class="hit-dice" appEditableNumber [hero]="hero" [field]="'hitDiceCount'" [min]="0" [max]="hero.level">
+            <span>{{hero.hitDiceCount}} {{hero.hitDice}}</span>
+            <hr />
+            <span>Hit Dice</span>
+          </div>
+        </div>
+        <div class="bottom-container">
+          <div class="max-hp">
+            {{hero.maxHp}}
+          </div>
+        </div>
+        <div class="bottom-container">
+          <div class="death-saves">
+            <div class="row" *ngFor="let i of [0, 1]">
+              <div class="col" *ngFor="let j of [0, 1, 2]">
+                <mat-checkbox></mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,51 @@
+@import '../combat-block.component.less';
+
+.armor-init-speed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .si-container {
+    width: 100%;
+    .center();
+    justify-content: space-between;
+  }
+
+  .armor-container {
+    width: 100%;
+    .center();
+  }
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .armor {
+    .card-container(29%);
+    @media screen and (max-width: 480px) {
+      .card-container(50%);
+    }
+  }
+
+  .ais-body {
+    .center();
+  }
+
+  .initiative {
+    .card-container(29%);
+    @media screen and (max-width: 480px) {
+      .card-container(50%);
+    }
+  }
+
+  .speed {
+    .card-container(29%);
+    @media screen and (max-width: 480px) {
+      .card-container(50%);
+    }
+  }
+}

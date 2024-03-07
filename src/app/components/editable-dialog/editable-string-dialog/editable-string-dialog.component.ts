@@ -3,6 +3,7 @@ import { AbstractEditableDialog } from '../abstract-editable-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-editable-string-dialog',
@@ -33,7 +34,7 @@ export class EditableStringDialogComponent extends AbstractEditableDialog<string
     });
   }
 
-  canSubmit(): boolean {
+  override canSubmit(): boolean  {
     return this.value !== '';
   }
 }

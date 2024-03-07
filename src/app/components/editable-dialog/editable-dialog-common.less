@@ -1,0 +1,31 @@
+@import '../../card-common.less';
+
+.edit-number-container {
+  .card-container(250px);
+  margin: 0;
+  min-height: 250px;
+
+  .header {
+    .card-header();
+  }
+
+  .body {
+    .center();
+    flex-direction: column;
+
+    .content {
+      .center();
+      margin: 25px;
+    }
+
+    .buttons {
+      .center();
+      width: 90%;
+      gap: 15px;
+
+      button {
+        width: 60%;
+      }
+    }
+  }
+}
