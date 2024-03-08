@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Hero } from 'src/app/domain/hero';
 import { AbstractEditableDirective } from '../abstract-editable-directive';
 import { ComponentType } from '@angular/cdk/portal';
+import { GitdbService } from 'src/app/services/gitdb.service';
 
 export type Setter<T> = (val: T) => void;
 export type Getter<T> = () => T;
@@ -21,7 +22,7 @@ export class EditableNumberDirective extends AbstractEditableDirective<number> {
   constructor(
     ref: ElementRef,
     renderer: Renderer2,
-    matDialog: MatDialog
+    matDialog: MatDialog,
   ) {
     super(ref, renderer, matDialog);
   }

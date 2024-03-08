@@ -2,17 +2,20 @@ export interface ItemJSON {
     name: string,
     description: string,
     count: number,
+    ammunition?: boolean;
 }
 
 export class Item {
     name: string;
     description: string;
     count: number;
+    ammunition: boolean;
 
     constructor(json: ItemJSON) {
         this.name = json.name;
         this.description = json.description;
         this.count = json.count;
+        this.ammunition = json.ammunition ?? false;
     }
 
     increment() {
@@ -25,9 +28,10 @@ export class Item {
 
     get json(): ItemJSON {
         return {
-            name: this.name, 
+            name: this.name,
             description: this.description,
             count: this.count,
+            ammunition: this.ammunition
         }
     }
 }

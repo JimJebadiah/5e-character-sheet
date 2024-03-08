@@ -1,1 +1,12 @@
-<p>inventory-block works!</p>
+<mat-card class="inventory">
+  <div class="inventory-header">Inventory</div>
+  <div class="inventory-body">
+    <ng-container *ngIf="this.items.length <= 0">
+      <div class="empty">
+        <mat-icon>assignment_late</mat-icon>
+        No Items
+      </div>
+    </ng-container>
+  </div>
+</mat-card>
+

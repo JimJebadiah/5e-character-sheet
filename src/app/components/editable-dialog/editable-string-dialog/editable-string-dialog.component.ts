@@ -4,6 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
+import { GitdbService } from 'src/app/services/gitdb.service';
+import { Hero } from 'src/app/domain/hero';
 
 @Component({
   selector: 'app-editable-string-dialog',
@@ -17,7 +19,7 @@ export class EditableStringDialogComponent extends AbstractEditableDialog<string
 
   constructor(
     ref: MatDialogRef<EditableStringDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<string>, setter: Setter<string>},
+    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<string>, setter: Setter<string>, hero: Hero, update: () => void},
     private readonly fb: FormBuilder,
   ) {
     super(ref, data);

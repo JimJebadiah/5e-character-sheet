@@ -1,8 +1,9 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from "@angular/core";
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2, inject } from "@angular/core";
 import { Setter, Getter } from "./editable-number/editable-number.directive";
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from "@angular/cdk/portal";
 import { Hero } from "../domain/hero";
+import { GitdbService } from "../services/gitdb.service";
 
 @Directive()
 export abstract class AbstractEditableDirective<T> implements AfterViewInit {
@@ -27,7 +28,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     );
   }
 
-  @Input() hero?: Hero;
+  @Input() hero!: Hero;
   @Input() field?: keyof Hero;
 
   @Input() eGetter?: Getter<T>;
@@ -38,7 +39,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
   constructor(
     private readonly ref: ElementRef,
     private readonly renderer: Renderer2,
-    private readonly matDialog: MatDialog
+    private readonly matDialog: MatDialog,
   ) { }
 
   protected abstract dialog(): ComponentType<any>;
@@ -46,7 +47,8 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
   protected data(): object {
     return {
       getter: this.eGetter ?? this.getter(),
-      setter: this.eSetter ?? this.setter()
+      setter: this.eSetter ?? this.setter(),
+      hero: this.hero
     }
   }
 

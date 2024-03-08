@@ -1,0 +1,26 @@
+@import '../../../card-common.less';
+
+.inventory {
+  .card-container(400px);
+
+  .inventory-header {
+    .card-header();
+  }
+
+  .inventory-body {
+    .center();
+
+    .empty {
+      .center();
+      margin: 40px;
+      font-size: xxx-large;
+      color: rgba(0, 0, 0, 0.5);
+
+      mat-icon {
+        transform: scale(2);
+        margin-right: 24px;
+        color: rgba(0, 0, 0, 0.5) !important;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { GitdbService } from 'src/app/services/gitdb.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractWeaponComponent } from '../../abstract-weapon.component';
 import { Firearm } from 'src/app/domain/weapon';
@@ -13,9 +14,12 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   firearm!: Firearm
   emptyGroup = new FormControl();
 
+  constructor(private readonly dbService: GitdbService) {
+    super();
+  }
+
   ngOnInit(): void {
     this.firearm = this.weapon as Firearm;
-    this.firearm.loaded = 5;
   }
 
   statusIcon() {
@@ -44,13 +48,22 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
 
   fire() {
     this.firearm.fire();
+    this.dbService.update(this.hero);
   }
 
   reload() {
     this.firearm.reload(this.firearm.rounds);
+    this.dbService.update(this.hero);
   }
 
   status() {
     return this.firearm.status.charAt(0).toUpperCase() + this.firearm.status.substring(1);
+  }
+
+  nextState() {
+    if (this.firearm.status === 'operational') this.firearm.misfire();
+    else if (this.firearm.status === 'jammed') this.firearm.break();
+    else this.firearm.repair();
+    this.dbService.update(this.hero);
   }
 }

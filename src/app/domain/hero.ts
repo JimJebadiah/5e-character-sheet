@@ -4,7 +4,7 @@ import { AttributeJSON, Attributes, Attribute, attributes } from "./attribute";
 import { Dice } from "./dice";
 import { Feat, FeatJSON } from "./feat";
 import { Item, ItemJSON } from "./item";
-import { Skill, SkillJSON, Skills, skills } from "./skill";
+import { Skill, Skills, skills } from "./skill";
 import { Weapon, WeaponJSON, makeWeapon } from "./weapon";
 
 export interface HeroJSON {
@@ -25,7 +25,7 @@ export interface HeroJSON {
     inspiration: boolean,
     proficiencyBonus: number,
     attributes: AttributeJSON[],
-    skills: SkillJSON[],
+    proficientSkills: string[],
     inventory: ItemJSON[],
     weapons: WeaponJSON[],
     languages: string[],
@@ -92,11 +92,13 @@ export class Hero {
 
         this.skills = new Map<Skills, Skill>();
         i = 0;
-        json.skills.forEach(() => {
-          const skill = skills[i];
-          this.skills.set(skill, new Skill(json.skills.filter((s) => s.name === skill)[0]));
-          i++;
+        skills.forEach((s) => {
+          const proficient = json.proficientSkills.includes(s.skill);
+          const skill = new Skill(s, proficient);
+          this.skills.set(s.skill, skill);
         });
+
+        console.log(this.json);
     }
 
     getAttrMod(attribute: Attributes): number {
@@ -160,7 +162,7 @@ export class Hero {
             alignment: this.alignment,
             inspiration: this.inspiration,
             proficiencyBonus: this.proficiencyBonus,
-            skills: [ ...this.skills.values() ].map((v) => v.json),
+            proficientSkills: [...this.skills.values()].filter((s) => s.proficient).map((s) => s.skill.skill),
             inventory: this.inventory.map((i) => i.json),
             weapons: this.weapons.map((w) => w.json),
             feats: this.feats.map((f) => f.json),
@@ -188,7 +190,7 @@ export class Hero {
             alignment: '',
             inspiration: false,
             proficiencyBonus: 0,
-            skills: [],
+            proficientSkills: [],
             inventory: [],
             weapons: [],
             feats: [],

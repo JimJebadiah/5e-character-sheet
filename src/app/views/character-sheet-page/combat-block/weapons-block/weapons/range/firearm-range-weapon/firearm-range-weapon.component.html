@@ -11,7 +11,9 @@
   </div>
   <hr />
   <div class="bottom">
-    <span [ngClass]="statusClass()">{{status()}}</span>
+    <button class="status" mat-raised-button [ngClass]="statusClass()" (click)="nextState()">
+      {{status()}}
+    </button>
     <div class="bullets" [ngClass]="statusClass()">
       <button mat-icon-button (click)="fire()">
         <mat-icon svgIcon="crosshair"></mat-icon>

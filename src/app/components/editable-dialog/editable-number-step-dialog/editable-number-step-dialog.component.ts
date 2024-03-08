@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { EditableStringDialogComponent } from '../editable-string-dialog/editable-string-dialog.component';
+import { GitdbService } from 'src/app/services/gitdb.service';
+import { Hero } from 'src/app/domain/hero';
 
 @Component({
   selector: 'app-editable-number-step-dialog',
@@ -21,7 +23,7 @@ export class EditableNumberStepDialogComponent extends AbstractEditableDialog<nu
 
   constructor(
     ref: MatDialogRef<EditableNumberStepDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>},
+    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>, hero: Hero, update: () => void},
     private readonly fb: FormBuilder,
   ) {
     super(ref, data);

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AbstractEditableDirective } from '../abstract-editable-directive';
 import { ComponentType } from '@angular/cdk/portal';
 import { Getter, Setter } from '../editable-number/editable-number.directive';
+import { GitdbService } from 'src/app/services/gitdb.service';
 
 export type StepOptions = 'add' | 'sub';
 
@@ -19,7 +20,7 @@ export class EditableNumberStepDirective extends AbstractEditableDirective<numbe
   constructor(
     ref: ElementRef,
     renderer: Renderer2,
-    matDialog: MatDialog
+    matDialog: MatDialog,
   ) {
     super(ref, renderer, matDialog);
   }

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
-import { BehaviorSubject, Observable, ReplaySubject, combineLatest, firstValueFrom, forkJoin, from, map, merge, mergeAll, mergeMap, of, tap, toArray, zip, zipWith } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, combineLatest, debounceTime, firstValueFrom, forkJoin, from, map, merge, mergeAll, mergeMap, of, tap, toArray, zip, zipWith } from 'rxjs';
 import { Token } from '@angular/compiler';
 
 declare var GitHub: any;
@@ -15,13 +15,15 @@ export class GitdbService {
 
   private gh: any;
   private repo: any;
-  private user: string = '';
 
   private tokenSubject: BehaviorSubject<string> = new BehaviorSubject('');
   token$: Observable<string> = this.tokenSubject.asObservable();
 
   private usernameSubject: BehaviorSubject<string> = new BehaviorSubject('');
   username$: Observable<string> = this.usernameSubject.asObservable();
+
+  private updateSubject: Subject<Hero> = new Subject();
+  update$ = this.updateSubject.asObservable();
 
   private heroCacheSubject: ReplaySubject<Hero[] | null> = new ReplaySubject(1);
   private heroCache$ = this.heroCacheSubject.asObservable();
@@ -45,12 +47,20 @@ export class GitdbService {
     }
 
     this.heroCacheSubject.next(null);
+
+    this.update$.pipe(debounceTime(2500)).subscribe((hero) => {
+      this.saveHero(hero);
+    });
   }
 
   setToken(token: string) {
     this.tokenSubject.next(token);
     sessionStorage.setItem(GitdbService.TOKEN, token);
     this.route.navigate(['']);
+  }
+
+  update(hero: Hero) {
+    this.updateSubject.next(hero);
   }
 
   saveHero(hero: Hero) {

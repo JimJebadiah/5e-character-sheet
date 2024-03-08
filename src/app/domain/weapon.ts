@@ -1,4 +1,4 @@
-import { Attribute, Attributes } from "./attribute";
+import { Attribute, Attributes, attributes } from "./attribute";
 import { Dice } from "./dice";
 import { Hero } from "./hero";
 
@@ -17,6 +17,7 @@ export interface WeaponJSON {
     damageType: DamageType,
     modifiers: number[],
     type: WeaponType,
+    attribute?: string,
 
     // Range
     range?: number;
@@ -49,6 +50,7 @@ export abstract class Weapon {
     proficient: boolean;
     damageType: DamageType;
     modifiers: number[];
+    attribute?: Attributes;
 
     constructor(json: WeaponJSON) {
         this.name = json.name;
@@ -58,10 +60,11 @@ export abstract class Weapon {
         this.proficient = json.proficient;
         this.damageType = json.damageType;
         this.modifiers = json.modifiers;
+        this.attribute = attributes.find((a) => a === json.attribute);
     }
 
     attackRole(hero: Hero): string {
-        let modifer = hero.getAttrMod(this.attribute());
+        let modifer = hero.getAttrMod(this.getAttribute());
         this.modifiers.forEach((val) => modifer += val);
         if (this.proficient) modifer += hero.getProfBonus();
 
@@ -69,13 +72,12 @@ export abstract class Weapon {
     }
 
     damageRole(hero: Hero): string {
-        let modifer = hero.getAttrMod(this.attribute());
+        let modifer = hero.getAttrMod(this.getAttribute());
         this.damageModifiers.forEach((val) => modifer += val);
-        if (this.proficient) modifer += hero.getProfBonus();
         return `${this.damageDiceAmount}${this.damageDice} + ${modifer} ${this.damageType}`;
     }
 
-    abstract attribute(): Attributes;
+    abstract getAttribute(): Attributes;
 
     abstract type(): WeaponType;
 
@@ -94,8 +96,8 @@ export abstract class Weapon {
 }
 
 export class MeleeWeapon extends Weapon {
-    override attribute(): Attributes {
-        return Attributes.STR;
+    override getAttribute(): Attributes { 
+        return this.attribute ?? Attributes.STR;
     }
 
     override type(): WeaponType {
@@ -113,8 +115,8 @@ export class RangeWeapon extends Weapon {
         this.maxRange = json.maxRange!;
     }
 
-    override attribute(): Attributes {
-        return Attributes.DEX;
+    override getAttribute(): Attributes {
+        return this.attribute ?? Attributes.DEX;
     }
 
     override type(): WeaponType {

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AbstractEditableDialog } from '../abstract-editable-dialog';
+import { Hero } from 'src/app/domain/hero';
 
 @Component({
   selector: 'app-editable-number-dialog',
@@ -16,7 +17,7 @@ export class EditableNumberDialogComponent extends AbstractEditableDialog<number
 
   constructor(
     ref: MatDialogRef<EditableNumberDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>, step: number, max: number, min: number}
+    @Inject(MAT_DIALOG_DATA) data: {getter: Getter<number>, setter: Setter<number>, hero: Hero, step: number, max: number, min: number}
   ) {
     super(ref, data);
     this.step = data.step;

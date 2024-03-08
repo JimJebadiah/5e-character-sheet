@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { EditableStringDialogComponent } from 'src/app/components/editable-dialog/editable-string-dialog/editable-string-dialog.component';
 import { Getter, Setter } from '../editable-number/editable-number.directive';
+import { GitdbService } from 'src/app/services/gitdb.service';
 
 @Directive({
   selector: '[appEditableString]'
@@ -12,7 +13,7 @@ export class EditableStringDirective extends AbstractEditableDirective<string> {
   constructor(
     ref: ElementRef,
     renderer: Renderer2,
-    matDialog: MatDialog
+    matDialog: MatDialog,
   ) {
     super(ref, renderer, matDialog);
   }
