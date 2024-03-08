@@ -55,7 +55,6 @@ export class Skill {
     proficient: boolean;
 
     constructor(json: SkillJSON) {
-      console.log(json.attribute + ' ' + json.name);
       this.name = json.name;
       this.attribute = attributes.find((attr) => attr === json.attribute)!;
       this.proficient = json.proficient;

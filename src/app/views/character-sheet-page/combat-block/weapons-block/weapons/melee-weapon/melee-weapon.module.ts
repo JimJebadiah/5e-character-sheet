@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeaponsBlockComponent } from './weapons-block.component';
+import { MeleeWeaponComponent } from './melee-weapon.component';
 
 
 
 @NgModule({
   declarations: [
-    WeaponsBlockComponent
+    MeleeWeaponComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class WeaponsBlockModule { }
+export class MeleeWeaponModule { }

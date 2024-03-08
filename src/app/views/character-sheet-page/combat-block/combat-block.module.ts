@@ -7,6 +7,7 @@ import { EditableModule } from 'src/app/directives/editable.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HpBlockModule } from './hp-block/hp-block.module';
 import { AisBlockModule } from './ais-block/ais-block.module';
+import { WeaponsBlockModule } from './weapons-block/weapons-block.module';
 
 
 
@@ -21,7 +22,8 @@ import { AisBlockModule } from './ais-block/ais-block.module';
     MatCheckboxModule,
     EditableModule,
     HpBlockModule,
-    AisBlockModule
+    AisBlockModule,
+    WeaponsBlockModule
   ],
   exports: [
     CombatBlockComponent

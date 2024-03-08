@@ -34,15 +34,17 @@
 .bottom {
   .center();
   width: 100%;;
+  height: 100%;
   padding-bottom: 15px;
 
   .bottom-container {
     .center();
     width: 33.333%;
+    height: max-content;
   }
 
   .hit-dice {
-    .box(70px, 70px);
+    .box(90%, 80px);
     flex-direction: column;
 
     hr {
@@ -52,16 +54,29 @@
 
   .max-hp {
     .box(100px, 50px);
-    font-size: larger;
+    font-size: x-large;
   }
 
   .death-saves {
+    .box(90%, 90%);
+    flex-direction: column;
+
+    .row {
+      .center();
+
+
+      mat-icon {
+        margin-left: initial !important;
+        margin-right: 5px !important;
+      }
+    }
   }
 }
 
 
 .damage {
   margin-right: 10px;
+  color: var(--bad) !important;
   mat-icon {
     color: var(--bad) !important;
   }
@@ -69,6 +84,7 @@
 
 .heal {
   margin-left: 10px;
+  color: var(--good) !important;
   mat-icon {
     color: var(--good) !important;
   }

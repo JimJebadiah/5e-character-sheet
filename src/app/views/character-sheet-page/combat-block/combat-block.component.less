@@ -1,7 +1,7 @@
 @import '../../../card-common.less';
 
 .combat-card {
-  .block-container(500px);
+  .block-container(550px);
 
   @media screen and (max-width: 480px) {
     .card-container(@card-mobile-width);
@@ -27,11 +27,7 @@
     }
   }
 
-  app-ais-block {
-    width: 100%;
-  }
-
-  app-hp-block {
+  .block {
     width: 100%;
   }
 }
@@ -54,7 +50,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   overflow-y: scroll;
 }
 
@@ -63,7 +58,7 @@
 }
 
 .box {
-  .box(200px, 85px);
+  .box(300px, 85px);
   font-size: xxx-large;
 }
 

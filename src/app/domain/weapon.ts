@@ -5,14 +5,14 @@ import { Hero } from "./hero";
 type WeaponType = 'melee' | 'ranged';
 type RangeType = 'standard' | 'firearm';
 type DamageType = 'piercing' | 'slashing' | 'bludgeoning';
-type FirearmStatus = 'good' | 'jammed' | 'broken';
+type FirearmStatus = 'operational' | 'jammed' | 'broken';
 
 export interface WeaponJSON {
     // Global
     name: string,
     damageDice: Dice,
     damageDiceAmount: number,
-    damageModifers: number[],
+    damageModifiers: number[],
     proficient: boolean,
     damageType: DamageType,
     modifiers: number[],
@@ -45,7 +45,7 @@ export abstract class Weapon {
     name: string;
     damageDice: Dice;
     damageDiceAmount: number;
-    damageModifers: number[];
+    damageModifiers: number[];
     proficient: boolean;
     damageType: DamageType;
     modifiers: number[];
@@ -54,23 +54,23 @@ export abstract class Weapon {
         this.name = json.name;
         this.damageDice = json.damageDice;
         this.damageDiceAmount = json.damageDiceAmount;
-        this.damageModifers = json.damageModifers;
+        this.damageModifiers = json.damageModifiers;
         this.proficient = json.proficient;
         this.damageType = json.damageType;
         this.modifiers = json.modifiers;
     }
 
     attackRole(hero: Hero): string {
-        let modifer = hero.getAttrMod(this.attribute()); 
+        let modifer = hero.getAttrMod(this.attribute());
         this.modifiers.forEach((val) => modifer += val);
         if (this.proficient) modifer += hero.getProfBonus();
-        
+
         return `d20 + ${modifer}`;
     }
 
     damageRole(hero: Hero): string {
-        let modifer = hero.getAttrMod(this.attribute()); 
-        this.damageModifers.forEach((val) => modifer += val);
+        let modifer = hero.getAttrMod(this.attribute());
+        this.damageModifiers.forEach((val) => modifer += val);
         if (this.proficient) modifer += hero.getProfBonus();
         return `${this.damageDiceAmount}${this.damageDice} + ${modifer} ${this.damageType}`;
     }
@@ -84,11 +84,11 @@ export abstract class Weapon {
             name: this.name,
             damageDice: this.damageDice,
             damageDiceAmount: this.damageDiceAmount,
-            damageModifers: this.damageModifers,
+            damageModifiers: this.damageModifiers,
             proficient: this.proficient,
             damageType: this.damageType,
             modifiers: this.modifiers,
-            type: 'melee'
+            type: this.type()
         }
     }
 }
@@ -130,7 +130,8 @@ export class RangeWeapon extends Weapon {
         return {
             ...super.json,
             range: this.range,
-            maxRange: this.maxRange
+            maxRange: this.maxRange,
+            rangeType: this.rangeType()
         }
     }
 }
@@ -152,7 +153,7 @@ export class Firearm extends RangeWeapon {
     }
 
     canFire() {
-        return this.status === 'good' && this.loaded > 0;
+        return this.status === 'operational' && this.loaded > 0;
     }
 
     canReload() {
@@ -168,7 +169,7 @@ export class Firearm extends RangeWeapon {
     }
 
     repair() {
-        this.status = 'good';
+        this.status = 'operational';
     }
 
     reload(amt: number): number {

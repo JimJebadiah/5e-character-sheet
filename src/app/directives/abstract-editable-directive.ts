@@ -51,7 +51,6 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.ref.nativeElement);
     this.overlay = document.createElement('div');
     this.overlay.className = 'box-overlay';
     this.overlay.setAttribute('style',

@@ -12,24 +12,6 @@
         </div>
       </mat-card>
     </div>
-    <div class="speed">
-      <mat-card>
-        <div class="header">
-          Speed
-        </div>
-        <div class="speed-body ais-body">
-          <div class="box square" appEditableNumber
-            [hero]="hero"
-            [field]="'speed'"
-            [step]="5"
-          >
-            {{hero.speed}}
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-  <div class="armor-container">
     <div class="armor">
       <mat-card>
         <div class="header">
@@ -42,6 +24,22 @@
             [field]="'ac'"
           >
             {{hero.ac}}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="speed">
+      <mat-card>
+        <div class="header">
+          Speed
+        </div>
+        <div class="speed-body ais-body">
+          <div class="box square" appEditableNumber
+            [hero]="hero"
+            [field]="'speed'"
+            [step]="5"
+          >
+            {{hero.speed}}
           </div>
         </div>
       </mat-card>

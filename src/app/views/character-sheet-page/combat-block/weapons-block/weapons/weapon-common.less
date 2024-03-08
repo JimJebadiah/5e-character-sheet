@@ -1,0 +1,50 @@
+@import '../weapons-block.component.less';
+
+.weapon {
+  .card-container(100%);
+  display: flex;
+  align-items: center;
+
+  background-color: var(--white);
+  width: 95%;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-size: larger;
+}
+
+.weapon {
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+
+  hr {
+    color: rgba(0, 0, 0, 0.25);
+    width: 90%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.field {
+  .center();
+  background-color: white;
+  width: 95%;
+  border-radius: 5px;
+  margin: 5px 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  flex-wrap: nowrap;
+}
+
+.top {
+  .center();
+  width: 100%;
+  justify-content: space-between;
+
+  div {
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+  }
+}

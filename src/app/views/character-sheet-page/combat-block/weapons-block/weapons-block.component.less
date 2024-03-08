@@ -1,0 +1,16 @@
+@import '../combat-block.component.less';
+
+.weapons {
+  .card-container(unset);
+
+  .body {
+    .center();
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+}
+
+:host ::ng-deep .weapon-item {
+  width: 100%;
+  .center();
+}

@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 body {
   top: 0;
   position: absolute;
@@ -30,4 +32,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-icon {
   color: var(--primary) !important;
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 2.5px;
+  height: 2.5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

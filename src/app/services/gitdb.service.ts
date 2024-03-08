@@ -100,7 +100,6 @@ export class GitdbService {
   }
 
   setName(user: string) {
-    console.log(user);
     this.usernameSubject.next(user);
     sessionStorage.setItem(GitdbService.USERNAME, user);
   }
@@ -112,11 +111,9 @@ export class GitdbService {
           return data.data.map((c: any) => {
             const name = c.name as string
             const a = this.getHero(name.replace('.json', ''));
-            console.log(a);
             return a
           });
         }),
-        tap((h) => console.log(h)),
         mergeMap((heroes) => forkJoin<Hero[]>(heroes)),
         tap((heroes) => this.heroCacheSubject.next(heroes))
       );

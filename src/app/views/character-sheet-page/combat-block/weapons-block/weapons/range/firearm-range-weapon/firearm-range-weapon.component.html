@@ -1,0 +1,29 @@
+<div class="weapon">
+  <div class="name field">
+    {{weapon.name}}
+    <span class="smaller">{{firearm.range}}/{{firearm.maxRange}}</span>
+  </div>
+  <div class="top">
+    <div class="attack field">{{weapon.attackRole(hero)}}</div>
+    <div class="damage-role field">
+      {{weapon.damageRole(hero)}}
+    </div>
+  </div>
+  <hr />
+  <div class="bottom">
+    <span [ngClass]="statusClass()">{{status()}}</span>
+    <div class="bullets" [ngClass]="statusClass()">
+      <button mat-icon-button (click)="fire()">
+        <mat-icon svgIcon="crosshair"></mat-icon>
+      </button>
+      <div class="bullet-count">
+        <ng-container *ngFor="let i of rounds()">
+          <mat-checkbox class="radio-like" disabled [checked]="loaded(i)"></mat-checkbox>
+        </ng-container>
+      </div>
+      <button mat-icon-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
