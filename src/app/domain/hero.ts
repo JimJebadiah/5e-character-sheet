@@ -25,7 +25,7 @@ export interface HeroJSON {
     inspiration: boolean,
     proficiencyBonus: number,
     attributes: AttributeJSON[],
-    proficientSkills: string[],
+    proficientSkills?: string[],
     inventory: ItemJSON[],
     weapons: WeaponJSON[],
     languages: string[],
@@ -91,9 +91,10 @@ export class Hero {
         });
 
         this.skills = new Map<Skills, Skill>();
+        const skillArray = json.proficientSkills ?? [];
         i = 0;
         skills.forEach((s) => {
-          const proficient = json.proficientSkills.includes(s.skill);
+          const proficient = skillArray.includes(s.skill);
           const skill = new Skill(s, proficient);
           this.skills.set(s.skill, skill);
         });

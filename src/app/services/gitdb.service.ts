@@ -48,9 +48,9 @@ export class GitdbService {
 
     this.heroCacheSubject.next(null);
 
-    this.update$.pipe(debounceTime(2500)).subscribe((hero) => {
-      this.saveHero(hero);
-    });
+    // this.update$.pipe(debounceTime(2500)).subscribe((hero) => {
+    //   this.saveHero(hero);
+    // });
   }
 
   setToken(token: string) {

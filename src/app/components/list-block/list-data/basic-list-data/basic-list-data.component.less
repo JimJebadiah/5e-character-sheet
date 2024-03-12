@@ -1,0 +1,29 @@
+@import '../../list-block.component.less';
+
+.box {
+  .center();
+  width: 90%;
+  margin-bottom: 10px;
+
+  .item {
+      .info-bit(center);
+  }
+}
+
+.info-bit(@justify) {
+    background-color: var(--white);
+    width: 90%;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 5%;
+    background-color: var(--white);
+    margin: 5px 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    display: flex;
+    justify-content: @justify;
+    align-items: center;
+
+    font-size: larger;
+}
+  

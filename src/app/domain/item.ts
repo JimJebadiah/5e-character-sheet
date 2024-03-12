@@ -14,7 +14,7 @@ export class Item {
     constructor(json: ItemJSON) {
         this.name = json.name;
         this.description = json.description;
-        this.count = json.count;
+        this.count = json.count ?? 0;
         this.ammunition = json.ammunition ?? false;
     }
 

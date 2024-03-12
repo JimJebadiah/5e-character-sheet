@@ -1,0 +1,18 @@
+<mat-card class="list-block">
+    <div class="header">{{header}}</div>
+    <div class="body scrollbar">
+      <ng-container *ngIf="this.items.length <= 0; else list">
+        <div class="empty">
+          <mat-icon>assignment_late</mat-icon>
+          Empty List
+        </div>
+      </ng-container>
+      <ng-template #list>
+        <div class="list">
+          <ng-container *ngFor="let item of items">
+            <ng-container *ngComponentOutlet="getComponent(item); inputs: {data: wrap(item)}" /> 
+          </ng-container>
+        </div>
+      </ng-template>
+    </div>
+  </mat-card>

@@ -1,0 +1,36 @@
+@import '../../card-common.less';
+
+.confirmation-container {
+    .card-container(250px);
+    margin: 0;
+    min-height: 250px;
+  
+    .header {
+      .card-header();
+    }
+  
+    .body {
+      .center();
+      flex-direction: column;
+  
+      .content {
+        .center();
+        width: 100%;
+        font-size: x-large;
+        text-align: center;
+        margin: 25px;
+      }
+  
+      .buttons {
+        .center();
+        position: absolute;
+        width: 90%;
+        gap: 15px;
+  
+        button {
+          width: 60%;
+        }
+        bottom: 20px;
+      }
+    }
+  }

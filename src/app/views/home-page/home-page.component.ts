@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class HomePageComponent implements OnInit {
 
   heroes: Hero[] = [];
+  loaded: boolean = false;
 
   constructor(
     private readonly dbService: GitdbService,
@@ -21,6 +22,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.dbService.getAllHeroes().subscribe((h) => {
       this.heroes = h;
+      this.loaded = true;
     });
   }
 

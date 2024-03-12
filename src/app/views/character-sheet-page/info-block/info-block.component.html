@@ -5,7 +5,7 @@
     </button>
     {{hero.name}}
   </div>
-  <div class="body">
+  <div class="body scrollbar">
     <div class="image-container">
       <div class="image">
         <img [src]="getImageString() | async" alt="Character Image">
@@ -51,7 +51,7 @@
       </div>
     </div>
     <hr />
-    <mat-card class="languages">
+    <!-- <mat-card class="languages">
       <div class="header">Languages</div>
       <div class="body">
         <div class="language-box" *ngFor="let language of hero.languages">
@@ -60,6 +60,7 @@
           </div>
         </div>
       </div>
-    </mat-card>
+    </mat-card> -->
+    <app-list-block [header]="'Languages'" [items]="languages()"></app-list-block>
   </div>
 </mat-card>

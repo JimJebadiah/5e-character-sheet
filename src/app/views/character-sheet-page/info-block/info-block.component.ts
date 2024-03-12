@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Basic } from 'src/app/components/list-block/list-data/basic-list-data/basic';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
@@ -24,5 +25,9 @@ export class InfoBlockComponent {
 
   goBack() {
     this.router.navigate(['']);
+  }
+
+  languages(): Basic[] {
+    return this.hero.languages.map((l) => new Basic(l));
   }
 }

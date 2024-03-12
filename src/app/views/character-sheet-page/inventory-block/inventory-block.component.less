@@ -2,6 +2,7 @@
 
 .inventory {
   .card-container(400px);
+  margin: 0;
 
   .inventory-header {
     .card-header();
@@ -20,6 +21,44 @@
         transform: scale(2);
         margin-right: 24px;
         color: rgba(0, 0, 0, 0.5) !important;
+      }
+    }
+    
+    .item-list {
+      .center();
+      flex-direction: column;
+      margin: 15px 0;
+      width: 100%;
+    }
+
+    .inventory-box {
+      background-color: var(--white);
+      width: 90%;
+      height: 50px;
+      border-radius: 5%;
+      background-color: var(--white);
+      margin: 5px 0;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: larger;
+
+      span {
+        padding: 0 15px;
+      }
+    }
+
+    .item-count {
+      .center();
+      justify-content: flex-end;
+      flex-grow: 1;
+      
+      .count {
+        text-align: center;
+        width: 25px;
       }
     }
   }

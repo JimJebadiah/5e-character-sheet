@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { EditableModule } from 'src/app/directives/editable.module';
+import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 
 
 
@@ -19,7 +20,8 @@ import { EditableModule } from 'src/app/directives/editable.module';
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    EditableModule
+    EditableModule,
+    ListBlockModule
   ],
   exports: [
     InfoBlockComponent
