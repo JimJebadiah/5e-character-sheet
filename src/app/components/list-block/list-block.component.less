@@ -4,7 +4,16 @@
   .card-container(250px);
 
   .header {
-      .card-header();
+    .card-header();
+
+    button {
+      position: absolute;
+      right: 20px;
+    }
+
+    mat-icon {
+      color: white !important;
+    }
   }
 
   .body {
@@ -14,6 +23,7 @@
     .list {
       .center();
       margin-top: 10px;
+      margin-bottom: 5px;
       flex-direction: column;
       width: 100%;
     }
@@ -25,7 +35,7 @@
       gap: 15px;
 
       button {
-          width: 60%;
+        width: 60%;
       }
 
       bottom: 20px;

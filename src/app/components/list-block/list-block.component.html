@@ -1,7 +1,12 @@
 <mat-card class="list-block">
-    <div class="header">{{header}}</div>
+    <div class="header">
+      <span>{{header}}</span>
+      <button mat-icon-button (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
     <div class="body scrollbar">
-      <ng-container *ngIf="this.items.length <= 0; else list">
+      <ng-container *ngIf="items.length <= 0; else list">
         <div class="empty">
           <mat-icon>assignment_late</mat-icon>
           Empty List
@@ -9,8 +14,8 @@
       </ng-container>
       <ng-template #list>
         <div class="list">
-          <ng-container *ngFor="let item of items">
-            <ng-container *ngComponentOutlet="getComponent(item); inputs: {data: wrap(item)}" /> 
+          <ng-container *ngFor="let item of items; index as index">
+            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index}" /> 
           </ng-container>
         </div>
       </ng-template>

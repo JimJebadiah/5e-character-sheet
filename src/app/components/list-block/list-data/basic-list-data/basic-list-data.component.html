@@ -1,5 +1,8 @@
 <div class="box">
-    <div class="item">
-        {{data.data.val}}
-    </div>
+  <div class="item">
+    <button mat-icon-button *ngIf="hovering" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    {{data.data.val}}
+  </div>
 </div>

@@ -51,16 +51,10 @@
       </div>
     </div>
     <hr />
-    <!-- <mat-card class="languages">
-      <div class="header">Languages</div>
-      <div class="body">
-        <div class="language-box" *ngFor="let language of hero.languages">
-          <div class="language">
-            {{language}}
-          </div>
-        </div>
-      </div>
-    </mat-card> -->
-    <app-list-block [header]="'Languages'" [items]="languages()"></app-list-block>
+    <app-list-block 
+      [header]="'Languages'" 
+      [items]="languages" 
+      [type]="languageListType"
+    />
   </div>
 </mat-card>

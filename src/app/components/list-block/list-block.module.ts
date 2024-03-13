@@ -5,6 +5,7 @@ import { ListDataModule } from './list-data/list-data.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ListDialogModule } from './list-dialog/list-dialog.module';
 
 
 
@@ -17,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    ListDataModule
+    ListDataModule,
+    ListDialogModule
   ],
   exports: [
     ListBlockComponent
