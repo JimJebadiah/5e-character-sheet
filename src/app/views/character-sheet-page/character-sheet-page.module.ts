@@ -7,6 +7,8 @@ import { InfoBlockModule } from "./info-block/info-block.module";
 import { StatBlockModule } from "./stat-block/stat-block.module";
 import { CombatBlockModule } from "./combat-block/combat-block.module";
 import { InventoryBlockModule } from "./inventory-block/inventory-block.module";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 
@@ -22,7 +24,8 @@ import { InventoryBlockModule } from "./inventory-block/inventory-block.module";
     StatBlockModule,
     CombatBlockModule,
     InventoryBlockModule,
-    RouterModule
+    RouterModule,
+    MatProgressSpinnerModule
   ]
 })
 export class CharacterSheetPageModule { }

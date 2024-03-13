@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
 import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
+import { EditableNumberStepDirective } from 'src/app/directives/editable-number-step/editable-number-step.directive';
+import { EditableModule } from 'src/app/directives/editable.module';
 
 
 
@@ -20,6 +22,7 @@ import { ListBlockModule } from 'src/app/components/list-block/list-block.module
     MatButtonModule,
     ConfirmationDialogModule,
     ListBlockModule,
+    EditableModule
   ],
   exports: [
     InventoryBlockComponent

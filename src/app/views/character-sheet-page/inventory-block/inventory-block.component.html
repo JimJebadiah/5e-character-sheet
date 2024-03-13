@@ -1,3 +1,39 @@
-<!-- TODO add currency? -->
-<app-list-block [items]="items" [type]="inventoryType" [header]="'Inventory'"/>
+<mat-card class="inventory-container">
+  <div class="header">
+    Inventory
+  </div>
+  <div class="body scrollbar">
+    <app-list-block 
+      [items]="items" 
+      [type]="inventoryType" 
+      [header]="'Backpack'"  
+      [listId]="1"
+    />
+    <mat-card class="money">
+      <div class="header">
+        Currency
+      </div>
+      <div class="body">
+        <ng-container *ngFor="let coin of currency">
+          <div class="box">
+            <div class="coin-icon">
+              <mat-icon class="shadow">radio_button_checked</mat-icon>
+              <mat-icon [ngClass]="coin.toLowerCase()">radio_button_checked</mat-icon>
+              <mat-icon class="highlight">radio_button_checked</mat-icon>
+            </div>
+            <div class="money-change">
+              <button mat-icon-button (click)="openDialogRemove(coin)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span>{{hero.currency.get(coin)}}</span>
+              <button mat-icon-button (click)="openDialogAdd(coin)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>
 

@@ -32,6 +32,7 @@ export class EditableNumberStepDialogComponent extends AbstractEditableDialog<nu
       control: this.control
     });
     this.control.setValue('');
+    this.value = 0;
   }
 
   ngOnInit(): void {

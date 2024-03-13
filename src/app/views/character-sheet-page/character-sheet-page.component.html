@@ -1,11 +1,5 @@
-<ng-container *ngIf="loaded">
-  <!-- <app-header [title]="hero.name"></app-header> -->
+<ng-container *ngIf="loaded; else loading">
   <div class="sheet-container">
-
-    <!-- <div class="subtitles">
-      <p class="subtitle" *ngFor="let s of subtitles()">{{s}}</p>
-    </div>
-    <hr /> -->
 
     <div class="grid">
       <app-info-block [hero]="hero" class="block"></app-info-block>
@@ -18,3 +12,8 @@
 
   </div>
 </ng-container>
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

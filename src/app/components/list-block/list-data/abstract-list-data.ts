@@ -15,6 +15,7 @@ export abstract class AbstractListData<T extends ListType> {
     'margin': 0
   }
 
+  @Input() listId!: number;
   @Input() data!: ListData<T>;
   @Input() index!: number;
 
@@ -42,7 +43,7 @@ export abstract class AbstractListData<T extends ListType> {
         content: 'Are you sure you want to delete this?'
       }
     }).afterClosed().subscribe((res: boolean) => {
-      if (res) this.listService.remove(this.index);
+      if (res) this.listService.remove(this.index, this.listId);
       this.deleteCallback(res);
     })
   }

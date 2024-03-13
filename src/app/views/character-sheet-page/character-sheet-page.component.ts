@@ -1,8 +1,15 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
+import { InfoBlockModule } from './info-block/info-block.module';
+import { StatBlockComponent } from './stat-block/stat-block.component';
+import { InfoBlockComponent } from './info-block/info-block.component';
+import { CombatBlockComponent } from './combat-block/combat-block.component';
+import { InventoryBlockComponent } from './inventory-block/inventory-block.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AbstractBlock } from './abstract-block';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -19,6 +26,17 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     private readonly dbService: GitdbService,
     private readonly cdr: ChangeDetectorRef
   ) { }
+
+  blocks: Type<AbstractBlock>[] = [
+    InfoBlockComponent,
+    StatBlockComponent,
+    CombatBlockComponent,
+    InventoryBlockComponent
+  ];
+
+  onDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
+    moveItemInArray(this.blocks, event.previousIndex, event.currentIndex);
+  }
 
   ngOnInit(): void {
     const name = this.route.snapshot.paramMap.get('name') as string;

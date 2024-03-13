@@ -9,13 +9,13 @@
       <ng-container *ngIf="items.length <= 0; else list">
         <div class="empty">
           <mat-icon>assignment_late</mat-icon>
-          Empty List
+          Empty
         </div>
       </ng-container>
       <ng-template #list>
         <div class="list">
           <ng-container *ngFor="let item of items; index as index">
-            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index}" /> 
+            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" /> 
           </ng-container>
         </div>
       </ng-template>

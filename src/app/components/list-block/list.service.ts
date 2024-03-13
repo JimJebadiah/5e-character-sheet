@@ -6,12 +6,12 @@ import { Subject } from 'rxjs';
 })
 export class ListService {
 
-  private readonly removeSubject = new Subject<number>();
+  private readonly removeSubject = new Subject<number[]>();
   remove$ = this.removeSubject.asObservable();
 
   constructor() { }
 
-  remove(index: number) {
-    this.removeSubject.next(index);
+  remove(index: number, listId: number) {
+    this.removeSubject.next([index, listId]);
   }
 }

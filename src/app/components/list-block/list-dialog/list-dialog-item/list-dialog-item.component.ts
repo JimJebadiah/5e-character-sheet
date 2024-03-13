@@ -26,7 +26,8 @@ export class ListDialogItemComponent {
     this.amount = fb.control<number>(0);
 
     this.group = fb.group({
-      'value': this.name,
+      'name': this.name,
+      'amount': this.amount
     });
 
     this.amount.setValue(0);

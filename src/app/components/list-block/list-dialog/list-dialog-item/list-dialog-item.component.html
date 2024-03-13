@@ -4,9 +4,14 @@
     <div class="content">
       <form [formGroup]="group">
         <mat-form-field appearance="outline">
-          <mat-label>Value</mat-label>
-          <input class="num" matInput formControlName="value" required />
+          <mat-label>Name</mat-label>
+          <input class="num" matInput formControlName="name" required />
         </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input class="num" matInput formControlName="amount" required />
+        </mat-form-field>
+        <mat-checkbox></mat-checkbox>
       </form>
     </div>
     <div class="buttons">

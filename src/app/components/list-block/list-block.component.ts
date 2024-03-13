@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ListDialogBasicComponent } from './list-dialog/list-dialog-basic/list-dialog-basic.component';
 import { ListService } from './list.service';
 import { ItemListDataComponent } from './list-data/item-list-data/item-list-data.component';
+import { ListDialogItemComponent } from './list-dialog/list-dialog-item/list-dialog-item.component';
 
 export type ListType = Item | Basic;
 
@@ -20,6 +21,7 @@ export type ListType = Item | Basic;
 })
 export class ListBlockComponent implements OnInit {
   @Input() header: string = '';
+  @Input() listId!: number;
   @Input() type!: Type<ListType>;
   @Input() items: ListType[] = [];
 
@@ -29,8 +31,8 @@ export class ListBlockComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listService.remove$.subscribe((index) => {
-      this.items.splice(index, 1);
+    this.listService.remove$.subscribe(([index, listId]) => {
+      if (listId === this.listId) this.items.splice(index, 1);
     });
   }
 
@@ -59,7 +61,7 @@ export class ListBlockComponent implements OnInit {
     let dialogType;
     switch(this.type) {
       case Item:
-        dialogType = ListDialogBasicComponent
+        dialogType = ListDialogItemComponent
         break;
       default:
         dialogType = ListDialogBasicComponent

@@ -30,7 +30,8 @@ export interface HeroJSON {
     weapons: WeaponJSON[],
     languages: string[],
     feats: FeatJSON[],
-    abilities: AbilityJSON[]
+    abilities: AbilityJSON[],
+    currency: number[]
 }
 
 export class Hero {
@@ -57,7 +58,7 @@ export class Hero {
     languages: string[];
     feats: Feat[];
     abilities: Ability[];
-
+    currency: Map<string, number>;
 
     constructor (json: HeroJSON) {
         this.name = json.name;
@@ -97,6 +98,13 @@ export class Hero {
           const proficient = skillArray.includes(s.skill);
           const skill = new Skill(s, proficient);
           this.skills.set(s.skill, skill);
+        });
+
+        this.currency = new Map<string, number>();
+        const keys = ['Platinum', 'Gold', 'Electrum', 'Silver', 'Copper']
+        const currencyArray = json.currency ?? [0, 0, 0, 0, 0];
+        keys.forEach((k, index) => {
+          this.currency.set(k, currencyArray[index]);
         });
 
         console.log(this.json);
@@ -169,7 +177,8 @@ export class Hero {
             feats: this.feats.map((f) => f.json),
             languages: this.languages,
             abilities: this.abilities.map((a) => a.json),
-            attributes: [ ...this.attributes.values() ].map((v) => v.json)
+            attributes: [ ...this.attributes.values() ].map((v) => v.json),
+            currency: [...this.currency.values()]
         };
     }
 
@@ -197,7 +206,8 @@ export class Hero {
             feats: [],
             languages: [],
             abilities: [],
-            attributes: []
+            attributes: [],
+            currency: [0, 0, 0, 0, 0]
         });
     }
 
