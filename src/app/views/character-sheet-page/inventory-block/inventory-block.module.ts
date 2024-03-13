@@ -5,6 +5,7 @@ import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
+import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 
 
 
@@ -17,7 +18,8 @@ import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    ConfirmationDialogModule
+    ConfirmationDialogModule,
+    ListBlockModule,
   ],
   exports: [
     InventoryBlockComponent

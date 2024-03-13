@@ -11,18 +11,7 @@ import { ListService } from '../../list.service';
   styleUrls: ['./basic-list-data.component.less']
 })
 export class BasicListDataComponent extends AbstractListData<Basic> {
-  constructor(private readonly dialog: MatDialog, listService: ListService) {
-    super(listService);
-  }
-
-  onDelete() {
-    this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        header: 'Delete item',
-        content: 'Are you sure you want to delete this?'
-      }
-    }).afterClosed().subscribe((res: boolean) => {
-      if (res) this.listService.remove(this.index);
-    })
+  constructor(dialog: MatDialog, listService: ListService) {
+    super(dialog, listService);
   }
 }

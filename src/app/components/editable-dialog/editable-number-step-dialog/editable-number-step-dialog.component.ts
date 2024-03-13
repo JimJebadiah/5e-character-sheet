@@ -36,7 +36,6 @@ export class EditableNumberStepDialogComponent extends AbstractEditableDialog<nu
 
   ngOnInit(): void {
     this.control.valueChanges.subscribe((val) => {
-
       if (val! === '') {
         this.value = 0;
         this.elRef.nativeElement.value = '';

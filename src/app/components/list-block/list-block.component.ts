@@ -8,6 +8,7 @@ import { ListData } from './list-data';
 import { MatDialog } from '@angular/material/dialog';
 import { ListDialogBasicComponent } from './list-dialog/list-dialog-basic/list-dialog-basic.component';
 import { ListService } from './list.service';
+import { ItemListDataComponent } from './list-data/item-list-data/item-list-data.component';
 
 export type ListType = Item | Basic;
 
@@ -44,6 +45,9 @@ export class ListBlockComponent implements OnInit {
   getComponent(): ComponentType<AbstractListData<any>> {
     let type;
     switch(this.type) {
+      case Item:
+        type = ItemListDataComponent;
+        break;
       default: 
         type = BasicListDataComponent;
         break;
@@ -54,6 +58,9 @@ export class ListBlockComponent implements OnInit {
   getDialog(): ComponentType<any> {
     let dialogType;
     switch(this.type) {
+      case Item:
+        dialogType = ListDialogBasicComponent
+        break;
       default:
         dialogType = ListDialogBasicComponent
         break;

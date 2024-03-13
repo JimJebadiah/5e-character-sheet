@@ -1,1 +1,12 @@
-<p>item-list-data works!</p>
+<div class="box">
+  <span class="name">{{data.data.name}}</span>
+  <div class="item-count">
+    <button mat-icon-button (click)="remove()">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span class="count">{{data.data.count}}</span>
+    <button mat-icon-button (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

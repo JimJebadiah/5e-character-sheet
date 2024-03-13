@@ -1,28 +1,3 @@
-<mat-card class="inventory">
-  <div class="inventory-header">Inventory</div>
-  <div class="inventory-body scrollbar">
-    <ng-container *ngIf="this.items.length <= 0; else itemList">
-      <div class="empty">
-        <mat-icon>assignment_late</mat-icon>
-        No Items
-      </div>
-    </ng-container>
-    <ng-template #itemList>
-      <div class="item-list">
-        <div class="inventory-box" *ngFor="let item of items; index as index">
-          <span class="name">{{item.name}}</span>
-          <div class="item-count">
-            <button mat-icon-button (click)="remove(item, index)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <span class="count">{{item.count}}</span>
-            <button mat-icon-button (click)="add(item)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-  </div>
-</mat-card>
+<!-- TODO add currency? -->
+<app-list-block [items]="items" [type]="inventoryType" [header]="'Inventory'"/>
 
