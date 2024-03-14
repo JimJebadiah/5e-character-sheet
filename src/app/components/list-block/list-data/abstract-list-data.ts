@@ -69,8 +69,6 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
         index: this.index,
         val: this.data.data
       }
-    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
-      console.log(item);
     });
   }
 
@@ -84,6 +82,7 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
       }
     }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
       this.data.data.from(item);
+      this.listService.update(this.data.data, this.index, this.listId);
     });
   }
 

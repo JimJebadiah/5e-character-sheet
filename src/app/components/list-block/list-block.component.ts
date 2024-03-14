@@ -45,6 +45,13 @@ export class ListBlockComponent implements OnInit, OnDestroy {
         this.updateItemList.next(this.items);
       }
     });
+
+    this.listService.update$.pipe(takeUntil(this.destroyed)).subscribe(([item, index, listId]) => {
+      if (listId === this.listId) {
+        this.items[index] = item;
+        this.updateItemList.next(this.items);
+      }
+    });
   }
 
   addItem(n: ListType) {

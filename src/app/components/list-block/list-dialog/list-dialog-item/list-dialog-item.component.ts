@@ -61,9 +61,14 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
     this.amount.valueChanges.subscribe((val) => {
       if (this.amountRef !== undefined) {
         if (val! === '') {
-          this.amountV = 0;
+          this.amountV = 1;
           this.amountRef.nativeElement.value = '';
           return;
+        }
+
+        if (val! === '0') {
+          this.amountV = 1;
+          this.amountRef.nativeElement.value = '1';
         }
 
         if (val!.length > 3) {

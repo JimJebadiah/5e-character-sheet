@@ -20,6 +20,7 @@ export class ItemListDataComponent extends AbstractListData<Item> {
 
   add() {
     this.data.data.increment();
+    this.listService.update(this.data.data, this.index, this.listId);
   }
 
   remove() {
@@ -27,6 +28,7 @@ export class ItemListDataComponent extends AbstractListData<Item> {
     if (this.data.data.count === 0) {
       this.onDelete();
     }
+    this.listService.update(this.data.data, this.index, this.listId);
   }
 
   protected override deleteCallback(res: boolean): void {

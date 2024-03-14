@@ -73,6 +73,7 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
         this.firearm.reload(bulletItem!.count);
         this.hero.inventory.splice(index, 1);
       }
+      this.dbService.update(this.hero);
     }
   }
 
