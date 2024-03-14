@@ -40,6 +40,10 @@ export class ListBlockComponent implements OnInit {
     this.items = [...this.items, n];
   }
 
+  replaceItem(n: ListType, index: number) {
+
+  }
+
   getItems(): ListType[] {
     return this.items;
   }
@@ -71,7 +75,13 @@ export class ListBlockComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(this.getDialog()).afterClosed().subscribe((res: ListType | null) => {
+    this.dialog.open(this.getDialog(), {
+      data: {
+        header: 'Add to List',
+        edit: true,
+        index: -1
+      }
+    }).afterClosed().subscribe((res: ListType | null) => {
       if (res !== null) {
         this.addItem(res);
       }

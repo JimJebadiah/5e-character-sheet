@@ -1,83 +1,74 @@
 @import '../../../card-common.less';
+@import '../block-common.less';
 
 :host ::ng-deep .list-block {
   .card-container(400px) !important;
 }
 
-.inventory-container {
-  .card-container(unset);
-  margin: 0;
 
-  .header {
-    .card-header();
-  }
+.body {
+  .money {
+    .card-container(400px);
 
-  .body {
-    .center();
-    flex-direction: column;
+    .body {
+      margin: 10px 0;
+    }
 
-    .money {
-      .card-container(400px);
-
-      .body {
-        margin: 10px 0;
+    .box {
+      .info-bit(space-between);
+      
+      mat-icon {
+        transform: scale(1.2);
       }
 
-      .box {
-        .info-bit(space-between);
-        
-        mat-icon {
-          transform: scale(1.2);
-        }
-
-        .coin-icon {
-          .center();
-
-          mat-icon {
-            position: absolute;
-            left: 30px;
-          }
-
-          .shadow {
-            left: 31px;
-            color: rgba(0, 0, 0, 0.5) !important;
-            transform: scale(1.4) translateY(1px);
-            filter: blur(2.5px);
-          }
-          
-          .highlight {
-            left: 30px;
-            color: rgba(255, 255, 255, 0.4) !important;
-            transform: scale(0.9);
-            filter: blur(1px);
-          }
-        }
-
-        span {
-          padding-right: 15px;
-          font-size: x-large;
-        }
-      }
-
-      .money-change {
+      .coin-icon {
         .center();
 
         mat-icon {
-          font-size: normal !important;
-          transform: scale(1);
+          position: absolute;
+          left: 30px;
         }
 
-        span {
-          padding-right: 0;
-          width: 25px;
-          padding: 0 15px;
-          text-align: center;
-          font-size: unset !important;
+        .shadow {
+          left: 31px;
+          color: rgba(0, 0, 0, 0.5) !important;
+          transform: scale(1.4) translateY(1px);
+          filter: blur(2.5px);
         }
+        
+        .highlight {
+          left: 30px;
+          color: rgba(255, 255, 255, 0.4) !important;
+          transform: scale(0.9);
+          filter: blur(1px);
+        }
+      }
+
+      span {
+        padding-right: 15px;
+        font-size: x-large;
+      }
+    }
+
+    .money-change {
+      .center();
+
+      mat-icon {
+        font-size: normal !important;
+        transform: scale(1);
+      }
+
+      span {
+        padding-right: 0;
+        width: 25px;
+        padding: 0 15px;
+        text-align: center;
+        font-size: unset !important;
       }
     }
   }
 }
+
 
 .platinum {
   color: #D3E5EF !important;

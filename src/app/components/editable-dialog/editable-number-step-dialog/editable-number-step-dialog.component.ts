@@ -1,10 +1,8 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { AbstractEditableDialog } from '../abstract-editable-dialog';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
-import { EditableStringDialogComponent } from '../editable-string-dialog/editable-string-dialog.component';
-import { GitdbService } from 'src/app/services/gitdb.service';
 import { Hero } from 'src/app/domain/hero';
 
 @Component({
@@ -13,7 +11,6 @@ import { Hero } from 'src/app/domain/hero';
   styleUrls: ['./editable-number-step-dialog.component.less']
 })
 export class EditableNumberStepDialogComponent extends AbstractEditableDialog<number, EditableNumberStepDialogComponent> implements OnInit {
-
   @ViewChild('input') elRef: any;
 
   PATTERN = /^[0-9]+$/;

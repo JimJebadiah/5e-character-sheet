@@ -1,9 +1,10 @@
 @import '../../../card-common.less';
 
 .container {
-  .card-container(250px);
+  .card-container(unset);
+  min-width: 250px;
   margin: 0;
-  min-height: 250px;
+  max-height: 75vh !important;
 
   .header {
     .card-header();
@@ -15,22 +16,24 @@
 
     .content {
       .center();
-      width: 100%;
       font-size: x-large;
       text-align: center;
       margin: 25px;
     }
 
+    .empty {
+      margin-bottom: 0;
+    }
+
     .buttons {
       .center();
-      position: absolute;
       width: 90%;
       gap: 15px;
+      margin-bottom: 25px;
 
       button {
         width: 60%;
       }
-      bottom: 20px;
     }
   }
 }

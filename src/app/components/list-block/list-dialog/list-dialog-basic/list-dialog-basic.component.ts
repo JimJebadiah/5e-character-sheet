@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Basic } from '../../list-data/basic-list-data/basic';
 
 @Component({
@@ -15,15 +15,24 @@ export class ListDialogBasicComponent implements OnInit {
 
   val: string = '';
 
+  header: string;
+  edit: boolean;
+  index: number;
+
   constructor(
     fb: FormBuilder,
-    private readonly ref: MatDialogRef<ListDialogBasicComponent>
+    private readonly ref: MatDialogRef<ListDialogBasicComponent>,
+    @Inject(MAT_DIALOG_DATA) data: {header: string, edit: boolean, index: number}
   ) { 
     this.value = fb.control('', [Validators.required]);
 
     this.group = fb.group({
       'value': this.value,
     });
+
+    this.header = data.header;
+    this.edit = data.edit;
+    this.index = data.index;
   }
 
   ngOnInit(): void {

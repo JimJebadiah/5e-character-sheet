@@ -1,12 +1,13 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from "@angular/core";
+import { Directive, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output } from "@angular/core";
 import { ListData } from "../list-data";
 import { ListType } from "../list-block.component";
 import { ListService } from "../list.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
+import { Subject, takeUntil } from "rxjs";
 
 @Directive()
-export abstract class AbstractListData<T extends ListType> {
+export abstract class AbstractListData<T extends ListType> implements OnDestroy {
   @HostBinding('style') style = {
     'width': '100%',
     'display': 'flex',
@@ -36,13 +37,19 @@ export abstract class AbstractListData<T extends ListType> {
     protected readonly listService: ListService
   ) { }
 
+  onDestroyed = new Subject<void>;
+  ngOnDestroy(): void {
+    this.onDestroyed.next();
+    this.onDestroyed.complete();
+  }
+
   onDelete() {
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         header: 'Delete Item',
         content: 'Are you sure you want to delete this?'
       }
-    }).afterClosed().subscribe((res: boolean) => {
+    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((res: boolean) => {
       if (res) this.listService.remove(this.index, this.listId);
       this.deleteCallback(res);
     })

@@ -1,35 +1,32 @@
 @import '../../../card-common.less';
+@import '../block-common.less';
 
-.combat-card {
+.container {
   .block-container(550px);
+}
 
-  @media screen and (max-width: 480px) {
-    .card-container(@card-mobile-width);
+.hp {
+  .card-container(95%);
+
+  .hp-body-curr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .hp {
-    .card-container(95%);
-
-    .hp-body-curr {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hp-body {
-      .center();
-      flex-direction: column;
-    }
-
-    hr {
-      color: rgba(0, 0, 0, 0.25);
-      width: 90%;
-    }
+  .hp-body {
+    .center();
+    flex-direction: column;
   }
 
-  .block {
-    width: 100%;
+  hr {
+    color: rgba(0, 0, 0, 0.25);
+    width: 90%;
   }
+}
+
+.block {
+  width: 100%;
 }
 
 .box(@width, @height) {

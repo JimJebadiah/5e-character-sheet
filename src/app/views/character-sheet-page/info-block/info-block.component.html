@@ -1,4 +1,4 @@
-<mat-card class="info-card">
+<mat-card class="container">
   <div class="header">
     <button mat-icon-button (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
@@ -22,32 +22,40 @@
         [hero]="hero"
         [field]="'class'"
       >
-        <span>Class</span>
-        <span>{{hero.class}}</span>
+        <div class="info-row">
+          <span>Class</span>
+          <span>{{hero.class}}</span>
+        </div>
       </div>
       <div class="info"
         appEditableString
         [hero]="hero"
         [field]="'race'"
       >
-        <span>Race</span>
-        <span>{{hero.race}}</span>
+        <div class="info-row">
+          <span>Race</span>
+          <span>{{hero.race}}</span>
+        </div>  
       </div>
       <div class="info"
         appEditableString
         [hero]="hero"
         [field]="'background'"
       >
-       <span>Background</span>
-        <span>{{hero.background}}</span>
+        <div class="info-row">
+          <span>Background</span>
+          <span>{{hero.background}}</span>
+        </div>
       </div>
       <div class="info"
         appEditableString
         [hero]="hero"
         [field]="'alignment'"
       >
-        <span>Alignment</span>
-        <span>{{hero.alignment}}</span>
+        <div class="info-row">
+          <span>Alignment</span>
+          <span>{{hero.alignment}}</span>
+        </div>
       </div>
     </div>
     <hr />

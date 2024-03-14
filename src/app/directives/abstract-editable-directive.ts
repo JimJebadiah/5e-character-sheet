@@ -16,7 +16,13 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
   onEnter() {
     this.ref.nativeElement.style.cursor = 'pointer';
     this.overlay!.setAttribute('style',
-      `position: absolute; width: ${this.ref.nativeElement.clientWidth}px; height: ${this.ref.nativeElement.clientHeight}px; background-color: rgba(0, 0, 0, 0.1); border-radius: 5%`
+      `
+        position: absolute; 
+        width: ${this.ref.nativeElement.clientWidth}px; 
+        height: ${this.ref.nativeElement.clientHeight}px; 
+        background-color: rgba(0, 0, 0, 0.1); 
+        border-radius: 5%
+      `
     );
   }
 
@@ -24,7 +30,12 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
   onLeave() {
     this.ref.nativeElement.style.cursor = 'auto';
     this.overlay!.setAttribute('style',
-    `position: absolute; width: ${this.ref.nativeElement.clientWidth}px; height: ${this.ref.nativeElement.clientHeight}px; background-color: transparent`
+      `
+        position: absolute; 
+        width: ${this.ref.nativeElement.clientWidth}px; 
+        height: ${this.ref.nativeElement.clientHeight}px; 
+        background-color: transparent
+        `
     );
   }
 
@@ -56,7 +67,12 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     this.overlay = document.createElement('div');
     this.overlay.className = 'box-overlay';
     this.overlay.setAttribute('style',
-      `position: absolute; width: ${this.ref.nativeElement.clientWidth}px; height: ${this.ref.nativeElement.clientHeight}px; background-color: transparent`
+      `
+        position: absolute; 
+        width: ${this.ref.nativeElement.clientWidth}px; 
+        height: ${this.ref.nativeElement.clientHeight}px; 
+        background-color: transparent
+      `
     );
 
     this.renderer.appendChild(this.ref.nativeElement, this.overlay);

@@ -1,96 +1,87 @@
 @import '../../../card-common.less';
+@import '../block-common.less';
 
-.info-card {
-  .block-container(300px);
-  @media screen and (max-width: 480px) {
-    .card-container(@card-mobile-width);
-  }
+.header {
+  button {
+    position: absolute;
+    left: 10px;
 
-  .header {
-    .card-header();
-
-    button {
-      position: absolute;
-      left: 10px;
-
-      mat-icon {
-        color: var(--white) !important;
-      }
-    }
-
-    button:hover {
-      background-color: rgba(255, 255, 255, 0.25);
+    mat-icon {
+      color: var(--white) !important;
     }
   }
 
-  .body {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    overflow-y: scroll;
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+}
 
-    .image-container {
-      height: 240px;
+.body {
+  .image-container {
+    height: 240px;
 
-      .image {
-        width: 200px;
-        height: 200px;
-        margin: 30px;
-        border: 1px solid rgba(0, 0, 0, 0.5);
+    .image {
+      width: 200px;
+      height: 200px;
+      margin: 30px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
 
-        img {
-          width: 100%;
-          height: 100%;
-        }
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
+  }
 
-    hr {
-      color: rgba(0, 0, 0, 0.25);
-      width: 90%;
-    }
+  hr {
+    color: rgba(0, 0, 0, 0.25);
+    width: 90%;
+  }
 
-    .info-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
+  .info-container {
+    .center();
+    width: 100%;
+    flex-direction: column;
+    position: relative;
 
-      .info {
-        .info-bit(space-between);
+    .info {
+      .info-bit(space-between);
 
-        span {
-          padding: 0 15px;
-        }
-      }
-    }
-
-    .languages {
-      width: 90%;
-      margin: 10px 0;
-
-      .body {
-        overflow: visible;
-      }
-
-      .language-box:first-child {
-        margin-top: 10px;
-      }
-
-      .language-box {
+      .info-row {
         .center();
-        width: 90%;
-        margin-bottom: 10px;
+        justify-content: space-between;
+      }
 
-        .language {
-          .info-bit(center);
-        }
+      span {
+        padding: 0 15px;
+      }
+    }
+  }
+
+  .languages {
+    width: 90%;
+    margin: 10px 0;
+
+    .body {
+      overflow: visible;
+    }
+
+    .language-box:first-child {
+      margin-top: 10px;
+    }
+
+    .language-box {
+      .center();
+      width: 90%;
+      margin-bottom: 10px;
+
+      .language {
+        .info-bit(center);
       }
     }
   }
 }
+
 
 .info-bit(@justify) {
   background-color: var(--white);
