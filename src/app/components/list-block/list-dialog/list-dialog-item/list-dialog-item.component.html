@@ -20,7 +20,11 @@
         <mat-label>Description</mat-label>
         <textarea matInput class="scrollbar" formControlName="description"></textarea>
       </mat-form-field>
-      <mat-checkbox></mat-checkbox>
+      <div class="is-ammunition">
+        <span>Is Ammunition?</span>
+        <mat-checkbox></mat-checkbox>
+      </div>
+      <ng-container *ngIf="true; then ammunitionTypeBody" />
     </form>
   </div>
   <div class="buttons">
@@ -43,5 +47,14 @@
   <div class="buttons">
     <button mat-raised-button color="primary" (click)="cancel()">Close</button>
   </div>
+</ng-template>
+
+<ng-template #ammunitionTypeBody>
+  <mat-radio-group>
+    <ng-container *ngFor="let type of AMMUNITION_TYPES">
+      <span>{{type.charAt(0).toUpperCase() + type.substring(1)}}</span>
+      <mat-radio-button></mat-radio-button>
+    </ng-container>
+  </mat-radio-group>
 </ng-template>
 

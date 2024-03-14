@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Item } from 'src/app/domain/item';
+import { Item, AmmunitionType, ammunitionTypes } from 'src/app/domain/item';
 import { AbstractListDialog, DialogData } from '../abstract-list-dialog';
 
 @Component({
@@ -18,6 +18,7 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
   description: FormControl;
 
   readonly PATTERN = /^[0-9]+$/;
+  readonly AMMUNITION_TYPES = ammunitionTypes;
 
   nameV: string = '';
   amountV: number = 1;

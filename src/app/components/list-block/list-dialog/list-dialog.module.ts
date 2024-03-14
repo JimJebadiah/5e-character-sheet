@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ListDialogItemComponent } from './list-dialog-item/list-dialog-item.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -25,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
+    MatRadioModule,
     ReactiveFormsModule
   ]
 })
