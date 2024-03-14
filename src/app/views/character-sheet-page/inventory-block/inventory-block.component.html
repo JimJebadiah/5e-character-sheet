@@ -4,10 +4,11 @@
   </div>
   <div class="body scrollbar">
     <app-list-block 
-      [items]="items" 
+      [items]="hero.inventory" 
       [type]="inventoryType" 
       [header]="'Backpack'"  
       [listId]="1"
+      (updateItemList)="updateList($event)"
     />
     <mat-card class="money">
       <div class="header">

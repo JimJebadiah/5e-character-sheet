@@ -17,9 +17,9 @@ export class AppComponent {
     registry: MatIconRegistry,
     domSanitizer: DomSanitizer
   ) {
-    const sword = domSanitizer.bypassSecurityTrustResourceUrl(urlJson.sword);
-    const crosshair = domSanitizer.bypassSecurityTrustResourceUrl(urlJson.crosshair);
-    registry.addSvgIcon('sword', sword);
-    registry.addSvgIcon('crosshair', crosshair);
+    Object.keys(urlJson).forEach((icon: string) => {
+      const i = domSanitizer.bypassSecurityTrustResourceUrl((urlJson as any)[icon]);
+      registry.addSvgIcon(icon, i);
+    });
   }
 }

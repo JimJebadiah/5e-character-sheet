@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Type } from '@angular/core';
 import { Item } from 'src/app/domain/item';
 import { AbstractListData } from './list-data/abstract-list-data';
 import { BasicListDataComponent } from './list-data/basic-list-data/basic-list-data.component';
@@ -11,6 +11,7 @@ import { ListService } from './list.service';
 import { ItemListDataComponent } from './list-data/item-list-data/item-list-data.component';
 import { ListDialogItemComponent } from './list-dialog/list-dialog-item/list-dialog-item.component';
 import { ListType } from './list-data/list-type';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-list-block',
@@ -18,29 +19,36 @@ import { ListType } from './list-data/list-type';
   styleUrls: ['./list-block.component.less'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListBlockComponent implements OnInit {
+export class ListBlockComponent implements OnInit, OnDestroy {
   @Input() header: string = '';
   @Input() listId!: number;
   @Input() type!: Type<ListType>;
   @Input() items: ListType[] = [];
+
+  @Output() updateItemList: EventEmitter<ListType[]> = new EventEmitter<ListType[]>();
 
   constructor(
     private readonly dialog: MatDialog,
     private readonly listService: ListService
   ) { }
 
+  destroyed = new Subject<void>;
+  ngOnDestroy(): void {
+    this.destroyed.next();
+    this.destroyed.complete();
+  }
+
   ngOnInit(): void {
-    this.listService.remove$.subscribe(([index, listId]) => {
-      if (listId === this.listId) this.items.splice(index, 1);
+    this.listService.remove$.pipe(takeUntil(this.destroyed)).subscribe(([index, listId]) => {
+      if (listId === this.listId) {
+        this.items.splice(index, 1)
+        this.updateItemList.next(this.items);
+      }
     });
   }
 
   addItem(n: ListType) {
-    this.items = [...this.items, n];
-  }
-
-  replaceItem(n: ListType, index: number) {
-
+    this.updateItemList.next([...this.items, n]);
   }
 
   getItems(): ListType[] {

@@ -1,32 +1,37 @@
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Type } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditableNumberStepDialogComponent } from 'src/app/components/editable-dialog/editable-number-step-dialog/editable-number-step-dialog.component';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { Item } from 'src/app/domain/item';
 import { AbstractBlock } from '../abstract-block';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';
+import { GitdbService } from 'src/app/services/gitdb.service';
 
 @Component({
   selector: 'app-inventory-block',
   templateUrl: './inventory-block.component.html',
   styleUrls: ['./inventory-block.component.less']
 })
-export class InventoryBlockComponent extends AbstractBlock implements OnInit{
-  items: Item[] = [];
-
+export class InventoryBlockComponent extends AbstractBlock implements OnInit {
   inventoryType: Type<ListType> = Item;
 
   currency = ['Platinum', 'Gold', 'Electrum', 'Silver', 'Copper'];
 
   constructor(
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly dbService: GitdbService,
   ) { 
     super();
     this.getCurrency.bind(this);
   }
 
-  ngOnInit(): void {
-    this.items = this.hero.inventory;
+  ngOnInit(): void { }
+
+  updateList(event: ListType[]) {
+    if (event.filter((i) => i instanceof Item).length === event.length) {
+      this.hero.inventory = event as Item[];
+      this.dbService.update(this.hero);
+    }
   }
 
   openDialogAdd(k: string) {

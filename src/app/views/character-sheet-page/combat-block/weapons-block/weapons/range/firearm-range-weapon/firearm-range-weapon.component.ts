@@ -52,8 +52,28 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   }
 
   reload() {
-    this.firearm.reload(this.firearm.rounds);
-    this.dbService.update(this.hero);
+    console.log(this.hero.inventory);
+    const hasBullets = this.hero.inventory.filter((i) => i.ammunitionType === 'bullet').length > 0;
+    if (hasBullets) {
+      const reloadAmount = this.firearm.rounds - this.firearm.loaded;
+
+      let index = 0;
+      let bulletItem = null;
+      for (index = 0; index < this.hero.inventory.length; index++) {
+        if (this.hero.inventory[index].ammunitionType === 'bullet') {
+          bulletItem = this.hero.inventory[index];
+          break;
+        }
+      }
+      
+      if (bulletItem!.count > reloadAmount) {
+        this.firearm.reload(reloadAmount);
+        bulletItem!.count -= reloadAmount;
+      } else {
+        this.firearm.reload(bulletItem!.count);
+        this.hero.inventory.splice(index, 1);
+      }
+    }
   }
 
   status() {

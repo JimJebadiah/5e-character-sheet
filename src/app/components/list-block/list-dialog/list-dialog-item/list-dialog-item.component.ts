@@ -16,6 +16,8 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
   name: FormControl;
   amount: FormControl;
   description: FormControl;
+  isAmmunition: FormControl;
+  ammunitionType: FormControl;
 
   readonly PATTERN = /^[0-9]+$/;
   readonly AMMUNITION_TYPES = ammunitionTypes;
@@ -23,6 +25,8 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
   nameV: string = '';
   amountV: number = 1;
   descriptionV: string = '';
+  isAmmunitionV: boolean = false;
+  ammunitionTypeV: AmmunitionType = 'bullet';
 
   constructor(
     fb: FormBuilder,
@@ -34,14 +38,19 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
     this.name = fb.control('', [Validators.required]);
     this.amount = fb.control('1', [Validators.required]);
     this.description = fb.control<string>('');
+    this.isAmmunition = fb.control<boolean>(false);
+    this.ammunitionType = fb.control('bullet');
 
     this.group = fb.group({
       'name': this.name,
       'amount': this.amount,
       'description': this.description,
+      'isAmmunition': this.isAmmunition,
+      'ammunitionType': this.ammunitionType,
     });
 
     this.amount.setValue('1');
+    this.isAmmunition.setValue(false);
   }
 
   ngOnInit(): void {
@@ -76,6 +85,14 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
       this.descriptionV = val;
     });
 
+    this.isAmmunition.valueChanges.subscribe((val) => {
+      this.isAmmunitionV = val;
+    })
+
+    this.ammunitionType.valueChanges.subscribe((val) => {
+      this.ammunitionTypeV = val;
+    });
+
     this.loadEdit();
   }
 
@@ -84,17 +101,26 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
   }
 
   override createListType(): Item {
-    return new Item({
+    const item = new Item({
       "name": this.nameV,
       "count": this.amountV,
-      "description": this.descriptionV
+      "description": this.descriptionV,
     });
+
+    if (this.isAmmunitionV) {
+      item.ammunitionType = this.ammunitionTypeV;
+    }
+
+    return item;
   }
 
   override setValues(): void {
-    console.log(this.val);
     this.name.setValue(this.val!.name);
     this.amount.setValue(this.val!.count);
     this.description.setValue(this.val!.description);
+    if (this.val!.ammunitionType !== undefined) {
+      this.isAmmunition.setValue(true);
+      this.ammunitionType.setValue(this.val!.ammunitionType!);
+    }
   }
 }

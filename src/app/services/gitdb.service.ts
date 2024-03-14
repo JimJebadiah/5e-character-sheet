@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, combineLatest, debounceTime, firstValueFrom, forkJoin, from, map, merge, mergeAll, mergeMap, of, tap, toArray, zip, zipWith } from 'rxjs';
-import { Token } from '@angular/compiler';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, merge, mergeMap, of, tap } from 'rxjs';
 
 declare var GitHub: any;
+
+export const LATEST_COMMIT = 'latest_commit';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class GitdbService {
   private static readonly USERNAME: string = 'username';
 
   private gh: any;
+  private latestCommit: string | null = null;
   private repo: any;
 
   private tokenSubject: BehaviorSubject<string> = new BehaviorSubject('');
@@ -48,9 +50,9 @@ export class GitdbService {
 
     this.heroCacheSubject.next(null);
 
-    // this.update$.pipe(debounceTime(2500)).subscribe((hero) => {
-    //   this.saveHero(hero);
-    // });
+    this.update$.pipe(debounceTime(5000)).subscribe((hero) => {
+      this.saveHero(hero);
+    });
   }
 
   setToken(token: string) {
@@ -66,26 +68,30 @@ export class GitdbService {
   saveHero(hero: Hero) {
     from(this.createRepo()).pipe(
       mergeMap(() => {
-        return this.repo.writeFile(
+        return from(this.repo.writeFile(
           'main',
-          `heroes/${hero.name}.json`,
-          JSON.stringify(hero.json),
+          `heroes/${hero.name}.json?time=${Date.now()}`,
+          JSON.stringify(hero.json, null, 2),
           `Updated ${hero.name}.json on ${new Date().toUTCString()}`
-        );
+        ));
       }),
-      tap(() => {
+      tap((data: any) => {
+        this.latestCommit = data.data.commit.sha;
+        localStorage.setItem(LATEST_COMMIT, this.latestCommit!);
         this.heroCacheSubject.next(null);
       }),
     ).subscribe();
   }
 
   getHero(name: string): Observable<Hero> {
-    return from(this.createRepo()).pipe(mergeMap(() => {
-      return from(this.repo.getContents('main', `heroes/${name}.json`))
-      .pipe(map((data: any) => {
-        const string = atob(data.data.content);
-        const hero: HeroJSON = JSON.parse(string);
-        return new Hero(hero);
+    return from(this.createRepo()).pipe(
+      // mergeMap(() => from(this.getLatestCommit())),
+      mergeMap(() => {
+        return from(this.repo.getContents('main', `heroes/${name}.json?time=${Date.now()}`))
+        .pipe(map((data: any) => {
+          const string = atob(data.data.content);
+          const hero: HeroJSON = JSON.parse(string);
+          return new Hero(hero);
       }));
     }))
   }
@@ -127,6 +133,15 @@ export class GitdbService {
         mergeMap((heroes) => forkJoin<Hero[]>(heroes)),
         tap((heroes) => this.heroCacheSubject.next(heroes))
       );
+  }
+
+  async getLatestCommit() {
+    this.latestCommit = localStorage.getItem(LATEST_COMMIT);
+    if (this.latestCommit === null) {
+      await this.createRepo();
+      const commits = await this.repo.listCommits();
+      this.latestCommit = commits.data[0].sha;
+    }
   }
 
   async createRepo() {

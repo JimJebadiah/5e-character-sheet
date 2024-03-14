@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Basic } from 'src/app/components/list-block/list-data/basic-list-data/basic';
 import { GitdbService } from 'src/app/services/gitdb.service';
 import { AbstractBlock } from '../abstract-block';
+import { ListType } from 'src/app/components/list-block/list-data/list-type';
 
 @Component({
   selector: 'app-info-block',
@@ -20,6 +21,14 @@ export class InfoBlockComponent extends AbstractBlock implements OnInit {
     private readonly router: Router,
   ) {
     super();
+  }
+
+  updateLanguages(event: ListType[]) {
+    if (event.filter((i) => i instanceof Basic).length === event.length) {
+      this.hero.languages = (event as Basic[]).map((l) => l.val);
+      this.languages = this.hero.languages.map((l) => new Basic(l));
+      this.dbService.update(this.hero);
+    }
   }
 
   ngOnInit(): void {
