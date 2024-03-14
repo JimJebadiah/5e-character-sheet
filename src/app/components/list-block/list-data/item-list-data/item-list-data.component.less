@@ -18,23 +18,32 @@
   span {
     padding: 0 15px;
   }
+
+  .name {
+    .center();
+    justify-content: space-between;
+    flex-grow: 2;
+  }
 }
 
 .item-count {
   .center();
   justify-content: flex-end;
-  flex-grow: 1;
-  
+
   .count {
     text-align: center;
     width: 25px;
   }
 }
 
+button {
+  z-index: 1;
+}
+
 .overlay {
   position: absolute;
   width: 90%;
-  height: 40px;
+  height: 50px;
   background-color: transparent;
   cursor: pointer;
 }

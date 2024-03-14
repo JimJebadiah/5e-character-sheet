@@ -4,7 +4,9 @@ import { Basic } from './basic';
 import { MatDialog } from '@angular/material/dialog';
 import { ListService } from '../../list.service';
 import { ListDialogBasicComponent } from '../../list-dialog/list-dialog-basic/list-dialog-basic.component';
-import { takeUntil } from 'rxjs';
+import { ComponentType } from '@angular/cdk/portal';
+import { AbstractListDialog } from '../../list-dialog/abstract-list-dialog';
+import { ListType } from '../list-type';
 
 @Component({
   selector: 'app-basic-list-data',
@@ -16,27 +18,11 @@ export class BasicListDataComponent extends AbstractListData<Basic> {
     super(dialog, listService);
   }
 
-  openDialog() {
-    this.dialog.open(ListDialogBasicComponent, {
-      data: {
-        header: this.data.data.val,
-        edit: false,
-        index: this.index
-      }
-    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
-      console.log(item);
-    });
+  protected override listDialog(): ComponentType<AbstractListDialog<ListType>> {
+    return ListDialogBasicComponent;
   }
 
-  openEditDialog() {
-    this.dialog.open(ListDialogBasicComponent, {
-      data: {
-        header: `Edit ${this.data.data.val}`,
-        edit: true,
-        index: this.index
-      }
-    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
-      console.log(item)
-    });
+  protected override header(): string {
+    return this.data.data.val;
   }
 }

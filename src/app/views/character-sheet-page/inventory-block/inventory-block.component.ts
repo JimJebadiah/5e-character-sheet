@@ -1,11 +1,10 @@
 import { Component, Input, OnInit, Type } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditableNumberStepDialogComponent } from 'src/app/components/editable-dialog/editable-number-step-dialog/editable-number-step-dialog.component';
-import { ListType } from 'src/app/components/list-block/list-block.component';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
-import { Hero } from 'src/app/domain/hero';
 import { Item } from 'src/app/domain/item';
 import { AbstractBlock } from '../abstract-block';
+import { ListType } from 'src/app/components/list-block/list-data/list-type';
 
 @Component({
   selector: 'app-inventory-block',

@@ -1,10 +1,12 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output } from "@angular/core";
 import { ListData } from "../list-data";
-import { ListType } from "../list-block.component";
 import { ListService } from "../list.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
 import { Subject, takeUntil } from "rxjs";
+import { AbstractListDialog } from "../list-dialog/abstract-list-dialog";
+import { ComponentType } from "@angular/cdk/portal";
+import { ListType } from "./list-type";
 
 @Directive()
 export abstract class AbstractListData<T extends ListType> implements OnDestroy {
@@ -37,6 +39,10 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
     protected readonly listService: ListService
   ) { }
 
+  protected abstract listDialog(): ComponentType<AbstractListDialog<ListType>>;
+
+  protected abstract header(): string;
+
   onDestroyed = new Subject<void>;
   ngOnDestroy(): void {
     this.onDestroyed.next();
@@ -53,6 +59,32 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
       if (res) this.listService.remove(this.index, this.listId);
       this.deleteCallback(res);
     })
+  }
+
+  openDialog() {
+    this.dialog.open(this.listDialog(), {
+      data: {
+        header: this.header(),
+        edit: false,
+        index: this.index,
+        val: this.data.data
+      }
+    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
+      console.log(item);
+    });
+  }
+
+  openEditDialog() {
+    this.dialog.open(this.listDialog(), {
+      data: {
+        header: `Edit ${this.header()}`,
+        edit: true,
+        index: this.index,
+        val: this.data.data
+      }
+    }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
+      this.data.data.from(item);
+    });
   }
 
   protected deleteCallback(res: boolean): void {}

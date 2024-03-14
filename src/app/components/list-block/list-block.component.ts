@@ -10,8 +10,7 @@ import { ListDialogBasicComponent } from './list-dialog/list-dialog-basic/list-d
 import { ListService } from './list.service';
 import { ItemListDataComponent } from './list-data/item-list-data/item-list-data.component';
 import { ListDialogItemComponent } from './list-dialog/list-dialog-item/list-dialog-item.component';
-
-export type ListType = Item | Basic;
+import { ListType } from './list-data/list-type';
 
 @Component({
   selector: 'app-list-block',

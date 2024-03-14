@@ -1,5 +1,10 @@
 <div class="box">
-  <span class="name">{{data.data.name}}</span>
+  <div class="name">
+    <span class="name">{{data.data.name}}</span>
+    <button mat-icon-button *ngIf="hovering" (click)="openEditDialog()">
+      <mat-icon class="edit">edit</mat-icon>
+    </button>
+  </div>
   <div class="item-count">
     <button mat-icon-button (click)="remove()">
       <mat-icon>remove</mat-icon>
@@ -9,4 +14,5 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  <div class="overlay" (click)="openDialog()"></div>
 </div>

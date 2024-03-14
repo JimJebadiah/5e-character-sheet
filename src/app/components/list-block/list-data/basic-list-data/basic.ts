@@ -1,7 +1,10 @@
-export class Basic {
-    val: string;
+import { ListType } from "../list-type";
 
-    constructor(val: string) {
-        this.val = val;
-    } 
+export class Basic extends ListType {
+  val: string;
+
+  constructor(val: string) {
+    super();
+    this.val = val;
+  } 
 }
