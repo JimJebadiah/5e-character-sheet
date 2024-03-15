@@ -36,6 +36,7 @@ export class Ability extends ListType {
   }
 
   setMaxCharge(hero: Hero): void {
+    this.maxCharge = 0;
     if (this.attribute !== undefined) {
       if (this.attribute === 'proficiency') {
         const p = hero.getProfBonus();
@@ -47,6 +48,8 @@ export class Ability extends ListType {
     }
 
     this.maxCharge += this.chargeModifier;
+
+    if (this.charges > this.maxCharge) this.charges = this.maxCharge;
   }
 
   canUse(): boolean {

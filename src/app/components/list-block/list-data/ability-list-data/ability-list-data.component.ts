@@ -29,10 +29,12 @@ export class AbilityListDataComponent extends AbstractListData<Ability> {
 
   expend() {
     this.data.data.use();
+    this.listService.update(this.data.data, this.index, this.listId);
   }
 
   recharge() {
     this.data.data.recharge(1);
+    this.listService.update(this.data.data, this.index, this.listId);
   }
 
   rounds() {

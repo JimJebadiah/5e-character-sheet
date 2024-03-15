@@ -1,21 +1,21 @@
-<mat-card class="container">
+<mat-card class="container feature-container">
   <div class="header">
     Features
   </div>
   <div class="body scrollbar">
-    <app-list-block
-      [header] = "'Feats'"
-      [type] = "featsType"
-      [listId]="2"
-      [items]="featsItems"
-      (updateItemList)="updateFeatsList($event)"
-    />
     <app-list-block
       [header] = "'Abilities'"
       [type] = "abilitiesType"
       [listId]="2"
       [items]="abilitiesItems"
       (updateItemList)="updateAbilitiesList($event)"
+    />
+    <app-list-block
+      [header] = "'Feats'"
+      [type] = "featsType"
+      [listId]="3"
+      [items]="featsItems"
+      (updateItemList)="updateFeatsList($event)"
     />
   </div>
 </mat-card>

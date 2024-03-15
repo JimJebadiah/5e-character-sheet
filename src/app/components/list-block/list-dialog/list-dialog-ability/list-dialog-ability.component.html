@@ -1,1 +1,61 @@
-<p>list-dialog-ability works!</p>
+<mat-card class="container">
+  <div class="header">{{header}}</div>
+  <div class="body">
+    <ng-container *ngIf="edit; then editBody; else viewBody" />
+  </div>
+</mat-card>
+
+<ng-template #editBody>
+  <div class="content">
+    <form class="form" [formGroup]="group">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input class="num" matInput formControlName="name" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Charges</mat-label>
+        <input class="num" matInput formControlName="charges" required #chargeInput />
+      </mat-form-field>
+      <mat-form-field class="textarea" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput class="scrollbar" formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Attribute</mat-label>
+        <mat-select formControlName="attribute">
+          <mat-option [value]="'none'">None</mat-option>
+          <mat-option *ngFor="let attribute of attributes" [value]="attribute">
+            {{attribute.charAt(0).toUpperCase() + attribute.substring(1)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-radio-group formControlName="rechargeOn">
+        <mat-radio-button [value]="'short'">Short Rest</mat-radio-button>
+        <mat-radio-button [value]="'long'">Long Rest</mat-radio-button>
+      </mat-radio-group>
+    </form>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="confirm()" [disabled]="!canSubmit()">Confirm</button>
+  </div>
+</ng-template>
+
+<ng-template #viewBody>
+  <div class="content">
+    <div class="list">
+      <div>
+        {{val!.charges}} / {{val!.maxCharge}}
+      </div>
+      <div>
+        {{val!.description}}
+      </div>
+      <div>
+        Recharge: {{val!.rechargeOn.charAt(0).toUpperCase() + val!.rechargeOn.substring(1)}}
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="cancel()">Close</button>
+  </div>
+</ng-template>

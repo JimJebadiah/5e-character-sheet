@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ListDialogItemComponent } from './list-dialog-item/list-dialog-item.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { ListDialogFeatComponent } from './list-dialog-feat/list-dialog-feat.component';
 import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ability.component';
 
@@ -31,6 +32,7 @@ import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ab
     MatIconModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatSelectModule,
     ReactiveFormsModule
   ]
 })

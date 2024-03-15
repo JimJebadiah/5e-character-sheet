@@ -38,7 +38,9 @@ export class FeaturesBlockComponent extends AbstractBlock implements OnInit {
 
   updateAbilitiesList(event: ListType[]) {
     if (event.filter((i) => i instanceof Ability).length === event.length) {
-      this.hero.abilities = event as Ability[];
+      const abilities = event as Ability[];
+      abilities.forEach((a) => a.setMaxCharge(this.hero));
+      this.hero.abilities = abilities;
       this.abilitiesItems = this.hero.abilities;
       this.dbService.update(this.hero);
     }
