@@ -71,7 +71,7 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
 
         if (val! === '0') {
           this.chargeV = 1;
-          this.amountRef.nativeElement.value = '1';
+          this.amountRef.nativeElement.value = '0';
         }
 
         if (val!.length > 3) {
