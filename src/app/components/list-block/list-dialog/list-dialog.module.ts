@@ -10,13 +10,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { ListDialogItemComponent } from './list-dialog-item/list-dialog-item.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { ListDialogFeatComponent } from './list-dialog-feat/list-dialog-feat.component';
+import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ability.component';
 
 
 
 @NgModule({
   declarations: [
     ListDialogBasicComponent,
-    ListDialogItemComponent
+    ListDialogItemComponent,
+    ListDialogFeatComponent,
+    ListDialogAbilityComponent
   ],
   imports: [
     CommonModule,

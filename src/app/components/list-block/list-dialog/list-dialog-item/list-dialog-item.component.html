@@ -21,7 +21,7 @@
         <textarea matInput class="scrollbar" formControlName="description"></textarea>
       </mat-form-field>
       <div class="is-ammunition">
-        <span>Is Ammunition?</span>
+        <span>Ammunition?</span>
         <mat-checkbox formControlName="isAmmunition"></mat-checkbox>
       </div>
       <ng-container *ngIf="isAmmunitionV; then ammunitionTypeBody" />
@@ -42,7 +42,7 @@
       <div>
         {{val!.description}}
       </div>
-      <div *ngIf="ammunitionTypeV">
+      <div *ngIf="isAmmunitionV">
         <span>Ammunition Type: {{val!.ammunitionType!.charAt(0).toUpperCase() + val!.ammunitionType!.substring(1)}}</span>
       </div>
     </div>

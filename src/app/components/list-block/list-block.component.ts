@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Type } from 
 import { Item } from 'src/app/domain/item';
 import { AbstractListData } from './list-data/abstract-list-data';
 import { BasicListDataComponent } from './list-data/basic-list-data/basic-list-data.component';
-import { Basic } from './list-data/basic-list-data/basic';
 import { ComponentType } from '@angular/cdk/portal';
 import { ListData } from './list-data';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,12 +11,17 @@ import { ItemListDataComponent } from './list-data/item-list-data/item-list-data
 import { ListDialogItemComponent } from './list-dialog/list-dialog-item/list-dialog-item.component';
 import { ListType } from './list-data/list-type';
 import { Subject, takeUntil } from 'rxjs';
+import { FeatListDataComponent } from './list-data/feat-list-data/feat-list-data.component';
+import { ListDialogFeatComponent } from './list-dialog/list-dialog-feat/list-dialog-feat.component';
+import { Feat } from 'src/app/domain/feat';
+import { Ability } from 'src/app/domain/ability';
+import { AbilityListDataComponent } from './list-data/ability-list-data/ability-list-data.component';
+import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/list-dialog-ability.component';
 
 @Component({
   selector: 'app-list-block',
   templateUrl: './list-block.component.html',
   styleUrls: ['./list-block.component.less'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListBlockComponent implements OnInit, OnDestroy {
   @Input() header: string = '';
@@ -42,20 +46,20 @@ export class ListBlockComponent implements OnInit, OnDestroy {
     this.listService.remove$.pipe(takeUntil(this.destroyed)).subscribe(([index, listId]) => {
       if (listId === this.listId) {
         this.items.splice(index, 1)
-        this.updateItemList.next(this.items);
+        this.updateItemList.emit(this.items);
       }
     });
 
     this.listService.update$.pipe(takeUntil(this.destroyed)).subscribe(([item, index, listId]) => {
       if (listId === this.listId) {
         this.items[index] = item;
-        this.updateItemList.next(this.items);
+        this.updateItemList.emit(this.items);
       }
     });
   }
 
   addItem(n: ListType) {
-    this.updateItemList.next([...this.items, n]);
+    this.updateItemList.emit([...this.items, n]);
   }
 
   getItems(): ListType[] {
@@ -68,6 +72,12 @@ export class ListBlockComponent implements OnInit, OnDestroy {
       case Item:
         type = ItemListDataComponent;
         break;
+      case Feat:
+        type = FeatListDataComponent;
+        break;
+      case Ability:
+        type = AbilityListDataComponent;
+        break;
       default: 
         type = BasicListDataComponent;
         break;
@@ -79,10 +89,16 @@ export class ListBlockComponent implements OnInit, OnDestroy {
     let dialogType;
     switch(this.type) {
       case Item:
-        dialogType = ListDialogItemComponent
+        dialogType = ListDialogItemComponent;
+        break;
+      case Feat:
+        dialogType = ListDialogFeatComponent;
+        break;
+      case Ability:
+        dialogType = ListDialogAbilityComponent;
         break;
       default:
-        dialogType = ListDialogBasicComponent
+        dialogType = ListDialogBasicComponent;
         break;
     }
     return dialogType;

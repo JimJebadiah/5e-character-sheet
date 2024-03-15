@@ -107,7 +107,7 @@ export class Hero {
           this.currency.set(k, currencyArray[index]);
         });
 
-        console.log(this.json);
+        this.abilities.forEach((a) => a.setMaxCharge(this));
     }
 
     getAttrMod(attribute: Attributes): number {
@@ -143,7 +143,7 @@ export class Hero {
         this.hp = this.maxHp;
         this.hitDiceCount = this.level;
         this.abilities.filter((a) => a.rechargeOn === 'long' || a.rechargeOn === 'short')
-            .forEach((a) => a.recharge());
+            .forEach((a) => a.recharge(a.maxCharge));
     }
 
     shortRest(hitDice: number, hpRecovered: number) {
