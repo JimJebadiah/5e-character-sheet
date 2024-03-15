@@ -14,6 +14,7 @@ import { ListType } from '../list-type';
   styleUrls: ['./item-list-data.component.less']
 })
 export class ItemListDataComponent extends AbstractListData<Item> {
+  
   constructor(dialog: MatDialog, listService: ListService) {
     super(dialog, listService);
   }

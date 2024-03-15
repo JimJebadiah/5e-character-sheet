@@ -7,6 +7,7 @@ import { Subject, takeUntil } from "rxjs";
 import { AbstractListDialog } from "../list-dialog/abstract-list-dialog";
 import { ComponentType } from "@angular/cdk/portal";
 import { ListType } from "./list-type";
+import { ListDialogFeatComponent } from "../list-dialog/list-dialog-feat/list-dialog-feat.component";
 
 @Directive()
 export abstract class AbstractListData<T extends ListType> implements OnDestroy {
@@ -62,6 +63,7 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
   }
 
   openDialog() {
+    console.log(this.header());
     this.dialog.open(this.listDialog(), {
       data: {
         header: this.header(),
