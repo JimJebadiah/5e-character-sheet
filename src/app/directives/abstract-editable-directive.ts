@@ -21,7 +21,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
         width: ${this.ref.nativeElement.clientWidth}px; 
         height: ${this.ref.nativeElement.clientHeight}px; 
         background-color: rgba(0, 0, 0, 0.1); 
-        border-radius: 5%
+        border-radius: 5px
       `
     );
   }

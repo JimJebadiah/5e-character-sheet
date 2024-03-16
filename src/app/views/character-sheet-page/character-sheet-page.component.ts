@@ -9,7 +9,10 @@ import { InfoBlockComponent } from './info-block/info-block.component';
 import { CombatBlockComponent } from './combat-block/combat-block.component';
 import { InventoryBlockComponent } from './inventory-block/inventory-block.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AbstractBlock } from './abstract-block';
+import { AbstractBlock, Blocks } from './abstract-block';
+import { FeaturesBlockComponent } from './features-block/features-block.component';
+import { ComponentType } from '@angular/cdk/portal';
+import { Block } from '@angular/compiler';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -21,21 +24,25 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   hero!: Hero;
   loaded: boolean = false;
 
+  blockMap = new Map<Blocks, ComponentType<AbstractBlock>>();
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly dbService: GitdbService,
     private readonly cdr: ChangeDetectorRef
-  ) { }
+  ) { 
+    this.blockMap.set(Blocks.STAT, StatBlockComponent);
+    this.blockMap.set(Blocks.COMBAT, CombatBlockComponent);
+    this.blockMap.set(Blocks.FEATURES, FeaturesBlockComponent);
+    this.blockMap.set(Blocks.INVENTORY, InventoryBlockComponent);
+  }
 
-  blocks: Type<AbstractBlock>[] = [
-    InfoBlockComponent,
-    StatBlockComponent,
-    CombatBlockComponent,
-    InventoryBlockComponent
-  ];
+  blocks: number[] = [];
 
   onDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
     moveItemInArray(this.blocks, event.previousIndex, event.currentIndex);
+    this.hero.blockOrder = this.blocks;
+    this.dbService.update(this.hero);
   }
 
   ngOnInit(): void {
@@ -43,6 +50,8 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.dbService.getHero(name).pipe(delay(0)).subscribe((hero) => {
       this.hero = hero;
       this.loaded = true;
+
+      this.blocks = this.hero.blockOrder;
     });
   }
 

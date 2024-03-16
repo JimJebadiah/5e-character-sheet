@@ -31,7 +31,8 @@ export interface HeroJSON {
     languages: string[],
     feats: FeatJSON[],
     abilities: AbilityJSON[],
-    currency: number[]
+    currency: number[],
+    blockOrder: number[],
 }
 
 export class Hero {
@@ -59,6 +60,7 @@ export class Hero {
     feats: Feat[];
     abilities: Ability[];
     currency: Map<string, number>;
+    blockOrder: number[];
 
     constructor (json: HeroJSON) {
         this.name = json.name;
@@ -82,6 +84,7 @@ export class Hero {
         this.languages = json.languages;
         this.feats = json.feats?.map((f) => new Feat(f)) ?? [];
         this.abilities = json.abilities?.map((a) => new Ability(a)) ?? [];
+        this.blockOrder = json.blockOrder ?? [0, 1, 2, 3];
 
         this.attributes = new Map<Attributes, Attribute>();
         let i = 0;
@@ -178,7 +181,8 @@ export class Hero {
             languages: this.languages,
             abilities: this.abilities.map((a) => a.json),
             attributes: [ ...this.attributes.values() ].map((v) => v.json),
-            currency: [...this.currency.values()]
+            currency: [...this.currency.values()],
+            blockOrder: [...this.blockOrder],
         };
     }
 
@@ -207,7 +211,8 @@ export class Hero {
             languages: [],
             abilities: [],
             attributes: [],
-            currency: [0, 0, 0, 0, 0]
+            currency: [0, 0, 0, 0, 0],
+            blockOrder: [0, 1, 2, 3]
         });
     }
 

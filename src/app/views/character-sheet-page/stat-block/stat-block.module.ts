@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AttributeBlockModule } from './attribute-block/attribute-block.module';
 import { SkillsBlockModule } from './skills-block/skills-block.module';
 import { EditableModule } from 'src/app/directives/editable.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -19,7 +20,8 @@ import { EditableModule } from 'src/app/directives/editable.module';
     AttributeBlockModule,
     SkillsBlockModule,
     MatCheckboxModule,
-    EditableModule
+    EditableModule,
+    DragDropModule
   ],
   exports: [StatBlockComponent]
 })

@@ -65,7 +65,7 @@ export class GitdbService {
     this.updateSubject.next(hero);
   }
 
-  saveHero(hero: Hero) {
+  private saveHero(hero: Hero) {
     from(this.createRepo()).pipe(
       mergeMap(() => {
         return from(this.repo.writeFile(

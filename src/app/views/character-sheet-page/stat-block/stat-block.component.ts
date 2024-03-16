@@ -1,8 +1,4 @@
-import { AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, delay, of, startWith } from 'rxjs';
-import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
-import { Attributes, Attribute } from 'src/app/domain/attribute';
-import { Hero } from 'src/app/domain/hero';
+import { Component } from '@angular/core';
 import { AbstractBlock } from '../abstract-block';
 
 @Component({

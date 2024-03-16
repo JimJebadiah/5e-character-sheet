@@ -10,6 +10,7 @@ import { InventoryBlockModule } from "./inventory-block/inventory-block.module";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FeaturesBlockModule } from "./features-block/features-block.module";
+import { MatIconModule } from "@angular/material/icon";
 
 
 
@@ -21,13 +22,15 @@ import { FeaturesBlockModule } from "./features-block/features-block.module";
   imports: [
     CommonModule,
     HeaderModule,
+    MatIconModule,
     InfoBlockModule,
     StatBlockModule,
     CombatBlockModule,
     FeaturesBlockModule,
     InventoryBlockModule,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DragDropModule
   ]
 })
 export class CharacterSheetPageModule { }
