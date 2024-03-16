@@ -14,9 +14,6 @@
 
 .prof-bonus-card {
   .card-container(250px);
-  @media screen and (max-width: 480px) {
-    .card-container(300px);
-  }
 
   background-color: var(--white);
   display: flex;
@@ -38,5 +35,31 @@
   .mat-mdc-checkbox {
     --mdc-checkbox-disabled-selected-icon-color: var(--primary);
     --mdc-checkbox-disabled-unselected-icon-color: var(--primary);
+  }
+}
+
+.mobile {
+  .center();
+  width: 100%;
+  flex-direction: column !important;
+
+  .prof-bonus-card {
+    .card-container(100%);
+  }
+
+  .col1 {
+    width: 95%;
+
+    app-attribute-block {
+      width: 100% !important;
+    }
+  }
+
+  .col2 {
+    width: 95%;
+
+    app-skills-block {
+      width: 100% !important;
+    }
   }
 }

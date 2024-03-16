@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { isMobile } from 'src/app/app.component';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { Attributes, attributes } from 'src/app/domain/attribute';
 import { Hero } from 'src/app/domain/hero';
@@ -12,6 +13,7 @@ export class AttributeBlockComponent {
   @Input() hero!: Hero;
 
   attributes = attributes;
+  isMobile = isMobile();
 
   constructor() {
     this.getAttrGetterFunction.bind(this);

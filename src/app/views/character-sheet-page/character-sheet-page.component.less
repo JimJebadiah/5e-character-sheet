@@ -10,6 +10,7 @@
 
   @media screen and (max-width: 480px) {
     width: 100vw;
+    overflow: hidden;
   }
 
   .grid {
@@ -112,6 +113,45 @@
   
     mat-icon {
       color: white !important;
+    }
+  }
+}
+
+.mobile {
+  width: 100vw !important;
+  height: 100vh !important;
+  position: relative;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  margin: 0;
+
+  .block {
+    overflow-x: visible;
+    overflow-y: hidden;
+    @media screen and (max-width: 480px) {
+      overflow: hidden !important;
+    }
+  }
+
+  .block-container {
+    .center();
+    align-items: flex-start;
+
+    height: 98%;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 10px 0;
+    overflow: hidden;
+
+    ::ng-deep .block {
+      width: 95%;
+      height: 100%;;
+    }
+
+    ::ng-deep .container {
+      width: 100%;
+      height: 100%;
     }
   }
 }

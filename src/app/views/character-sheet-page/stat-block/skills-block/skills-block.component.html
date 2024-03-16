@@ -1,4 +1,4 @@
-<mat-card class="skills">
+<mat-card class="skills" [class.mobile]="isMobile">
   <div class="skills-header">Skills</div>
   <div class="skills-body">
     <div class="skill" *ngFor="let skill of skills">

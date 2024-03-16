@@ -13,6 +13,7 @@ import { AbstractBlock, Blocks } from './abstract-block';
 import { FeaturesBlockComponent } from './features-block/features-block.component';
 import { ComponentType } from '@angular/cdk/portal';
 import { Block } from '@angular/compiler';
+import { isMobile } from 'src/app/app.component';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -23,6 +24,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
 
   hero!: Hero;
   loaded: boolean = false;
+  isMobile: boolean = isMobile();
 
   blockMap = new Map<Blocks, ComponentType<AbstractBlock>>();
 
@@ -38,6 +40,14 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   blocks: number[] = [];
+
+  mobileBlocks: ComponentType<AbstractBlock>[] = [
+    InfoBlockComponent,
+    StatBlockComponent,
+    CombatBlockComponent,
+    FeaturesBlockComponent,
+    InventoryBlockComponent
+  ]
 
   onDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
     moveItemInArray(this.blocks, event.previousIndex, event.currentIndex);
@@ -59,6 +69,22 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  activeIndex = 1;
+  getActiveComponent() {
+    return this.mobileBlocks[this.activeIndex];
+  }
+
+  mobileOnSwipeLeft(): void {
+    this.activeIndex = (this.activeIndex + 1) % this.mobileBlocks.length;
+    console.log(this.activeIndex);
+  }
+
+  mobileOnSwipeRight(): void {
+    this.activeIndex = (this.activeIndex - 1);
+    if (this.activeIndex < 0) this.activeIndex = this.mobileBlocks.length - 1;
+
+    console.log(this.activeIndex);
+  }
 
   subtitles(): string[] {
     return [

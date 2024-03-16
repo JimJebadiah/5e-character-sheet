@@ -1,4 +1,4 @@
-<mat-card class="attributes">
+<mat-card class="attributes" [class.mobile]="isMobile">
   <div class="attributes-header">Attributes</div>
   <div class="attributes-body">
     <div class="attribute" *ngFor="let attribute of attributes">

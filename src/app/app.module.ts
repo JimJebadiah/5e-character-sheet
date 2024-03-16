@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule } from '@angular/platform-browser';
+import * as Hammer from 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomePageComponent } from './views/home-page/home-page.component';
 import { HomePageModule } from './views/home-page/home-page.module';
 import { TokenPageModule } from './views/token-page/token-page.module';
 import { CharacterSheetPageModule } from './views/character-sheet-page/character-sheet-page.module';
@@ -21,7 +20,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     HomePageModule,
     TokenPageModule,
     CharacterSheetPageModule,
-    HttpClientModule
+    HttpClientModule,
+    HammerModule
   ],
   providers: [
   ],

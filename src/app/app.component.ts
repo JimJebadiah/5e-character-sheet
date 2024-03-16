@@ -23,3 +23,7 @@ export class AppComponent {
     });
   }
 }
+
+export function isMobile(): boolean {
+  return window.outerWidth <= 480;
+}

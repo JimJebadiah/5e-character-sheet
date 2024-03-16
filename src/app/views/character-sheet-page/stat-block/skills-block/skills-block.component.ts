@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { isMobile } from 'src/app/app.component';
 import { Hero } from 'src/app/domain/hero';
 import { Skills, skills } from 'src/app/domain/skill';
 
@@ -10,6 +11,8 @@ import { Skills, skills } from 'src/app/domain/skill';
 export class SkillsBlockComponent {
   @Input() hero!: Hero;
   skills = skills;
+
+  isMobile = isMobile();
 
   getSkill(skill: Skills) {
     return this.hero.skills.get(skill)!;
