@@ -5,11 +5,12 @@ import { Basic } from 'src/app/components/list-block/list-data/basic-list-data/b
 import { GitdbService } from 'src/app/services/gitdb.service';
 import { AbstractBlock } from '../abstract-block';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';
+import { swipeAnimation } from '../swipe-animation';
 
 @Component({
   selector: 'app-info-block',
   templateUrl: './info-block.component.html',
-  styleUrls: ['./info-block.component.less']
+  styleUrls: ['./info-block.component.less'],
 })
 export class InfoBlockComponent extends AbstractBlock implements OnInit {
 

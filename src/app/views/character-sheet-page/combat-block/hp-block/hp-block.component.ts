@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { isMobile } from 'src/app/app.component';
 import { Hero } from 'src/app/domain/hero';
 
 @Component({
@@ -8,6 +9,7 @@ import { Hero } from 'src/app/domain/hero';
 })
 export class HpBlockComponent {
   @Input() hero!: Hero;
+  isMobile = isMobile();
 
   healthStyling() {
     let c = 'fine';

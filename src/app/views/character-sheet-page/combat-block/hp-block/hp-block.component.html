@@ -1,4 +1,4 @@
-<div class="hp">
+<div class="hp" [class.mobile]="isMobile">
   <mat-card>
     <div class="header">
       Health
@@ -14,11 +14,11 @@
           <mat-icon svgIcon="sword"></mat-icon>
         </div>
         <div class="hp-box">
-          <div class="box">
+          <div class="box hp-curr">
             <span [ngClass]="healthStyling()">{{hero.hp}}</span>
             <span *ngIf="hero.tempHp > 0">+{{hero.tempHp}}</span>
           </div>
-          <div class="box temp-hp"
+          <div class="box temp-hp hp-curr"
             appEditableNumberStep
             [hero]="hero"
             [field]="'tempHp'"

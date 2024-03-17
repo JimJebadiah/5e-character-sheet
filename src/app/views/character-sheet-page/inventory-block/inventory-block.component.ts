@@ -6,11 +6,12 @@ import { Item } from 'src/app/domain/item';
 import { AbstractBlock } from '../abstract-block';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';
 import { GitdbService } from 'src/app/services/gitdb.service';
+import { swipeAnimation } from '../swipe-animation';
 
 @Component({
   selector: 'app-inventory-block',
   templateUrl: './inventory-block.component.html',
-  styleUrls: ['./inventory-block.component.less']
+  styleUrls: ['./inventory-block.component.less'],
 })
 export class InventoryBlockComponent extends AbstractBlock implements OnInit {
   inventoryType: Type<ListType> = Item;

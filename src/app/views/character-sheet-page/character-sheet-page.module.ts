@@ -11,6 +11,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FeaturesBlockModule } from "./features-block/features-block.module";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTabsModule } from "@angular/material/tabs"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 
@@ -20,6 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
     CharacterSheetPageComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     HeaderModule,
     MatIconModule,
@@ -30,7 +33,8 @@ import { MatIconModule } from "@angular/material/icon";
     InventoryBlockModule,
     RouterModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
+    MatTabsModule
   ]
 })
 export class CharacterSheetPageModule { }

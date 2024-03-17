@@ -7,6 +7,8 @@ import { SkillsBlockModule } from './skills-block/skills-block.module';
 import { EditableModule } from 'src/app/directives/editable.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -15,13 +17,15 @@ import { CommonModule } from '@angular/common';
     StatBlockComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     MatCardModule,
     AttributeBlockModule,
     SkillsBlockModule,
     MatCheckboxModule,
     EditableModule,
-    DragDropModule
+    DragDropModule,
+    CdkScrollableModule
   ],
   exports: [StatBlockComponent]
 })

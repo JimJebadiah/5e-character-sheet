@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 import { EditableModule } from 'src/app/directives/editable.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -15,13 +18,15 @@ import { EditableModule } from 'src/app/directives/editable.module';
     FeaturesBlockComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     RouterModule,
     EditableModule,
-    ListBlockModule
+    ListBlockModule,
+    CdkScrollableModule
   ],
   exports: [
     FeaturesBlockComponent

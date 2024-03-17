@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
+import { isMobile } from 'src/app/app.component';
 import { Attributes } from 'src/app/domain/attribute';
 import { Hero } from 'src/app/domain/hero';
 
@@ -10,6 +10,8 @@ import { Hero } from 'src/app/domain/hero';
 })
 export class AisBlockComponent {
   @Input() hero!: Hero;
+
+  isMobile = isMobile();
 
   valueStyle() {
     const int = this.hero.getAttrMod(Attributes.DEX);

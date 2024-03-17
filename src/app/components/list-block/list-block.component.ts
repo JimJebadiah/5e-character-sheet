@@ -17,6 +17,7 @@ import { Feat } from 'src/app/domain/feat';
 import { Ability } from 'src/app/domain/ability';
 import { AbilityListDataComponent } from './list-data/ability-list-data/ability-list-data.component';
 import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/list-dialog-ability.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list-block',
@@ -56,6 +57,11 @@ export class ListBlockComponent implements OnInit, OnDestroy {
         this.updateItemList.emit(this.items);
       }
     });
+  }
+
+  onDrop(event: CdkDragDrop<Type<ListType[]>>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.updateItemList.emit(this.items);
   }
 
   addItem(n: ListType) {

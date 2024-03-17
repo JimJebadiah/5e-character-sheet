@@ -2,7 +2,7 @@
   <div class="header block-header">
     Stats
   </div>
-  <div class="body scrollbar">
+  <div class="body scrollbar" cdkScrollable>
     <div *ngIf="isMobile; then mobile else desktop"></div>
   </div>
 </mat-card>

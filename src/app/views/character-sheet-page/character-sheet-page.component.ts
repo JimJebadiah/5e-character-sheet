@@ -14,11 +14,12 @@ import { FeaturesBlockComponent } from './features-block/features-block.componen
 import { ComponentType } from '@angular/cdk/portal';
 import { Block } from '@angular/compiler';
 import { isMobile } from 'src/app/app.component';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-character-sheet-page',
   templateUrl: './character-sheet-page.component.html',
-  styleUrls: ['./character-sheet-page.component.less']
+  styleUrls: ['./character-sheet-page.component.less'],
 })
 export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
 
@@ -27,6 +28,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   isMobile: boolean = isMobile();
 
   blockMap = new Map<Blocks, ComponentType<AbstractBlock>>();
+  nameMap = new Map<Blocks, string>();
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -37,6 +39,13 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.blockMap.set(Blocks.COMBAT, CombatBlockComponent);
     this.blockMap.set(Blocks.FEATURES, FeaturesBlockComponent);
     this.blockMap.set(Blocks.INVENTORY, InventoryBlockComponent);
+
+    this.nameMap.set(Blocks.STAT, "Stats");
+    this.nameMap.set(Blocks.COMBAT, "Combat");
+    this.nameMap.set(Blocks.FEATURES, "Features");
+    this.nameMap.set(Blocks.INVENTORY, "Inventory");
+
+    this.activeIndex = Number.parseInt(localStorage.getItem('activeIndex') ?? '0');
   }
 
   blocks: number[] = [];
@@ -55,12 +64,22 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.dbService.update(this.hero);
   }
 
+  onTabDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
+    console.log(event);
+    let previousIndex = parseInt(event.previousContainer.id.replace("list-",""));
+    let currentIndex = parseInt(event.container.id.replace("list-",""));
+    if(previousIndex !== undefined && currentIndex !== undefined && previousIndex !== currentIndex){
+      moveItemInArray(this.blocks, previousIndex, currentIndex);
+      this.hero.blockOrder = this.blocks;
+      this.dbService.update(this.hero);
+    }
+  }
+
   ngOnInit(): void {
     const name = this.route.snapshot.paramMap.get('name') as string;
     this.dbService.getHero(name).pipe(delay(0)).subscribe((hero) => {
       this.hero = hero;
       this.loaded = true;
-
       this.blocks = this.hero.blockOrder;
     });
   }
@@ -70,20 +89,26 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   activeIndex = 1;
-  getActiveComponent() {
-    return this.mobileBlocks[this.activeIndex];
+  getActiveComponent(): ComponentType<AbstractBlock> {
+    if (this.activeIndex === 0) return InfoBlockComponent;
+    else return this.blockMap.get(this.blocks[this.activeIndex - 1])!;
   }
 
   mobileOnSwipeLeft(): void {
     this.activeIndex = (this.activeIndex + 1) % this.mobileBlocks.length;
-    console.log(this.activeIndex);
+    this.updateActive();
   }
 
   mobileOnSwipeRight(): void {
     this.activeIndex = (this.activeIndex - 1);
     if (this.activeIndex < 0) this.activeIndex = this.mobileBlocks.length - 1;
+    this.updateActive();
+  }
 
-    console.log(this.activeIndex);
+  setActiveIndex(index: number) {
+    console.log(index);
+    this.activeIndex = index;
+    this.updateActive();
   }
 
   subtitles(): string[] {
@@ -92,5 +117,27 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
       `Background: ${this.hero.background}`,
       `Alignment: ${this.hero.alignment}`
     ];
+  }
+
+  tabs(): string[] {
+    let list = ['Info'];
+    this.blockMap.forEach((v, k) => {
+      list.push(this.nameMap.get(k) ?? 'Unknown');
+    });
+    return list;
+  }
+
+  listConnections(index: number) {
+    let connections = []
+    for (var i=0;i<this.tabs.length;i++){
+      if(i != index){
+        connections.push("list-"+i);
+      }
+    }
+    return connections;
+  }
+  
+  private updateActive() {
+    localStorage.setItem('activeIndex', this.activeIndex.toString());
   }
 }

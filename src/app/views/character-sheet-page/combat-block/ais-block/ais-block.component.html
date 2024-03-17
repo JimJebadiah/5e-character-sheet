@@ -1,6 +1,6 @@
-<div class="armor-init-speed">
+<div class="armor-init-speed" [class.mobile]="isMobile">
   <div class="si-container">
-    <div class="initiative">
+    <div class="initiative card">
       <mat-card>
         <div class="header">
           Initiative
@@ -12,7 +12,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="armor">
+    <div class="armor card">
       <mat-card>
         <div class="header">
           Armor Class
@@ -28,7 +28,7 @@
         </div>
       </mat-card>
     </div>
-    <div class="speed">
+    <div class="speed card">
       <mat-card>
         <div class="header">
           Speed

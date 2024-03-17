@@ -5,7 +5,7 @@
     </button>
     {{hero.name}}
   </div>
-  <div class="body scrollbar">
+  <div class="body scrollbar" cdkScrollable>
     <div class="image-container">
       <div class="image">
         <img [src]="getImageString() | async" alt="Character Image">

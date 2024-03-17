@@ -101,3 +101,27 @@
 .mortally-wounded {
   color: var(--bad);
 }
+
+.mobile {
+  .hp-body {
+    width: 100%;
+
+    .hp-body-curr {
+      width: 95%;
+
+      .hp-box {
+        width: 65%;
+
+        .hp-curr {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .death-saves {
+    ::ng-deep .mdc-checkbox {
+      padding: 10px 7px;
+    }
+  }
+}

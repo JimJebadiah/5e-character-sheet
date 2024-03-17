@@ -8,6 +8,8 @@ import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog
 import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 import { EditableNumberStepDirective } from 'src/app/directives/editable-number-step/editable-number-step.directive';
 import { EditableModule } from 'src/app/directives/editable.module';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -16,13 +18,15 @@ import { EditableModule } from 'src/app/directives/editable.module';
     InventoryBlockComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     ConfirmationDialogModule,
     ListBlockModule,
-    EditableModule
+    EditableModule,
+    CdkScrollableModule
   ],
   exports: [
     InventoryBlockComponent

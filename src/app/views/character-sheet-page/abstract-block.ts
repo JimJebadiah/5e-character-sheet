@@ -1,4 +1,5 @@
 import { Directive, HostBinding, Input } from "@angular/core";
+import { isMobile } from "src/app/app.component";
 import { Hero } from "src/app/domain/hero";
 
 @Directive()
@@ -6,6 +7,7 @@ export abstract class AbstractBlock {
   @HostBinding('class') clazz = 'block'
 
   @Input() hero!: Hero;
+  isMobile = isMobile();
 }
 
 export enum Blocks {
