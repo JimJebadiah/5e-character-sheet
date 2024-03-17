@@ -7,13 +7,14 @@ import { MatCardModule } from '@angular/material/card';
 import { EditableDialogModule } from '../components/editable-dialog/editable-dialog.module';
 import { EditableStringDirective } from './editable-string/editable-string.directive';
 import { EditableNumberStepDirective } from './editable-number-step/editable-number-step.directive';
+import { ImagePreloadDirective } from './image-preload/image-preload.directive';
 
 
 @NgModule({
   declarations: [
     EditableNumberDirective,
     EditableStringDirective,
-    EditableNumberStepDirective
+    EditableNumberStepDirective,
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,7 @@ import { EditableModule } from 'src/app/directives/editable.module';
 import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImagePreloadModule } from 'src/app/directives/image-preload/image-preload.module';
 
 
 
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule,
     EditableModule,
     ListBlockModule,
-    CdkScrollableModule
+    CdkScrollableModule,
+    ImagePreloadModule
   ],
   exports: [
     InfoBlockComponent

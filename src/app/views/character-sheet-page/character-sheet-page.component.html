@@ -21,7 +21,7 @@
 </ng-template>
 
 <ng-template #mobile>
-  <div class="grid mobile" (swipeleft)="mobileOnSwipeLeft()" (swiperight)="mobileOnSwipeRight()">
+  <div class="grid mobile">
     <div class="block-container">
       <div *ngComponentOutlet="getActiveComponent(); inputs: {hero: hero}"></div>
     </div>

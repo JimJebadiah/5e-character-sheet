@@ -94,17 +94,6 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     else return this.blockMap.get(this.blocks[this.activeIndex - 1])!;
   }
 
-  mobileOnSwipeLeft(): void {
-    this.activeIndex = (this.activeIndex + 1) % this.mobileBlocks.length;
-    this.updateActive();
-  }
-
-  mobileOnSwipeRight(): void {
-    this.activeIndex = (this.activeIndex - 1);
-    if (this.activeIndex < 0) this.activeIndex = this.mobileBlocks.length - 1;
-    this.updateActive();
-  }
-
   setActiveIndex(index: number) {
     console.log(index);
     this.activeIndex = index;
