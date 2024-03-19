@@ -1,4 +1,4 @@
-<mat-card class="list-block">
+<mat-card class="list-block" [class.mobile]="isMobile">
     <div class="header">
       <span>{{header}}</span>
       <button mat-icon-button (click)="openDialog()">
@@ -15,7 +15,7 @@
       <ng-template #list>
         <div class="list" cdkDropList (cdkDropListDropped)="onDrop($event)">
           <div class="list-container" *ngFor="let item of items; index as index" cdkDrag>
-            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" /> 
+            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" />
           </div>
         </div>
       </ng-template>

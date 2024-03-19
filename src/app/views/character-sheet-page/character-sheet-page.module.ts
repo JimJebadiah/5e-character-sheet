@@ -13,6 +13,7 @@ import { FeaturesBlockModule } from "./features-block/features-block.module";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs"
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CdkScrollableModule } from "@angular/cdk/scrolling";
 
 
 

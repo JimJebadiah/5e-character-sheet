@@ -2,7 +2,7 @@
 @import '../block-common.less';
 
 :host ::ng-deep .list-block {
-  .card-container(400px) !important;
+  .card-container(400px);
 }
 
 .body {
@@ -17,7 +17,7 @@
 
     .box {
       .info-bit(space-between);
-      
+
       mat-icon {
         transform: scale(1.2);
       }
@@ -36,7 +36,7 @@
           transform: scale(1.4) translateY(1px);
           filter: blur(2.5px);
         }
-        
+
         .highlight {
           left: 30px;
           color: rgba(255, 255, 255, 0.4) !important;
@@ -67,6 +67,12 @@
         font-size: unset !important;
       }
     }
+  }
+}
+
+.mobile {
+  .money {
+    width: 95%;
   }
 }
 

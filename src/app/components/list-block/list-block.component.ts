@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Type } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, Type } from '@angular/core';
 import { Item } from 'src/app/domain/item';
 import { AbstractListData } from './list-data/abstract-list-data';
 import { BasicListDataComponent } from './list-data/basic-list-data/basic-list-data.component';
@@ -18,6 +18,7 @@ import { Ability } from 'src/app/domain/ability';
 import { AbilityListDataComponent } from './list-data/ability-list-data/ability-list-data.component';
 import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/list-dialog-ability.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { isMobile } from 'src/app/app.component';
 
 @Component({
   selector: 'app-list-block',
@@ -31,6 +32,9 @@ export class ListBlockComponent implements OnInit, OnDestroy {
   @Input() items: ListType[] = [];
 
   @Output() updateItemList: EventEmitter<ListType[]> = new EventEmitter<ListType[]>();
+
+  isMobile = isMobile();
+  @HostBinding('style.width') width = this.isMobile ? '95% !important' : '';
 
   constructor(
     private readonly dialog: MatDialog,
@@ -84,7 +88,7 @@ export class ListBlockComponent implements OnInit, OnDestroy {
       case Ability:
         type = AbilityListDataComponent;
         break;
-      default: 
+      default:
         type = BasicListDataComponent;
         break;
     }

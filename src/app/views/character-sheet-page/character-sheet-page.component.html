@@ -5,8 +5,13 @@
 </ng-container>
 
 <ng-template #desktop>
-  <div cdkDropList class="grid" (cdkDropListDropped)="onDrop($event)" cdkDropListOrientation="horizontal">
-    <div class="block-container"> 
+  <div
+    cdkDropList
+    class="grid"
+    (cdkDropListDropped)="onDrop($event)"
+    cdkDropListOrientation="horizontal"
+  >
+    <div class="block-container">
       <app-info-block [hero]="hero" class="block" />
     </div>
     <div *ngFor="let block of blocks" class="block-container" cdkDrag>
@@ -26,7 +31,11 @@
       <div *ngComponentOutlet="getActiveComponent(); inputs: {hero: hero}"></div>
     </div>
   </div>
-  <mat-tab-group class="tabs" (selectedIndexChange)="setActiveIndex($event)" [selectedIndex]="activeIndex">
+  <mat-tab-group
+    class="tabs"
+    (selectedIndexChange)="setActiveIndex($event)"
+    [selectedIndex]="activeIndex"
+  >
     <mat-tab [label]="'Info'" />
     <mat-tab *ngFor="let block of blocks; index as index" [label]="nameMap.get(block) ?? 'Error'" />
   </mat-tab-group>

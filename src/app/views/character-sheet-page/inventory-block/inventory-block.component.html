@@ -1,12 +1,12 @@
-<mat-card class="container">
+<mat-card class="container" [class.mobile]="isMobile">
   <div class="header block-header">
     Inventory
   </div>
   <div class="body scrollbar" cdkScrollable>
-    <app-list-block 
-      [items]="hero.inventory" 
-      [type]="inventoryType" 
-      [header]="'Backpack'"  
+    <app-list-block
+      [items]="hero.inventory"
+      [type]="inventoryType"
+      [header]="'Backpack'"
       [listId]="1"
       (updateItemList)="updateList($event)"
     />

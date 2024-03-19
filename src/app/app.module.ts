@@ -8,6 +8,7 @@ import { HomePageModule } from './views/home-page/home-page.module';
 import { TokenPageModule } from './views/token-page/token-page.module';
 import { CharacterSheetPageModule } from './views/character-sheet-page/character-sheet-page.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     TokenPageModule,
     CharacterSheetPageModule,
     HttpClientModule,
-    HammerModule
+    HammerModule,
+    CdkScrollableModule
   ],
   providers: [
   ],
