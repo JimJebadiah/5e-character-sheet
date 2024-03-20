@@ -1,8 +1,8 @@
-import { Directive, HostListener, Inject, inject } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { Getter, Setter } from "src/app/directives/editable-number/editable-number.directive";
-import { GitdbService } from "src/app/services/gitdb.service";
-import { Hero } from "src/app/domain/hero";
+import { Directive, HostListener, inject } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
+import { GitdbService } from 'src/app/services/gitdb.service';
+import { Hero } from 'src/app/domain/hero';
 
 @Directive()
 export abstract class AbstractEditableDialog<T, R> {
@@ -33,7 +33,7 @@ export abstract class AbstractEditableDialog<T, R> {
 
   confirm() {
     this.setter(this.value);
-    this.dbService.update(this.hero)
+    this.dbService.update(this.hero);
     this.cancel();
   }
 

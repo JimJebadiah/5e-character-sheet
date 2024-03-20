@@ -1,4 +1,4 @@
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractBlock } from '../abstract-block';
 import { Feat } from 'src/app/domain/feat';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';

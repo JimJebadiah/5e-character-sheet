@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check && eslint 'src/app/**/*.ts' --fix",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -37,7 +37,10 @@
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "angular-cli-ghpages": "^2.0.0-beta.2",
+    "eslint": "^8.57.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

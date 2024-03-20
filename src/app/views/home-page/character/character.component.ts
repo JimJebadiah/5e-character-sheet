@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
@@ -10,7 +10,7 @@ import { GitdbService } from 'src/app/services/gitdb.service';
   styleUrls: ['./character.component.less']
 })
 export class CharacterComponent {
-  @Input() hero: Hero | null = null;
+  @Input() hero!: Hero;
 
 
   constructor(
@@ -19,10 +19,10 @@ export class CharacterComponent {
   ) {}
 
   getImageString(): Observable<string> {
-    return this.dbService.getImageString(this.hero?.name!);
+    return this.dbService.getImageString(this.hero.name);
   }
 
   goToSheet() {
-    this.router.navigate(['character', this.hero?.name]);
+    this.router.navigate(['character', this.hero.name]);
   }
 }

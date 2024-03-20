@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Renderer2 } from '@angular/core';
 import { EditableNumberDialogComponent } from '../../components/editable-dialog/editable-number-dialog/editable-number-dialog.component';
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Hero } from 'src/app/domain/hero';
 import { AbstractEditableDirective } from '../abstract-editable-directive';
 import { ComponentType } from '@angular/cdk/portal';
-import { GitdbService } from 'src/app/services/gitdb.service';
 
 export type Setter<T> = (val: T) => void;
 export type Getter<T> = () => T;
@@ -37,7 +36,7 @@ export class EditableNumberDirective extends AbstractEditableDirective<number> {
       step: this.step,
       max: this.max,
       min: this.min
-    }
+    };
   }
 
   override getter(): Getter<number> {

@@ -1,11 +1,10 @@
-import { Directive, HostBinding, Input } from "@angular/core";
-import { isMobile } from "src/app/app.component";
-import { Hero } from "src/app/domain/hero";
-import { swipeAnimation } from "./swipe-animation";
+import { Directive, HostBinding, Input } from '@angular/core';
+import { isMobile } from 'src/app/app.component';
+import { Hero } from 'src/app/domain/hero';
 
 @Directive()
 export abstract class AbstractBlock {
-  @HostBinding('class') clazz = 'block'
+  @HostBinding('class') clazz = 'block';
   @HostBinding('@swipeAnimation') swipeAnimation = '';
 
   @Input() hero!: Hero;

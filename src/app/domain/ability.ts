@@ -1,6 +1,7 @@
-import { ListType } from "../components/list-block/list-data/list-type";
-import { Attributes, attributes } from "./attribute";
-import { Hero } from "./hero";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ListType } from '../components/list-block/list-data/list-type';
+import { Attributes, attributes } from './attribute';
+import { Hero } from './hero';
 
 export type Recharge = 'short' | 'long';
 
@@ -58,7 +59,7 @@ export class Ability extends ListType {
 
   use(): void {
     if (this.canUse()) {
-        this.charges--;
+      this.charges--;
     }
   }
 

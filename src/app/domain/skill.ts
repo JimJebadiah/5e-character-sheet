@@ -1,5 +1,5 @@
-import { Attributes, attributes } from "./attribute";
-import { Hero } from "./hero";
+import { Attributes } from './attribute';
+import { Hero } from './hero';
 
 export enum Skills {
     ACROBATICS = 'acrobatics',
@@ -45,26 +45,26 @@ export const skills = [
 
 // TODO allow str mod for intimidate
 export class Skill {
-    skill: {skill: Skills, attribute: Attributes};
-    proficient: boolean;
+  skill: {skill: Skills, attribute: Attributes};
+  proficient: boolean;
 
-    constructor(
-      skill: {skill: Skills, attribute: Attributes},
-      proficient: boolean
-    ) {
-      this.skill = skill;
-      this.proficient = proficient;
-    }
+  constructor(
+    skill: {skill: Skills, attribute: Attributes},
+    proficient: boolean
+  ) {
+    this.skill = skill;
+    this.proficient = proficient;
+  }
 
-    getName() {
-      return this.skill.skill.split('_').map((s) => {
-        return s[0].toUpperCase() + s.substring(1);
-      }).join(' ');
-    }
+  getName() {
+    return this.skill.skill.split('_').map((s) => {
+      return s[0].toUpperCase() + s.substring(1);
+    }).join(' ');
+  }
 
-    getModifier(hero: Hero): number {
-        let base = hero.getAttrMod(this.skill.attribute);
-        if (this.proficient) base += hero.getProfBonus();
-        return base;
-    }
+  getModifier(hero: Hero): number {
+    let base = hero.getAttrMod(this.skill.attribute);
+    if (this.proficient) base += hero.getProfBonus();
+    return base;
+  }
 }

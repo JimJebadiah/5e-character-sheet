@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 })
 export class FirearmRangeWeaponComponent extends AbstractWeaponComponent implements OnInit {
 
-  firearm!: Firearm
+  firearm!: Firearm;
   emptyGroup = new FormControl();
 
   constructor(private readonly dbService: GitdbService) {

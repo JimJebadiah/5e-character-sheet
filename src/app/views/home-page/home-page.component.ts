@@ -1,8 +1,7 @@
-import { GitdbService } from 'src/app/services/gitdb.service'
+import { GitdbService } from 'src/app/services/gitdb.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hero } from 'src/app/domain/hero';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',

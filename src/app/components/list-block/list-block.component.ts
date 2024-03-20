@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, Type } from '@angular/core';
 import { Item } from 'src/app/domain/item';
 import { AbstractListData } from './list-data/abstract-list-data';
@@ -50,7 +51,7 @@ export class ListBlockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listService.remove$.pipe(takeUntil(this.destroyed)).subscribe(([index, listId]) => {
       if (listId === this.listId) {
-        this.items.splice(index, 1)
+        this.items.splice(index, 1);
         this.updateItemList.emit(this.items);
       }
     });
@@ -79,18 +80,18 @@ export class ListBlockComponent implements OnInit, OnDestroy {
   getComponent(): ComponentType<AbstractListData<any>> {
     let type;
     switch(this.type) {
-      case Item:
-        type = ItemListDataComponent;
-        break;
-      case Feat:
-        type = FeatListDataComponent;
-        break;
-      case Ability:
-        type = AbilityListDataComponent;
-        break;
-      default:
-        type = BasicListDataComponent;
-        break;
+    case Item:
+      type = ItemListDataComponent;
+      break;
+    case Feat:
+      type = FeatListDataComponent;
+      break;
+    case Ability:
+      type = AbilityListDataComponent;
+      break;
+    default:
+      type = BasicListDataComponent;
+      break;
     }
     return type;
   }
@@ -98,18 +99,18 @@ export class ListBlockComponent implements OnInit, OnDestroy {
   getDialog(): ComponentType<any> {
     let dialogType;
     switch(this.type) {
-      case Item:
-        dialogType = ListDialogItemComponent;
-        break;
-      case Feat:
-        dialogType = ListDialogFeatComponent;
-        break;
-      case Ability:
-        dialogType = ListDialogAbilityComponent;
-        break;
-      default:
-        dialogType = ListDialogBasicComponent;
-        break;
+    case Item:
+      dialogType = ListDialogItemComponent;
+      break;
+    case Feat:
+      dialogType = ListDialogFeatComponent;
+      break;
+    case Ability:
+      dialogType = ListDialogAbilityComponent;
+      break;
+    default:
+      dialogType = ListDialogBasicComponent;
+      break;
     }
     return dialogType;
   }

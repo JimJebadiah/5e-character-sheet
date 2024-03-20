@@ -1,4 +1,4 @@
-import { ListType } from "../components/list-block/list-data/list-type";
+import { ListType } from '../components/list-block/list-data/list-type';
 
 export interface FeatJSON {
   name: string,
@@ -19,6 +19,6 @@ export class Feat extends ListType {
     return {
       name: this.name,
       description: this.description,
-    }
-}
+    };
+  }
 }

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Item, AmmunitionType, ammunitionTypes } from 'src/app/domain/item';
@@ -10,7 +10,7 @@ import { AbstractListDialog, DialogData } from '../abstract-list-dialog';
   styleUrls: ['./list-dialog-item.component.less']
 })
 export class ListDialogItemComponent extends AbstractListDialog<Item> implements OnInit {
-  @ViewChild('amountInput') amountRef: any;
+  @ViewChild('amountInput') amountRef!: ElementRef;
 
   group: FormGroup;
   name: FormControl;
@@ -32,7 +32,7 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
     fb: FormBuilder,
     ref: MatDialogRef<ListDialogItemComponent>,
     @Inject(MAT_DIALOG_DATA) data: DialogData<Item>
-  ) { 
+  ) {
     super(ref, data);
 
     this.name = fb.control('', [Validators.required]);
@@ -92,7 +92,7 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
 
     this.isAmmunition.valueChanges.subscribe((val) => {
       this.isAmmunitionV = val;
-    })
+    });
 
     this.ammunitionType.valueChanges.subscribe((val) => {
       this.ammunitionTypeV = val;
@@ -107,9 +107,9 @@ export class ListDialogItemComponent extends AbstractListDialog<Item> implements
 
   override createListType(): Item {
     const item = new Item({
-      "name": this.nameV,
-      "count": this.amountV,
-      "description": this.descriptionV,
+      'name': this.nameV,
+      'count': this.amountV,
+      'description': this.descriptionV,
     });
 
     if (this.isAmmunitionV) {

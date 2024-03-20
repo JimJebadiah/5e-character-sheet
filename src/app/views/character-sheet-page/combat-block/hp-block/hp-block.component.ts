@@ -8,13 +8,13 @@ import { Hero } from 'src/app/domain/hero';
   styleUrls: ['./hp-block.component.less']
 })
 export class HpBlockComponent {
-  @Input() hero!: Hero;
-  isMobile = isMobile();
+@Input() hero!: Hero;
+isMobile = isMobile();
 
-  healthStyling() {
-    let c = 'fine';
-    if (this.hero.hp / this.hero.maxHp < 0.5) c = 'bloodied';
-    if(this.hero.hp < 10) c = 'mortally-wounded';
-    return c;
-  }
+healthStyling() {
+  let c = 'fine';
+  if (this.hero.hp / this.hero.maxHp < 0.5) c = 'bloodied';
+  if(this.hero.hp < 10) c = 'mortally-wounded';
+  return c;
+}
 }

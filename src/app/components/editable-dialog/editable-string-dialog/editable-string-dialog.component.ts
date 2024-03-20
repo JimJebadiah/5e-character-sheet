@@ -3,8 +3,6 @@ import { AbstractEditableDialog } from '../abstract-editable-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
-import { GitdbService } from 'src/app/services/gitdb.service';
 import { Hero } from 'src/app/domain/hero';
 
 @Component({

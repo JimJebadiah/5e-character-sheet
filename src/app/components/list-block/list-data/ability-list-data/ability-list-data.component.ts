@@ -52,4 +52,6 @@ export class AbilityListDataComponent extends AbstractListData<Ability> {
   protected override header(): string {
     return this.data.data.name;
   }
+
+  protected override deleteCallback(): void { }
 }

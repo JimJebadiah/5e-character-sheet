@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { AbstractEditableDialog } from '../abstract-editable-dialog';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';

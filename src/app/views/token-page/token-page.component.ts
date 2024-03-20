@@ -30,13 +30,13 @@ export class TokenPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.control.valueChanges.subscribe((newValue) => {
-        this.token = newValue!;
-      });
+    this.control.valueChanges.subscribe((newValue) => {
+      this.token = newValue!;
+    });
 
-      this.user.valueChanges.subscribe((user) => {
-        this.username = user!;
-      });
+    this.user.valueChanges.subscribe((user) => {
+      this.username = user!;
+    });
   }
 
   canSubmit() {
@@ -46,7 +46,7 @@ export class TokenPageComponent implements OnInit {
   onSubmit() {
     this.gitService.setName(this.username);
     this.gitService.setToken(this.token);
-    this.gitService.createRepo().catch((u) => {
+    this.gitService.createRepo().catch(() => {
       this.error = true;
     });
   }

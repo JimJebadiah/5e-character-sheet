@@ -1,14 +1,13 @@
 import { NotFoundModule } from './views/not-found/not-found.module';
 import { NgModule } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule } from '@angular/platform-browser';
-import * as Hammer from 'hammerjs';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomePageModule } from './views/home-page/home-page.module';
 import { TokenPageModule } from './views/token-page/token-page.module';
 import { CharacterSheetPageModule } from './views/character-sheet-page/character-sheet-page.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 @NgModule({

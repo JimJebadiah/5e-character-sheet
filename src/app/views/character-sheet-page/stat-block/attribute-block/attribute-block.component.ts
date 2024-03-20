@@ -10,55 +10,55 @@ import { Hero } from 'src/app/domain/hero';
   styleUrls: ['./attribute-block.component.less']
 })
 export class AttributeBlockComponent {
-  @Input() hero!: Hero;
+@Input() hero!: Hero;
 
-  attributes = attributes;
-  isMobile = isMobile();
+attributes = attributes;
+isMobile = isMobile();
 
-  constructor() {
-    this.getAttrGetterFunction.bind(this);
-    this.getAttributeSetterFunction.bind(this);
+constructor() {
+  this.getAttrGetterFunction.bind(this);
+  this.getAttributeSetterFunction.bind(this);
+}
+
+getAttribute(attr: Attributes) {
+  return this.hero.attributes.get(attr)!;
+}
+
+getAttributeValue(attr: Attributes) {
+  return this.getAttribute(attr).value;
+}
+
+getAttributeMod(attr: Attributes) {
+  const mod = this.getAttribute(attr).modifier;
+  let str =  mod >= 0 ? `+${mod}` : mod;
+  if (this.isProficient(attr)) {
+    const modProf = mod + this.hero.getProfBonus();
+    const append = modProf >= 0 ? `+${modProf}` : modProf;
+    str += ` (${append})`;
   }
+  return str;
+}
 
-  getAttribute(attr: Attributes) {
-    return this.hero.attributes.get(attr)!;
-  }
+isProficient(attr: Attributes) {
+  return this.getAttribute(attr).proficient;
+}
 
-  getAttributeValue(attr: Attributes) {
-    return this.getAttribute(attr).value;
-  }
+valueStyle(attr: Attributes) {
+  const mod = this.getAttribute(attr).modifier;
+  if (mod > 0) return 'positive';
+  else if (mod == 0) return 'zero';
+  else return 'negative';
+}
 
-  getAttributeMod(attr: Attributes) {
-    const mod = this.getAttribute(attr).modifier;
-    let str =  mod >= 0 ? `+${mod}` : mod;
-    if (this.isProficient(attr)) {
-      const modProf = mod + this.hero.getProfBonus();
-      const append = modProf >= 0 ? `+${modProf}` : modProf;
-      str += ` (${append})`;
-    }
-    return str;
-  }
+getAttrGetterFunction(attr: Attributes): Getter<number> {
+  return () => this.getAttributeValue(attr);
+}
 
-  isProficient(attr: Attributes) {
-    return this.getAttribute(attr).proficient;
-  }
-
-  valueStyle(attr: Attributes) {
-    const mod = this.getAttribute(attr).modifier;
-    if (mod > 0) return 'positive';
-    else if (mod == 0) return 'zero';
-    else return 'negative';
-  }
-
-  getAttrGetterFunction(attr: Attributes): Getter<number> {
-    return () => this.getAttributeValue(attr);
-  }
-
-  getAttributeSetterFunction(attr: Attributes): Setter<number> {
-    return (val: number) => {
-      const attribute = this.getAttribute(attr);
-      attribute.value = val;
-      this.hero.attributes.set(attr, attribute);
-    }
-  }
+getAttributeSetterFunction(attr: Attributes): Setter<number> {
+  return (val: number) => {
+    const attribute = this.getAttribute(attr);
+    attribute.value = val;
+    this.hero.attributes.set(attr, attribute);
+  };
+}
 }

@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnChanges, OnDestroy, OnInit, SimpleChanges, Type } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, delay, of } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
-import { InfoBlockModule } from './info-block/info-block.module';
 import { StatBlockComponent } from './stat-block/stat-block.component';
 import { InfoBlockComponent } from './info-block/info-block.component';
 import { CombatBlockComponent } from './combat-block/combat-block.component';
@@ -12,11 +11,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AbstractBlock, Blocks } from './abstract-block';
 import { FeaturesBlockComponent } from './features-block/features-block.component';
 import { ComponentType } from '@angular/cdk/portal';
-import { Block } from '@angular/compiler';
 import { isMobile } from 'src/app/app.component';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -24,7 +19,7 @@ import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dia
   styleUrls: ['./character-sheet-page.component.less'],
 })
 export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
-  hero!: Hero
+  hero!: Hero;
   loaded: boolean = false;
   isMobile: boolean = isMobile();
 
@@ -42,10 +37,10 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.blockMap.set(Blocks.FEATURES, FeaturesBlockComponent);
     this.blockMap.set(Blocks.INVENTORY, InventoryBlockComponent);
 
-    this.nameMap.set(Blocks.STAT, "Stats");
-    this.nameMap.set(Blocks.COMBAT, "Combat");
-    this.nameMap.set(Blocks.FEATURES, "Features");
-    this.nameMap.set(Blocks.INVENTORY, "Inventory");
+    this.nameMap.set(Blocks.STAT, 'Stats');
+    this.nameMap.set(Blocks.COMBAT, 'Combat');
+    this.nameMap.set(Blocks.FEATURES, 'Features');
+    this.nameMap.set(Blocks.INVENTORY, 'Inventory');
 
     this.activeIndex = Number.parseInt(localStorage.getItem('activeIndex') ?? '0');
   }
@@ -58,7 +53,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     CombatBlockComponent,
     FeaturesBlockComponent,
     InventoryBlockComponent
-  ]
+  ];
 
   onDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
     moveItemInArray(this.blocks, event.previousIndex, event.currentIndex);
@@ -67,8 +62,8 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   onTabDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
-    let previousIndex = parseInt(event.previousContainer.id.replace("list-",""));
-    let currentIndex = parseInt(event.container.id.replace("list-",""));
+    const previousIndex = parseInt(event.previousContainer.id.replace('list-',''));
+    const currentIndex = parseInt(event.container.id.replace('list-',''));
     if(previousIndex !== undefined && currentIndex !== undefined && previousIndex !== currentIndex){
       moveItemInArray(this.blocks, previousIndex, currentIndex);
       this.hero.blockOrder = this.blocks;
@@ -80,7 +75,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     const name = this.route.snapshot.paramMap.get('name') as string;
     this.dbService.getHero(name).pipe(
       delay(0),
-      catchError((e) => {
+      catchError(() => {
         this.router.navigate(['404']);
         return of();
       }),
@@ -116,7 +111,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   tabs(): string[] {
-    let list = ['Info'];
+    const list = ['Info'];
     this.blockMap.forEach((v, k) => {
       list.push(this.nameMap.get(k) ?? 'Unknown');
     });
@@ -124,10 +119,10 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   listConnections(index: number) {
-    let connections = []
-    for (var i=0;i<this.tabs.length;i++){
+    const connections = [];
+    for (let i=0;i<this.tabs.length;i++){
       if(i != index){
-        connections.push("list-"+i);
+        connections.push('list-'+i);
       }
     }
     return connections;

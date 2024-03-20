@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { GitdbService } from './services/gitdb.service';
-import { Hero } from './domain/hero';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import urlJson from './url.json';
@@ -18,7 +16,7 @@ export class AppComponent {
     domSanitizer: DomSanitizer
   ) {
     Object.keys(urlJson).forEach((icon: string) => {
-      const i = domSanitizer.bypassSecurityTrustResourceUrl((urlJson as any)[icon]);
+      const i = domSanitizer.bypassSecurityTrustResourceUrl((urlJson as never)[icon]);
       registry.addSvgIcon(icon, i);
     });
   }

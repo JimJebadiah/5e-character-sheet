@@ -18,6 +18,6 @@ export class ImagePreloadDirective {
   }
 
   load() {
-    this.className = 'image-loaded'
+    this.className = 'image-loaded';
   }
 }

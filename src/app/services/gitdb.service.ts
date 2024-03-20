@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, merge, mergeMap, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, mergeMap, of, tap } from 'rxjs';
 
-declare var GitHub: any;
+
+declare let GitHub: any;
 
 export const LATEST_COMMIT = 'latest_commit';
 
@@ -95,15 +97,14 @@ export class GitdbService {
 
   getHero(name: string): Observable<Hero> {
     return from(this.createRepo()).pipe(
-      // mergeMap(() => from(this.getLatestCommit())),
       mergeMap(() => {
         return from(this.repo.getContents('main', `heroes/${name}.json?time=${Date.now()}`))
-        .pipe(map((data: any) => {
-          const string = atob(data.data.content);
-          const hero: HeroJSON = JSON.parse(string);
-          return new Hero(hero);
+          .pipe(map((data: any) => {
+            const string = atob(data.data.content);
+            const hero: HeroJSON = JSON.parse(string);
+            return new Hero(hero);
+          }));
       }));
-    }))
   }
 
   getAllHeroes(): Observable<Hero[]> {
@@ -114,7 +115,7 @@ export class GitdbService {
           mergeMap((h) => {
             return h === null ? this.retrieveHeros() : of(h);
           })
-        )
+        );
       })
     );
   }
@@ -122,7 +123,7 @@ export class GitdbService {
   getImageString(name: string): Observable<string> {
     return this.username$.pipe(
       map((u) => `https://raw.githubusercontent.com/${u}/5e-db/main/images/${name}.png`),
-    )
+    );
   }
 
   setName(user: string) {
@@ -131,13 +132,13 @@ export class GitdbService {
   }
 
   private retrieveHeros(): Observable<Hero[]> {
-    return from(this.repo.getContents('main', `heroes/`))
+    return from(this.repo.getContents('main', 'heroes/'))
       .pipe(
         map( (data: any) => {
           return data.data.map((c: any) => {
-            const name = c.name as string
+            const name = c.name as string;
             const a = this.getHero(name.replace('.json', ''));
-            return a
+            return a;
           });
         }),
         mergeMap((heroes) => forkJoin<Hero[]>(heroes)),
@@ -159,7 +160,7 @@ export class GitdbService {
       const user = await firstValueFrom(this.username$);
       this.repo = await this.gh.getRepo(user, '5e-db');
       await this.repo.getContents('main', `README.md?time=${Date.now()}`)
-        .catch((u:any) => {
+        .catch(() => {
           this.heroCacheSubject.next(null);
           this.tokenSubject.next('');
           this.usernameSubject.next('');

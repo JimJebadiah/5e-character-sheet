@@ -1,13 +1,12 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output } from "@angular/core";
-import { ListData } from "../list-data";
-import { ListService } from "../list.service";
-import { MatDialog } from "@angular/material/dialog";
-import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
-import { Subject, takeUntil } from "rxjs";
-import { AbstractListDialog } from "../list-dialog/abstract-list-dialog";
-import { ComponentType } from "@angular/cdk/portal";
-import { ListType } from "./list-type";
-import { ListDialogFeatComponent } from "../list-dialog/list-dialog-feat/list-dialog-feat.component";
+import { Directive, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
+import { ListData } from '../list-data';
+import { ListService } from '../list.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
+import { AbstractListDialog } from '../list-dialog/abstract-list-dialog';
+import { ComponentType } from '@angular/cdk/portal';
+import { ListType } from './list-type';
 
 @Directive()
 export abstract class AbstractListData<T extends ListType> implements OnDestroy {
@@ -17,7 +16,7 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
     'align-items': 'center',
     'justify-content': 'center',
     'margin': 0
-  }
+  };
 
   @Input() listId!: number;
   @Input() data!: ListData<T>;
@@ -59,7 +58,7 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
     }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((res: boolean) => {
       if (res) this.listService.remove(this.index, this.listId);
       this.deleteCallback(res);
-    })
+    });
   }
 
   openDialog() {
@@ -88,5 +87,5 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
     });
   }
 
-  protected deleteCallback(res: boolean): void {}
+  protected abstract deleteCallback(res: boolean): void
 }

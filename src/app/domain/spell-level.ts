@@ -1,4 +1,4 @@
-import { Spell, SpellJSON } from "./spell";
+import { Spell, SpellJSON } from './spell';
 
 export interface SpellLevelJSON {
   level: number;
@@ -26,7 +26,7 @@ export class SpellLevel {
       spellSlots: this.spellSlots,
       maxSpellSlots: this.maxSpellSlots,
       spells: this.spells.map((s) => s.json)
-    }
+    };
   }
 }
 

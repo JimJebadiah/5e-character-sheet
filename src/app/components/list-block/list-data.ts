@@ -1,7 +1,7 @@
 export class ListData<T> {
-    data: T;
+  data: T;
 
-    constructor(data: T) {
-        this.data = data;
-    }
+  constructor(data: T) {
+    this.data = data;
+  }
 }

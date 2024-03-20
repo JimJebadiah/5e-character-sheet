@@ -25,4 +25,6 @@ export class BasicListDataComponent extends AbstractListData<Basic> {
   protected override header(): string {
     return this.data.data.val;
   }
+
+  protected override deleteCallback(): void { }
 }

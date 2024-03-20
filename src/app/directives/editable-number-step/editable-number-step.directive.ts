@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditableNumberStepDialogComponent } from './../../components/editable-dialog/editable-number-step-dialog/editable-number-step-dialog.component';
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractEditableDirective } from '../abstract-editable-directive';
 import { ComponentType } from '@angular/cdk/portal';
 import { Getter, Setter } from '../editable-number/editable-number.directive';
-import { GitdbService } from 'src/app/services/gitdb.service';
 
 export type StepOptions = 'add' | 'sub';
 
@@ -37,7 +37,7 @@ export class EditableNumberStepDirective extends AbstractEditableDirective<numbe
     return (val: number) => {
       const curr = this.stepDirection === 'add' ? this.add(val) : this.sub(val);
       this.hero?.setNumber(this.field!).call(this.hero, curr);
-    }
+    };
   }
 
   private add(val: number): number {

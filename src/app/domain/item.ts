@@ -1,4 +1,4 @@
-import { ListType } from "../components/list-block/list-data/list-type";
+import { ListType } from '../components/list-block/list-data/list-type';
 
 export const ammunitionTypes = ['bullet', 'arrow'] as const;
 export type AmmunitionType = typeof ammunitionTypes[number];
@@ -34,10 +34,10 @@ export class Item extends ListType {
 
   get json(): ItemJSON {
     return {
-        name: this.name,
-        description: this.description,
-        count: this.count,
-        ammunitionType: this.ammunitionType
-    }
+      name: this.name,
+      description: this.description,
+      count: this.count,
+      ammunitionType: this.ammunitionType
+    };
   }
 }

@@ -1,10 +1,10 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 import { AbstractEditableDirective } from '../abstract-editable-directive';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { EditableStringDialogComponent } from 'src/app/components/editable-dialog/editable-string-dialog/editable-string-dialog.component';
 import { Getter, Setter } from '../editable-number/editable-number.directive';
-import { GitdbService } from 'src/app/services/gitdb.service';
 
 @Directive({
   selector: '[appEditableString]'

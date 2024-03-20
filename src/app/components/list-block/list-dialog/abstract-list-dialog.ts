@@ -1,6 +1,6 @@
-import { MatDialogRef } from "@angular/material/dialog";
-import { AfterViewInit, Directive } from "@angular/core";
-import { ListType } from "../list-data/list-type";
+import { MatDialogRef } from '@angular/material/dialog';
+import { AfterViewInit, Directive } from '@angular/core';
+import { ListType } from '../list-data/list-type';
 
 export type DialogData<T extends ListType> = {header: string, edit: boolean, index: number, val?: T};
 
@@ -15,7 +15,7 @@ export abstract class AbstractListDialog<T extends ListType> implements AfterVie
   constructor(
     private readonly ref: MatDialogRef<AbstractListDialog<T>>,
     data: DialogData<T>
-  ) { 
+  ) {
     this.val = data.val;
     this.header = data.header;
     this.edit = data.edit;

@@ -1,4 +1,4 @@
-import { ListType } from "../list-type";
+import { ListType } from '../list-type';
 
 export class Basic extends ListType {
   val: string;

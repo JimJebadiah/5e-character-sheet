@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ListType } from './list-data/list-type';

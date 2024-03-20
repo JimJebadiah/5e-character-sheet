@@ -1,9 +1,9 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2, inject } from "@angular/core";
-import { Setter, Getter } from "./editable-number/editable-number.directive";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+import { Setter, Getter } from './editable-number/editable-number.directive';
 import { MatDialog } from '@angular/material/dialog';
-import { ComponentType } from "@angular/cdk/portal";
-import { Hero } from "../domain/hero";
-import { GitdbService } from "../services/gitdb.service";
+import { ComponentType } from '@angular/cdk/portal';
+import { Hero } from '../domain/hero';
 
 @Directive()
 export abstract class AbstractEditableDirective<T> implements AfterViewInit {
@@ -17,10 +17,10 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     this.ref.nativeElement.style.cursor = 'pointer';
     this.overlay!.setAttribute('style',
       `
-        position: absolute; 
-        width: ${this.ref.nativeElement.clientWidth}px; 
-        height: ${this.ref.nativeElement.clientHeight}px; 
-        background-color: rgba(0, 0, 0, 0.1); 
+        position: absolute;
+        width: ${this.ref.nativeElement.clientWidth}px;
+        height: ${this.ref.nativeElement.clientHeight}px;
+        background-color: rgba(0, 0, 0, 0.1);
         border-radius: 5px
       `
     );
@@ -31,9 +31,9 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     this.ref.nativeElement.style.cursor = 'auto';
     this.overlay!.setAttribute('style',
       `
-        position: absolute; 
-        width: ${this.ref.nativeElement.clientWidth}px; 
-        height: ${this.ref.nativeElement.clientHeight}px; 
+        position: absolute;
+        width: ${this.ref.nativeElement.clientWidth}px;
+        height: ${this.ref.nativeElement.clientHeight}px;
         background-color: transparent
         `
     );
@@ -60,7 +60,7 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
       getter: this.eGetter ?? this.getter(),
       setter: this.eSetter ?? this.setter(),
       hero: this.hero
-    }
+    };
   }
 
   ngAfterViewInit(): void {
@@ -68,9 +68,9 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
     this.overlay.className = 'box-overlay';
     this.overlay.setAttribute('style',
       `
-        position: absolute; 
-        width: ${this.ref.nativeElement.clientWidth}px; 
-        height: ${this.ref.nativeElement.clientHeight}px; 
+        position: absolute;
+        width: ${this.ref.nativeElement.clientWidth}px;
+        height: ${this.ref.nativeElement.clientHeight}px;
         background-color: transparent
       `
     );

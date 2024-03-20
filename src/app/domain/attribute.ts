@@ -14,7 +14,7 @@ export const attributes = [
   Attributes.INT,
   Attributes.WIS,
   Attributes.CHA,
-]
+];
 
 export interface AttributeJSON {
     readonly name: string,
@@ -23,25 +23,25 @@ export interface AttributeJSON {
 }
 
 export class Attribute {
-    readonly name: string;
-    value: number;
-    readonly proficient: boolean;
+  readonly name: string;
+  value: number;
+  readonly proficient: boolean;
 
-    constructor(json: AttributeJSON) {
-        this.name = json.name;
-        this.value = json.value;
-        this.proficient = json.proficient;
-    }
+  constructor(json: AttributeJSON) {
+    this.name = json.name;
+    this.value = json.value;
+    this.proficient = json.proficient;
+  }
 
-    get modifier() {
-        return Math.floor((this.value - 10) / 2);
-    }
+  get modifier() {
+    return Math.floor((this.value - 10) / 2);
+  }
 
-    get json() {
-        return {
-            name: this.name,
-            value: this.value,
-            proficient: this.proficient
-        }
-    }
+  get json() {
+    return {
+      name: this.name,
+      value: this.value,
+      proficient: this.proficient
+    };
+  }
 }

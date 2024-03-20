@@ -30,4 +30,6 @@ export class FeatListDataComponent extends AbstractListData<Feat> {
   protected override header(): string {
     return this.data.data.name;
   }
+
+  protected override deleteCallback(): void { }
 }

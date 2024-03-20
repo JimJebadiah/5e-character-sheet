@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditableNumberStepDialogComponent } from 'src/app/components/editable-dialog/editable-number-step-dialog/editable-number-step-dialog.component';
 import { Getter, Setter } from 'src/app/directives/editable-number/editable-number.directive';
@@ -43,7 +43,7 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
         getter: this.getCurrency(k),
         setter: this.addCurrency(k)
       }
-    })
+    });
   }
 
   openDialogRemove(k: string) {
@@ -53,7 +53,7 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
         getter: this.getCurrency(k),
         setter: this.removeCurrency(k)
       }
-    })
+    });
   }
 
   getCurrency(k: string): Getter<number> {
@@ -65,7 +65,7 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
       let curr = this.hero.currency.get(k)!;
       curr += val;
       this.hero.currency.set(k, curr);
-    }
+    };
   }
 
   removeCurrency(k: string): Setter<number> {
@@ -74,6 +74,6 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
       curr -= val;
       if (curr < 0) curr = 0;
       this.hero.currency.set(k, curr);
-    }
+    };
   }
 }

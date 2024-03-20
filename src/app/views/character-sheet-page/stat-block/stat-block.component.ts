@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AbstractBlock } from '../abstract-block';
-import { isMobile } from 'src/app/app.component';
 import { swipeAnimation } from '../swipe-animation';
 
 @Component({

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { AbstractListDialog, DialogData } from '../abstract-list-dialog';
 import { Ability, AbilityJSON, Recharge } from 'src/app/domain/ability';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Attributes, attributes } from 'src/app/domain/attribute';
   styleUrls: ['./list-dialog-ability.component.less']
 })
 export class ListDialogAbilityComponent extends AbstractListDialog<Ability> implements OnInit {
-  @ViewChild('chargeInput') amountRef: any;
+  @ViewChild('chargeInput') amountRef!: ElementRef;
 
   readonly PATTERN = /^[0-9]+$/;
 
@@ -33,8 +33,8 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
   constructor(
     fb: FormBuilder,
     ref: MatDialogRef<ListDialogAbilityComponent>,
-    @Inject(MAT_DIALOG_DATA) data: DialogData<Ability>
-  ) { 
+  @Inject(MAT_DIALOG_DATA) data: DialogData<Ability>
+  ) {
     super(ref, data);
 
     this.name = fb.control('', [Validators.required]);
@@ -127,7 +127,7 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
   override setValues(): void {
     this.name.setValue(this.val!.name);
     this.charges.setValue(this.val!.chargeModifier);
-    this.description.setValue(this.val!.description)
+    this.description.setValue(this.val!.description);
     this.attribute.setValue(this.val!.attribute ?? 'none');
     this.reachargeOn.setValue(this.val!.rechargeOn);
   }
