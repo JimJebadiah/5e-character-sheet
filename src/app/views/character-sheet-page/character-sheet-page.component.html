@@ -31,14 +31,19 @@
       <div *ngComponentOutlet="getActiveComponent(); inputs: {hero: hero}"></div>
     </div>
   </div>
-  <mat-tab-group
-    class="tabs"
-    (selectedIndexChange)="setActiveIndex($event)"
-    [selectedIndex]="activeIndex"
-  >
-    <mat-tab [label]="'Info'" />
-    <mat-tab *ngFor="let block of blocks; index as index" [label]="nameMap.get(block) ?? 'Error'" />
-  </mat-tab-group>
+  <div class="scroll">
+    <div class="tab-group-container">
+      <mat-tab-group
+        class="tabs"
+        (selectedIndexChange)="setActiveIndex($event)"
+        [selectedIndex]="activeIndex"
+        [disablePagination]="true"
+      >
+        <mat-tab [label]="'Info'" />
+        <mat-tab *ngFor="let block of blocks; index as index" [label]="nameMap.get(block) ?? 'Error'" />
+      </mat-tab-group>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #loading>

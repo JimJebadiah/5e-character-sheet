@@ -27,6 +27,9 @@ export class GitdbService {
   private updateSubject: Subject<Hero> = new Subject();
   update$ = this.updateSubject.asObservable();
 
+  private saveSubject: Subject<boolean> = new ReplaySubject(1);
+  saving$ = this.saveSubject.asObservable();
+
   private heroCacheSubject: ReplaySubject<Hero[] | null> = new ReplaySubject(1);
   private heroCache$ = this.heroCacheSubject.asObservable();
 
@@ -53,6 +56,8 @@ export class GitdbService {
     this.update$.pipe(debounceTime(5000)).subscribe((hero) => {
       this.saveHero(hero);
     });
+
+    this.saveSubject.next(false);
   }
 
   setToken(token: string) {
@@ -62,6 +67,7 @@ export class GitdbService {
   }
 
   update(hero: Hero) {
+    this.saveSubject.next(true);
     this.updateSubject.next(hero);
   }
 
@@ -80,7 +86,9 @@ export class GitdbService {
         localStorage.setItem(LATEST_COMMIT, this.latestCommit!);
         this.heroCacheSubject.next(null);
       }),
-    ).subscribe();
+    ).subscribe(() => {
+      this.saveSubject.next(false);
+    });
   }
 
   getHero(name: string): Observable<Hero> {

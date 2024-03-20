@@ -159,8 +159,25 @@
   }
 }
 
-mat-tab-group {
-  z-index: 2;
-  min-height: 50px;
-  max-height: 50px;
+.scroll {
+  overflow-x: scroll;
+  width: 100vw;
+  overflow-y: hidden;
+
+  .tab-group-container {
+    width: fit-content;
+    overflow-x: scroll;
+
+    mat-tab-group {
+      width: max-content;
+      z-index: 2;
+      min-height: 50px;
+      max-height: 50px;
+
+      ::ng-deep .mdc-tab-indicator__content {
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
 }

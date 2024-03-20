@@ -5,6 +5,7 @@ import { Dice } from "./dice";
 import { Feat, FeatJSON } from "./feat";
 import { Item, ItemJSON } from "./item";
 import { Skill, Skills, skills } from "./skill";
+import { SpellLevel, SpellLevelJSON, makeSpellLevels } from "./spell-level";
 import { Weapon, WeaponJSON, makeWeapon } from "./weapon";
 
 export interface HeroJSON {
@@ -33,6 +34,7 @@ export interface HeroJSON {
     abilities: AbilityJSON[],
     currency: number[],
     blockOrder: number[],
+    spellLevels?: SpellLevelJSON[],
 }
 
 export class Hero {
@@ -60,6 +62,7 @@ export class Hero {
     feats: Feat[];
     abilities: Ability[];
     currency: Map<string, number>;
+    spellLevels?: SpellLevel[];
     blockOrder: number[];
 
     constructor (json: HeroJSON) {
@@ -111,6 +114,8 @@ export class Hero {
         });
 
         this.abilities.forEach((a) => a.setMaxCharge(this));
+
+        this.spellLevels = json.spellLevels?.map((s) => new SpellLevel(s));
     }
 
     getAttrMod(attribute: Attributes): number {
@@ -182,6 +187,7 @@ export class Hero {
             abilities: this.abilities.map((a) => a.json),
             attributes: [ ...this.attributes.values() ].map((v) => v.json),
             currency: [...this.currency.values()],
+            spellLevels: makeSpellLevels(),
             blockOrder: [...this.blockOrder],
         };
     }
@@ -212,6 +218,7 @@ export class Hero {
             abilities: [],
             attributes: [],
             currency: [0, 0, 0, 0, 0],
+            spellLevels: makeSpellLevels(),
             blockOrder: [0, 1, 2, 3]
         });
     }

@@ -17,6 +17,7 @@ export class AppComponent {
     registry: MatIconRegistry,
     domSanitizer: DomSanitizer
   ) {
+    window.screen.lock
     Object.keys(urlJson).forEach((icon: string) => {
       const i = domSanitizer.bypassSecurityTrustResourceUrl((urlJson as any)[icon]);
       registry.addSvgIcon(icon, i);
