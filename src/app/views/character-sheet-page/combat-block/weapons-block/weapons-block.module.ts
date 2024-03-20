@@ -5,9 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { EditableModule } from 'src/app/directives/editable.module';
-import { MeleeWeaponModule } from './weapons/melee-weapon/melee-weapon.module';
-import { StandardRangeWeaponModule } from './weapons/range/standard-range-weapon/standard-range-weapon.module';
-import { FirearmRangeWeaponModule } from './weapons/range/firearm-range-weapon/firearm-range-weapon.module';
+import { ListBlockModule } from 'src/app/components/list-block/list-block.module';
 
 
 @NgModule({
@@ -21,9 +19,7 @@ import { FirearmRangeWeaponModule } from './weapons/range/firearm-range-weapon/f
     MatCheckboxModule,
     EditableModule,
     NgComponentOutlet,
-    MeleeWeaponModule,
-    StandardRangeWeaponModule,
-    FirearmRangeWeaponModule
+    ListBlockModule
   ],
   exports: [WeaponsBlockComponent]
 })

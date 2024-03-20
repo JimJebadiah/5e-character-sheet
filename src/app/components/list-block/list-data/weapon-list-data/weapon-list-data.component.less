@@ -1,0 +1,27 @@
+@import '../../list-block.component.less';
+
+.container {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+:host ::ng-deep .weapon-item {
+  width: 100%;
+  .center();
+}
+
+.overlay {
+  position: absolute;
+  width: 95%;
+  left: 2.5%;
+  height: calc(100% - 10px);
+  bottom: 5px;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.overlay:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

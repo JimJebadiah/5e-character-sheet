@@ -1,12 +1,7 @@
-<div class="weapons">
-  <mat-card>
-    <div class="header">
-      Weapons
-    </div>
-    <div class="body">
-      <ng-container *ngFor="let weapon of hero.weapons">
-        <ng-container *ngComponentOutlet="determineComponent(weapon); inputs: {weapon, hero}" class="test"></ng-container>
-      </ng-container>
-    </div>
-  </mat-card>
-</div>
+<app-list-block
+  [items]="hero.weapons"
+  [type]="weaponType"
+  [hero]="hero"
+  [header]="'Weapons'"
+  [listId]="5"
+/>

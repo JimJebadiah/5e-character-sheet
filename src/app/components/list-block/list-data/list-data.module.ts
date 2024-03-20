@@ -9,6 +9,10 @@ import { FeatListDataComponent } from './feat-list-data/feat-list-data.component
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AbilityListDataComponent } from './ability-list-data/ability-list-data.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { WeaponListDataComponent } from './weapon-list-data/weapon-list-data.component';
+import { StandardRangeWeaponModule } from './weapon-list-data/weapons/range/standard-range-weapon/standard-range-weapon.module';
+import { FirearmRangeWeaponModule } from './weapon-list-data/weapons/range/firearm-range-weapon/firearm-range-weapon.module';
+import { MeleeWeaponModule } from './weapon-list-data/weapons/melee-weapon/melee-weapon.module';
 
 
 @NgModule({
@@ -17,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ItemListDataComponent,
     FeatListDataComponent,
     AbilityListDataComponent,
+    WeaponListDataComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +29,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     MatCardModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    StandardRangeWeaponModule,
+    FirearmRangeWeaponModule,
+    MeleeWeaponModule
   ]
 })
 export class ListDataModule { }

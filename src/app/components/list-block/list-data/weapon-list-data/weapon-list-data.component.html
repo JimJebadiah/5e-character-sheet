@@ -1,0 +1,4 @@
+<div class="container">
+  <ng-container *ngComponentOutlet="determineComponent(data.data); inputs: {weapon: data.data, hero}" class="test" />
+  <div class="overlay" (click)="openDialog()"></div>
+</div>

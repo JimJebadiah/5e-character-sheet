@@ -1,3 +1,4 @@
+import { ListType } from '../components/list-block/list-data/list-type';
 import { Attributes, attributes } from './attribute';
 import { Dice } from './dice';
 import { Hero } from './hero';
@@ -42,7 +43,7 @@ export function makeWeapon(json: WeaponJSON): Weapon {
   return weapon;
 }
 
-export abstract class Weapon {
+export class Weapon extends ListType {
   name: string;
   damageDice: Dice;
   damageDiceAmount: number;
@@ -53,6 +54,7 @@ export abstract class Weapon {
   attribute?: Attributes;
 
   constructor(json: WeaponJSON) {
+    super();
     this.name = json.name;
     this.damageDice = json.damageDice;
     this.damageDiceAmount = json.damageDiceAmount;
@@ -77,22 +79,26 @@ export abstract class Weapon {
     return `${this.damageDiceAmount}${this.damageDice} + ${modifer} ${this.damageType}`;
   }
 
-    abstract getAttribute(): Attributes;
+  getAttribute(): Attributes {
+    return Attributes.STR;
+  }
 
-    abstract type(): WeaponType;
+  type(): WeaponType {
+    return 'melee';
+  }
 
-    get json(): WeaponJSON {
-      return {
-        name: this.name,
-        damageDice: this.damageDice,
-        damageDiceAmount: this.damageDiceAmount,
-        damageModifiers: this.damageModifiers,
-        proficient: this.proficient,
-        damageType: this.damageType,
-        modifiers: this.modifiers,
-        type: this.type()
-      };
-    }
+  get json(): WeaponJSON {
+    return {
+      name: this.name,
+      damageDice: this.damageDice,
+      damageDiceAmount: this.damageDiceAmount,
+      damageModifiers: this.damageModifiers,
+      proficient: this.proficient,
+      damageType: this.damageType,
+      modifiers: this.modifiers,
+      type: this.type()
+    };
+  }
 }
 
 export class MeleeWeapon extends Weapon {

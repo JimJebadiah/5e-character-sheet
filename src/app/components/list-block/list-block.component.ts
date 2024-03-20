@@ -1,3 +1,4 @@
+import { WeaponListDataComponent } from './list-data/weapon-list-data/weapon-list-data.component';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, Type } from '@angular/core';
 import { Item } from 'src/app/domain/item';
@@ -20,6 +21,8 @@ import { AbilityListDataComponent } from './list-data/ability-list-data/ability-
 import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/list-dialog-ability.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { isMobile } from 'src/app/app.component';
+import { Hero } from 'src/app/domain/hero';
+import { Weapon } from 'src/app/domain/weapon';
 
 @Component({
   selector: 'app-list-block',
@@ -29,6 +32,7 @@ import { isMobile } from 'src/app/app.component';
 export class ListBlockComponent implements OnInit, OnDestroy {
   @Input() header: string = '';
   @Input() listId!: number;
+  @Input() hero!: Hero;
   @Input() type!: Type<ListType>;
   @Input() items: ListType[] = [];
 
@@ -88,6 +92,9 @@ export class ListBlockComponent implements OnInit, OnDestroy {
       break;
     case Ability:
       type = AbilityListDataComponent;
+      break;
+    case Weapon:
+      type = WeaponListDataComponent;
       break;
     default:
       type = BasicListDataComponent;

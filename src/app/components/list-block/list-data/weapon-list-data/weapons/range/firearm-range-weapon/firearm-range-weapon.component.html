@@ -15,7 +15,7 @@
       {{status()}}
     </button>
     <div class="bullets" [ngClass]="statusClass()">
-      <button mat-icon-button (click)="fire()">
+      <button class="icon-button" mat-icon-button (click)="fire()">
         <mat-icon svgIcon="crosshair"></mat-icon>
       </button>
       <div class="bullet-count">
@@ -23,7 +23,7 @@
           <mat-checkbox class="radio-like" disabled [checked]="loaded(i)"></mat-checkbox>
         </ng-container>
       </div>
-      <button mat-icon-button (click)="reload()">
+      <button class="icon-button" mat-icon-button (click)="reload()">
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
