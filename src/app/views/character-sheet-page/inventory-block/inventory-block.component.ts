@@ -12,6 +12,7 @@ import { swipeAnimation } from '../swipe-animation';
   selector: 'app-inventory-block',
   templateUrl: './inventory-block.component.html',
   styleUrls: ['./inventory-block.component.less'],
+  animations: [swipeAnimation]
 })
 export class InventoryBlockComponent extends AbstractBlock implements OnInit {
   inventoryType: Type<ListType> = Item;
@@ -21,7 +22,7 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly dbService: GitdbService,
-  ) { 
+  ) {
     super();
     this.getCurrency.bind(this);
   }

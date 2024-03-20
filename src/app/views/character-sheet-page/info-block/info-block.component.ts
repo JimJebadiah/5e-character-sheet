@@ -11,6 +11,7 @@ import { swipeAnimation } from '../swipe-animation';
   selector: 'app-info-block',
   templateUrl: './info-block.component.html',
   styleUrls: ['./info-block.component.less'],
+  animations: [swipeAnimation]
 })
 export class InfoBlockComponent extends AbstractBlock implements OnInit {
 

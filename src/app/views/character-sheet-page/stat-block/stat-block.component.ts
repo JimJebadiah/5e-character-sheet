@@ -7,6 +7,7 @@ import { swipeAnimation } from '../swipe-animation';
   selector: 'app-stat-block',
   templateUrl: './stat-block.component.html',
   styleUrls: ['./stat-block.component.less'],
+  animations: [swipeAnimation]
 })
 export class StatBlockComponent extends AbstractBlock {
   proficency() {

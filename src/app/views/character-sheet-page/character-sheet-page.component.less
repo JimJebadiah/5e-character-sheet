@@ -140,14 +140,16 @@
 
     height: 98%;
     width: 100%;
-    position: absolute;
+    position: relative;
     margin: 0;
-    padding: 10px 0;
-    overflow: hidden;
+    padding-top: 10px;
+
+    overflow: visible;
 
     ::ng-deep .block {
       width: 95%;
-      height: 100%;;
+      height: 100%;
+      position: absolute;
     }
 
     ::ng-deep .container {
@@ -158,6 +160,7 @@
 }
 
 mat-tab-group {
+  z-index: 2;
   min-height: 50px;
   max-height: 50px;
 }

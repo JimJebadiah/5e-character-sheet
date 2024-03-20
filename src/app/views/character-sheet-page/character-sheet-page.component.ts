@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, Type } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnChanges, OnDestroy, OnInit, SimpleChanges, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
@@ -15,6 +15,8 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Block } from '@angular/compiler';
 import { isMobile } from 'src/app/app.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -22,8 +24,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./character-sheet-page.component.less'],
 })
 export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
-
-  hero!: Hero;
+  hero!: Hero
   loaded: boolean = false;
   isMobile: boolean = isMobile();
 
@@ -33,8 +34,8 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly dbService: GitdbService,
-    private readonly cdr: ChangeDetectorRef
-  ) { 
+    private readonly cdr: ChangeDetectorRef,
+  ) {
     this.blockMap.set(Blocks.STAT, StatBlockComponent);
     this.blockMap.set(Blocks.COMBAT, CombatBlockComponent);
     this.blockMap.set(Blocks.FEATURES, FeaturesBlockComponent);
@@ -65,7 +66,6 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
   }
 
   onTabDrop(event: CdkDragDrop<Type<AbstractBlock[]>>) {
-    console.log(event);
     let previousIndex = parseInt(event.previousContainer.id.replace("list-",""));
     let currentIndex = parseInt(event.container.id.replace("list-",""));
     if(previousIndex !== undefined && currentIndex !== undefined && previousIndex !== currentIndex){
@@ -125,7 +125,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     }
     return connections;
   }
-  
+
   private updateActive() {
     localStorage.setItem('activeIndex', this.activeIndex.toString());
   }

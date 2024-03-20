@@ -4,11 +4,13 @@ import { Feat } from 'src/app/domain/feat';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';
 import { GitdbService } from 'src/app/services/gitdb.service';
 import { Ability } from 'src/app/domain/ability';
+import { swipeAnimation } from '../swipe-animation';
 
 @Component({
   selector: 'app-features-block',
   templateUrl: './features-block.component.html',
-  styleUrls: ['./features-block.component.less']
+  styleUrls: ['./features-block.component.less'],
+  animations: [swipeAnimation]
 })
 export class FeaturesBlockComponent extends AbstractBlock implements OnInit {
   featsType = Feat;
