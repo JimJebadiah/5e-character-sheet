@@ -119,42 +119,46 @@
 }
 
 .mobile {
-  width: 100vw !important;
-  height: 100dvh !important;
-  position: relative;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-  margin: 0;
+  width: 100dvw !important;
 
-  .block {
-    overflow-x: visible;
-    overflow-y: hidden;
-    @media screen and (max-width: 480px) {
-      overflow: hidden !important;
-    }
-  }
-
-  .block-container {
-    .center();
-    align-items: flex-start;
-
-    height: 98%;
-    width: 100%;
+  .grid {
+    width: 100dvw !important;
+    height: 100dvh !important;
     position: relative;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
     margin: 0;
-    padding-top: 10px;
 
-    overflow: visible;
-
-    ::ng-deep .block {
-      width: 95%;
-      height: 100%;
-      position: absolute;
+    .block {
+      overflow-x: visible;
+      overflow-y: hidden;
+      @media screen and (max-width: 480px) {
+        overflow: hidden !important;
+      }
     }
 
-    ::ng-deep .container {
+    .block-container {
+      .center();
+      align-items: flex-start;
+
+      height: 98%;
       width: 100%;
-      height: 100%;
+      position: relative;
+      margin: 0;
+      padding-top: 10px;
+
+      overflow: visible;
+
+      ::ng-deep .block {
+        width: 95%;
+        height: 100%;
+        position: absolute;
+      }
+
+      ::ng-deep .container {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

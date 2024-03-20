@@ -17,7 +17,6 @@ export class AppComponent {
     registry: MatIconRegistry,
     domSanitizer: DomSanitizer
   ) {
-    window.screen.lock
     Object.keys(urlJson).forEach((icon: string) => {
       const i = domSanitizer.bypassSecurityTrustResourceUrl((urlJson as any)[icon]);
       registry.addSvgIcon(icon, i);
@@ -26,5 +25,6 @@ export class AppComponent {
 }
 
 export function isMobile(): boolean {
-  return window.outerWidth <= 480;
+  const agent = window.navigator.userAgent;
+  return /iPhone|iPad|Android/.test(agent);
 }
