@@ -15,9 +15,10 @@ export class TokenPageComponent implements OnInit {
 
   token: string = '';
   username: string = '';
+  error: boolean = false;
 
   constructor(
-    private readonly fb: FormBuilder,
+    fb: FormBuilder,
     private readonly gitService: GitdbService
   ) {
     this.control = fb.control<string>('');
@@ -45,5 +46,8 @@ export class TokenPageComponent implements OnInit {
   onSubmit() {
     this.gitService.setName(this.username);
     this.gitService.setToken(this.token);
+    this.gitService.createRepo().catch((u) => {
+      this.error = true;
+    });
   }
 }

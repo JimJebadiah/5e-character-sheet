@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnChanges, OnDestroy, OnInit, SimpleChanges, Type } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { delay } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, delay, of } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
 import { InfoBlockModule } from './info-block/info-block.module';
@@ -35,6 +35,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     private readonly route: ActivatedRoute,
     private readonly dbService: GitdbService,
     private readonly cdr: ChangeDetectorRef,
+    private readonly router: Router,
   ) {
     this.blockMap.set(Blocks.STAT, StatBlockComponent);
     this.blockMap.set(Blocks.COMBAT, CombatBlockComponent);
@@ -77,7 +78,13 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const name = this.route.snapshot.paramMap.get('name') as string;
-    this.dbService.getHero(name).pipe(delay(0)).subscribe((hero) => {
+    this.dbService.getHero(name).pipe(
+      delay(0),
+      catchError((e) => {
+        this.router.navigate(['404']);
+        return of();
+      }),
+    ).subscribe((hero) => {
       this.hero = hero;
       this.loaded = true;
       this.blocks = this.hero.blockOrder;

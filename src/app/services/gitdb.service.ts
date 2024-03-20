@@ -63,7 +63,9 @@ export class GitdbService {
   setToken(token: string) {
     this.tokenSubject.next(token);
     sessionStorage.setItem(GitdbService.TOKEN, token);
-    this.route.navigate(['']);
+    this.createRepo().then(() => {
+      this.route.navigate(['']);
+    }).catch();
   }
 
   update(hero: Hero) {
@@ -156,6 +158,15 @@ export class GitdbService {
     if (this.repo === undefined || this.repo === null) {
       const user = await firstValueFrom(this.username$);
       this.repo = await this.gh.getRepo(user, '5e-db');
+      await this.repo.getContents('main', `README.md?time=${Date.now()}`)
+        .catch((u:any) => {
+          this.heroCacheSubject.next(null);
+          this.tokenSubject.next('');
+          this.usernameSubject.next('');
+          this.repo = undefined;
+          this.route.navigate(['token']);
+          throw new Error('Fail');
+        });
     }
   }
 }

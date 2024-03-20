@@ -1,3 +1,4 @@
+import { NotFoundModule } from './views/not-found/not-found.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
@@ -23,7 +24,8 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
     CharacterSheetPageModule,
     HttpClientModule,
     HammerModule,
-    CdkScrollableModule
+    CdkScrollableModule,
+    NotFoundModule
   ],
   providers: [
   ],
