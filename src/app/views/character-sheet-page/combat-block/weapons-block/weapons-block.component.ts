@@ -26,6 +26,17 @@ export class WeaponsBlockComponent implements OnInit {
     this.status();
   }
 
+  updateList(event: ListType[]): void {
+    if (event.filter((i) => i instanceof Weapon).length === event.length) {
+      this.hero.weapons = event as Weapon[];
+      this.hero.weapons.forEach((w) => {
+        w.setAttackRole(this.hero);
+        w.setDamageRole(this.hero);
+      });
+      this.dbService.update(this.hero);
+    }
+  }
+
   reload() {
     this.rangeService.reaload$.subscribe((weaponId) => {
       const firearm = this.hero.weapons.find((w) => w.id === weaponId)! as Firearm;
