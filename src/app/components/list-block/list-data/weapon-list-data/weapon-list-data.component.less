@@ -25,3 +25,25 @@
 .overlay:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.buttons {
+  position: absolute;
+  width: 95%;
+  left: 2.5%;
+  top: 2.5px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    z-index: 1;
+    transform: scale(0.8);
+  }
+}
+
+.delete {
+  color: var(--bad) !important;
+}
+
+.edit {
+  color: var(--good) !important;
+}

@@ -10,7 +10,9 @@ type FirearmStatus = 'operational' | 'jammed' | 'broken';
 
 export interface WeaponJSON {
     // Global
+    id: string,
     name: string,
+    description: string,
     damageDice: Dice,
     damageDiceAmount: number,
     damageModifiers: number[],
@@ -44,7 +46,9 @@ export function makeWeapon(json: WeaponJSON): Weapon {
 }
 
 export class Weapon extends ListType {
+  id: string;
   name: string;
+  description: string;
   damageDice: Dice;
   damageDiceAmount: number;
   damageModifiers: number[];
@@ -55,7 +59,9 @@ export class Weapon extends ListType {
 
   constructor(json: WeaponJSON) {
     super();
+    this.id = json.id;
     this.name = json.name;
+    this.description = json.description;
     this.damageDice = json.damageDice;
     this.damageDiceAmount = json.damageDiceAmount;
     this.damageModifiers = json.damageModifiers;
@@ -65,18 +71,20 @@ export class Weapon extends ListType {
     this.attribute = attributes.find((a) => a === json.attribute);
   }
 
-  attackRole(hero: Hero): string {
+  attackRole: string = '';
+  setAttackRole(hero: Hero) {
     let modifer = hero.getAttrMod(this.getAttribute());
     this.modifiers.forEach((val) => modifer += val);
     if (this.proficient) modifer += hero.getProfBonus();
 
-    return `d20 + ${modifer}`;
+    this.attackRole = `d20 + ${modifer}`;
   }
 
-  damageRole(hero: Hero): string {
+  damageRole: string = '';
+  setDamageRole(hero: Hero) {
     let modifer = hero.getAttrMod(this.getAttribute());
     this.damageModifiers.forEach((val) => modifer += val);
-    return `${this.damageDiceAmount}${this.damageDice} + ${modifer} ${this.damageType}`;
+    this.damageRole = `${this.damageDiceAmount}${this.damageDice} + ${modifer} ${this.damageType}`;
   }
 
   getAttribute(): Attributes {
@@ -89,7 +97,9 @@ export class Weapon extends ListType {
 
   get json(): WeaponJSON {
     return {
+      id: this.id,
       name: this.name,
+      description: this.description,
       damageDice: this.damageDice,
       damageDiceAmount: this.damageDiceAmount,
       damageModifiers: this.damageModifiers,

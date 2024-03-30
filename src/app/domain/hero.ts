@@ -117,6 +117,11 @@ export class Hero {
     this.abilities.forEach((a) => a.setMaxCharge(this));
 
     this.spellLevels = json.spellLevels?.map((s) => new SpellLevel(s));
+
+    this.weapons.forEach((w) => {
+      w.setAttackRole(this);
+      w.setDamageRole(this);
+    });
   }
 
   getAttrMod(attribute: Attributes): number {

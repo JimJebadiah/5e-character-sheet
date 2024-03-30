@@ -1,4 +1,4 @@
-import { GitdbService } from 'src/app/services/gitdb.service';
+import { RangeService } from 'src/app/services/range.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractWeaponComponent } from '../../abstract-weapon.component';
 import { Firearm } from 'src/app/domain/weapon';
@@ -14,7 +14,7 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   firearm!: Firearm;
   emptyGroup = new FormControl();
 
-  constructor(private readonly dbService: GitdbService) {
+  constructor(private readonly rangeService: RangeService) {
     super();
   }
 
@@ -47,34 +47,11 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   }
 
   fire() {
-    this.firearm.fire();
-    this.dbService.update(this.hero);
+    this.rangeService.fireSubject.next(this.firearm.id);
   }
 
   reload() {
-    console.log(this.hero.inventory);
-    const hasBullets = this.hero.inventory.filter((i) => i.ammunitionType === 'bullet').length > 0;
-    if (hasBullets) {
-      const reloadAmount = this.firearm.rounds - this.firearm.loaded;
-
-      let index = 0;
-      let bulletItem = null;
-      for (index = 0; index < this.hero.inventory.length; index++) {
-        if (this.hero.inventory[index].ammunitionType === 'bullet') {
-          bulletItem = this.hero.inventory[index];
-          break;
-        }
-      }
-      
-      if (bulletItem!.count > reloadAmount) {
-        this.firearm.reload(reloadAmount);
-        bulletItem!.count -= reloadAmount;
-      } else {
-        this.firearm.reload(bulletItem!.count);
-        this.hero.inventory.splice(index, 1);
-      }
-      this.dbService.update(this.hero);
-    }
+    this.rangeService.reloadSubject.next(this.firearm.id);
   }
 
   status() {
@@ -82,9 +59,6 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   }
 
   nextState() {
-    if (this.firearm.status === 'operational') this.firearm.misfire();
-    else if (this.firearm.status === 'jammed') this.firearm.break();
-    else this.firearm.repair();
-    this.dbService.update(this.hero);
+    this.rangeService.statusSubject.next(this.firearm.id);
   }
 }

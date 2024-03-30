@@ -21,7 +21,6 @@ import { AbilityListDataComponent } from './list-data/ability-list-data/ability-
 import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/list-dialog-ability.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { isMobile } from 'src/app/app.component';
-import { Hero } from 'src/app/domain/hero';
 import { Weapon } from 'src/app/domain/weapon';
 
 @Component({
@@ -32,7 +31,6 @@ import { Weapon } from 'src/app/domain/weapon';
 export class ListBlockComponent implements OnInit, OnDestroy {
   @Input() header: string = '';
   @Input() listId!: number;
-  @Input() hero!: Hero;
   @Input() type!: Type<ListType>;
   @Input() items: ListType[] = [];
 

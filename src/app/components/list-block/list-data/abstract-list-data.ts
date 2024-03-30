@@ -7,7 +7,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { AbstractListDialog } from '../list-dialog/abstract-list-dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { ListType } from './list-type';
-import { Hero } from 'src/app/domain/hero';
 
 @Directive()
 export abstract class AbstractListData<T extends ListType> implements OnDestroy {
@@ -22,7 +21,6 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
   @Input() listId!: number;
   @Input() data!: ListData<T>;
   @Input() index!: number;
-  @Input() hero!: Hero;
 
   hovering: boolean = false;
 

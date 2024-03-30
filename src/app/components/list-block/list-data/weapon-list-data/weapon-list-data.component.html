@@ -1,4 +1,12 @@
 <div class="container">
-  <ng-container *ngComponentOutlet="determineComponent(data.data); inputs: {weapon: data.data, hero}" class="test" />
+  <ng-container *ngComponentOutlet="determineComponent(data.data); inputs: {weapon: data.data}" class="test" />
+  <div class="buttons" *ngIf="hovering">
+    <button mat-icon-button (click)="onDelete()">
+      <mat-icon class="delete">delete</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
   <div class="overlay" (click)="openDialog()"></div>
 </div>
