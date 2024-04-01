@@ -13,6 +13,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { ListDialogFeatComponent } from './list-dialog-feat/list-dialog-feat.component';
 import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ability.component';
+import { ListDialogWeaponComponent } from './list-dialog-weapon/list-dialog-weapon.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NumberFieldModule } from 'src/app/directives/number-field/number-field.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -21,7 +25,8 @@ import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ab
     ListDialogBasicComponent,
     ListDialogItemComponent,
     ListDialogFeatComponent,
-    ListDialogAbilityComponent
+    ListDialogAbilityComponent,
+    ListDialogWeaponComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +38,10 @@ import { ListDialogAbilityComponent } from './list-dialog-ability/list-dialog-ab
     MatCheckboxModule,
     MatRadioModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule,
+    NumberFieldModule,
+    MatChipsModule
   ]
 })
 export class ListDialogModule { }

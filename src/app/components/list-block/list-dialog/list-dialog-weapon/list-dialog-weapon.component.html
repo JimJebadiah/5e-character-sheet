@@ -1,0 +1,219 @@
+<mat-card class="container">
+  <div class="header">{{header}}</div>
+  <div class="body">
+    <ng-container *ngIf="edit; then editBody; else viewBody" />
+  </div>
+</mat-card>
+
+<!-- Edit -->
+<ng-template #editBody>
+  <mat-tab-group (selectedIndexChange)="updateWeaponType($event)" [selectedIndex]="weaponIndex">
+    <mat-tab label="Melee" />
+    <mat-tab label="Ranged" />
+    <mat-tab label="Firearm" />
+  </mat-tab-group>
+  <div class="content">
+    <form class="form" [formGroup]="group">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input class="num" matInput required formControlName="name" />
+      </mat-form-field>
+      <mat-form-field class="textarea" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput class="scrollbar" formControlName="description"></textarea>
+      </mat-form-field>
+      <div class="damage-dice">
+        <mat-form-field class="dice-select" appearance="outline">
+          <mat-label>Damage</mat-label>
+          <mat-select formControlName="damageDice">
+            <mat-option
+              *ngFor="let dice of dice"
+              [value]="dice"
+            >
+              {{dice}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>&nbsp;&nbsp;x&nbsp;&nbsp;</p>
+        <mat-form-field
+          class="dice-amount"
+          appearance="outline"
+          appNumberField
+          [formGroup]="group"
+          [value]="damageDiceAmountV"
+          [name]="'diceAmount'"
+          (valueChange)="updateDamageDiceAmount($event)"
+        >
+          <mat-label>Dice Amount</mat-label>
+          <input class="num" matInput required #diceAmount formControlName="diceAmount" />
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Damage Modifiers</mat-label>
+        <mat-chip-grid #damageModifierGrid>
+          <mat-chip-row
+            *ngFor="let modifier of damageModifiersV"
+            (removed)="removeDamageModifier(modifier)"
+            [editable]="false"
+          >
+            {{modifier}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input class="num"
+            matInput
+            [matChipInputFor]="damageModifierGrid"
+            (matChipInputTokenEnd)="addDamageModifier($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Attack Modifiers</mat-label>
+        <mat-chip-grid #attackModifierGrid>
+          <mat-chip-row
+            *ngFor="let modifier of modifiersV"
+            (removed)="removeAttackModifier(modifier)"
+            [editable]="false"
+          >
+            {{modifier}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input class="num"
+            matInput
+            [matChipInputFor]="attackModifierGrid"
+            (matChipInputTokenEnd)="addAttackModifier($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Damage Type</mat-label>
+        <mat-select formControlName="damageType">
+          <mat-option
+            *ngFor="let damageType of damage"
+            [value]="damageType"
+          >
+            {{damageType.charAt(0).toUpperCase() + damageType.substring(1)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Attribute</mat-label>
+        <mat-select formControlName="attribute">
+          <mat-option *ngFor="let attribute of attributes" [value]="attribute">
+            {{attribute.charAt(0).toUpperCase() + attribute.substring(1)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="proficient">
+        <span>Proficient?</span>
+        <mat-checkbox formControlName="proficient"></mat-checkbox>
+      </div>
+      <div [ngSwitch]="weaponIndex">
+        <ng-container *ngSwitchCase="1">
+          <ng-container [ngTemplateOutlet]="editRange" />
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <ng-container [ngTemplateOutlet]="editFirearm" />
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- Range -->
+<ng-template #editRange>
+  <div class="damage-dice">
+    <mat-form-field
+      appearance="outline"
+      appNumberField
+      [formGroup]="group"
+      [value]="rangeV"
+      [name]="'range'"
+      (valueChange)="updateRange($event)"
+    >
+      <mat-label>Min Range</mat-label>
+      <input class="num" matInput formControlName="range" />
+    </mat-form-field>
+    <p>&nbsp;&nbsp;/&nbsp;&nbsp;</p>
+    <mat-form-field
+      appearance="outline"
+      appNumberField
+      [formGroup]="group"
+      [value]="maxRangeV"
+      [name]="'maxRange'"
+      (valueChange)="updateMaxRange($event)"
+    >
+      <mat-label>Max Range</mat-label>
+      <input class="num" matInput formControlName="maxRange" />
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<!-- Firearm -->
+<ng-template #editFirearm>
+  <ng-container [ngTemplateOutlet]="editRange"></ng-container>
+  <div class="damage-dice">
+    <mat-form-field
+      appearance="outline"
+      appNumberField
+      [formGroup]="group"
+      [value]="roundsV"
+      [name]="'rounds'"
+      (valueChange)="updateRounds($event)"
+    >
+      <mat-label>Rounds</mat-label>
+      <input class="num" matInput formControlName="rounds" />
+    </mat-form-field>
+    <mat-form-field
+      appearance="outline"
+      appNumberField
+      [formGroup]="group"
+      [value]="misfireScoreV"
+      [name]="'misfireScore'"
+      (valueChange)="updateMisfireScore($event)"
+    >
+      <mat-label>Misfire Score</mat-label>
+      <input class="num" matInput formControlName="misfireScore" />
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<!-- View -->
+<ng-template #viewBody>
+  <div class="content">
+    <ng-container [ngSwitch]="val?.type()">
+      <ng-container *ngSwitchCase="'melee'">
+        <ng-container [ngTemplateOutlet]="viewMelee" />
+      </ng-container>
+      <ng-container *ngSwitchCase="'ranged'">
+        <ng-container [ngTemplateOutlet]="viewRange" />
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="cancel()">Close</button>
+  </div>
+</ng-template>
+
+<!-- Melee -->
+<ng-template #viewMelee>
+  Melee
+</ng-template>
+
+<!-- Range -->
+<ng-template #viewRange>
+  Range
+  <ng-container *ngIf="isFirearm(); then viewFirearm" />
+</ng-template>
+
+<!-- Firearm -->
+<ng-template #viewFirearm>
+  Firearm
+</ng-template>

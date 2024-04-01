@@ -5,7 +5,7 @@ import { Hero } from './hero';
 
 type WeaponType = 'melee' | 'ranged';
 type RangeType = 'standard' | 'firearm';
-type DamageType = 'piercing' | 'slashing' | 'bludgeoning';
+export type DamageType = 'piercing' | 'slashing' | 'bludgeoning';
 type FirearmStatus = 'operational' | 'jammed' | 'broken';
 
 export interface WeaponJSON {
@@ -15,7 +15,7 @@ export interface WeaponJSON {
     description: string,
     damageDice: Dice,
     damageDiceAmount: number,
-    damageModifiers: number[],
+    damageModifiers: number[];
     proficient: boolean,
     damageType: DamageType,
     modifiers: number[],
@@ -30,6 +30,7 @@ export interface WeaponJSON {
     // Firearm
     rounds?: number;
     loaded?: number;
+    misfireScore?: number;
     status?: FirearmStatus;
 }
 
@@ -157,12 +158,14 @@ export class RangeWeapon extends Weapon {
 export class Firearm extends RangeWeapon {
   rounds: number;
   loaded: number;
+  misfireScore: number;
   status: FirearmStatus;
 
   constructor(json: WeaponJSON) {
     super(json);
     this.rounds = json.rounds!;
     this.loaded = json.loaded!;
+    this.misfireScore = json.misfireScore!;
     this.status = json.status!;
   }
 
@@ -215,6 +218,7 @@ export class Firearm extends RangeWeapon {
       rounds: this.rounds,
       loaded: this.loaded,
       status: this.status,
+      misfireScore: this.misfireScore
     };
   }
 }

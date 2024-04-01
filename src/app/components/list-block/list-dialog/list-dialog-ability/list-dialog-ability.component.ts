@@ -20,7 +20,6 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
   group: FormGroup;
   name: FormControl;
   description: FormControl;
-  charges: FormControl;
   attribute: FormControl;
   reachargeOn: FormControl;
 
@@ -38,20 +37,17 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
     super(ref, data);
 
     this.name = fb.control('', [Validators.required]);
-    this.charges = fb.control('1', [Validators.required]);
     this.description = fb.control('');
     this.attribute = fb.control('');
     this.reachargeOn = fb.control('');
 
     this.group = fb.group({
       'name': this.name,
-      'charges': this.charges,
       'description': this.description,
       'attribute': this.attribute,
       'rechargeOn': this.reachargeOn
     });
 
-    this.charges.setValue('0');
     this.attribute.setValue('none');
     this.reachargeOn.setValue('short');
   }
@@ -59,34 +55,6 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
   ngOnInit(): void {
     this.name.valueChanges.subscribe((v) => {
       this.nameV = v;
-    });
-
-    this.charges.valueChanges.subscribe((val) => {
-      if (this.amountRef !== undefined) {
-        if (val! === '') {
-          this.chargeV = 0;
-          this.amountRef.nativeElement.value = '';
-          return;
-        }
-
-        if (val! === '0') {
-          this.chargeV = 1;
-          this.amountRef.nativeElement.value = '0';
-        }
-
-        if (val!.length > 3) {
-          this.amountRef.nativeElement.value = val!.substring(0, val!.length - 1);
-          return;
-        }
-
-        if (!this.PATTERN.test(val!)) {
-          this.amountRef.nativeElement.value = val!.substring(0, val!.length - 1);
-        } else {
-          this.chargeV = Number.parseInt(this.amountRef.nativeElement.value);
-        }
-
-        this.charges.setValue(this.chargeV.toString(), {emitEvent: false});
-      }
     });
 
     this.description.valueChanges.subscribe((val) => {
@@ -105,7 +73,7 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
   }
 
   override canSubmit(): boolean {
-    return !this.name.hasError('required') && !this.charges.hasError('required');
+    return !this.name.hasError('required');
   }
 
   override createListType(): Ability {
@@ -126,9 +94,14 @@ export class ListDialogAbilityComponent extends AbstractListDialog<Ability> impl
 
   override setValues(): void {
     this.name.setValue(this.val!.name);
-    this.charges.setValue(this.val!.chargeModifier);
+    console.log(this.val!.chargeModifier);
+    this.chargeV = this.val!.chargeModifier;
     this.description.setValue(this.val!.description);
     this.attribute.setValue(this.val!.attribute ?? 'none');
     this.reachargeOn.setValue(this.val!.rechargeOn);
+  }
+
+  updateCharge(a: string) {
+    this.chargeV = Number.parseInt(a);
   }
 }

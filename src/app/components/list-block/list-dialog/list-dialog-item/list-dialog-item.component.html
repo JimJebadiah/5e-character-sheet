@@ -12,9 +12,16 @@
         <mat-label>Name</mat-label>
         <input class="num" matInput formControlName="name" required />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        appNumberField
+        [formGroup]="group"
+        [name]="'amount'"
+        [value]="amountV"
+        (valueChange)="updateAmount($event)"
+      >
         <mat-label>Amount</mat-label>
-        <input class="num" matInput formControlName="amount" required #amountInput />
+        <input class="num" matInput required formControlName="amount"/>
       </mat-form-field>
       <mat-form-field class="textarea" appearance="outline">
         <mat-label>Description</mat-label>
@@ -60,6 +67,6 @@
         <mat-radio-button [value]="type"></mat-radio-button>
       </ng-container>
     </mat-radio-group>
-  </form>  
+  </form>
 </ng-template>
 

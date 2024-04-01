@@ -12,9 +12,16 @@
         <mat-label>Name</mat-label>
         <input class="num" matInput formControlName="name" required />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field
+        appearance="outline"
+        appNumberField
+        [formGroup]="group"
+        [value]="chargeV"
+        [name]="'charges'"
+        (valueChange)="updateCharge($event)"
+      >
         <mat-label>Charges</mat-label>
-        <input class="num" matInput formControlName="charges" required #chargeInput />
+        <input class="num" matInput formControlName="charges" required />
       </mat-form-field>
       <mat-form-field class="textarea" appearance="outline">
         <mat-label>Description</mat-label>

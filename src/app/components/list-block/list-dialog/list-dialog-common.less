@@ -4,7 +4,6 @@
   .card-container(unset);
   min-width: 250px;
   margin: 0;
-  max-height: 75vh !important;
 
   .header {
     .card-header();
@@ -12,13 +11,17 @@
 
   .body {
     .center();
+    justify-content: flex-start;
     flex-direction: column;
+    height: 100%;
 
     .content {
       .center();
+      height: 100%;;
       font-size: x-large;
       text-align: center;
-      margin: 25px;
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
 
     .empty {
@@ -36,4 +39,31 @@
       }
     }
   }
+}
+
+.form {
+  max-height: 85vh !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px;
+
+  mat-form-field {
+    width: 350px;
+  }
+
+  @height: 200px;
+
+  .textarea {
+    height: @height;
+
+    textarea {
+      font-size: normal !important;
+      height: calc(@height - 60px);
+    }
+  }
+}
+
+.content {
+  width: 100%;
 }

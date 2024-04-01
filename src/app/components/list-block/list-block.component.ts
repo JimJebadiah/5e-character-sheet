@@ -22,6 +22,7 @@ import { ListDialogAbilityComponent } from './list-dialog/list-dialog-ability/li
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { isMobile } from 'src/app/app.component';
 import { Weapon } from 'src/app/domain/weapon';
+import { ListDialogWeaponComponent } from './list-dialog/list-dialog-weapon/list-dialog-weapon.component';
 
 @Component({
   selector: 'app-list-block',
@@ -112,6 +113,9 @@ export class ListBlockComponent implements OnInit, OnDestroy {
       break;
     case Ability:
       dialogType = ListDialogAbilityComponent;
+      break;
+    case Weapon:
+      dialogType = ListDialogWeaponComponent;
       break;
     default:
       dialogType = ListDialogBasicComponent;
