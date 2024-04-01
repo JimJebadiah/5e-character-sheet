@@ -1,3 +1,20 @@
 <div class="weapon">
-  {{weapon.name}}
+  <div class="name field">
+    {{weapon.name}}&nbsp;&nbsp;
+    <span class="smaller">{{range.range}}/{{range.maxRange}}</span>
+  </div>
+  <div class="top">
+    <div class="attack field">{{weapon.attackRole}}</div>
+    <button
+      mat-icon-button
+      [class.disabled]="!range.hasAmmo"
+      [disabled]="!range.hasAmmo"
+      (click)="fire()"
+     >
+      <mat-icon [svgIcon]="'arrow'" />
+    </button>
+    <div class="damage-role field">
+      {{weapon.damageRole}}
+    </div>
+  </div>
 </div>

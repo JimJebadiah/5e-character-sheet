@@ -93,6 +93,7 @@ export class ListDialogWeaponComponent extends AbstractListDialog<Weapon> implem
   }
 
   override createListType(): Weapon {
+    console.log(this.weaponIndex);
     switch (this.weaponIndex) {
     case 0:
       return this.createMeleeWeapon();

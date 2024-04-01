@@ -1,6 +1,6 @@
 <div class="weapon">
   <div class="name field">
-    {{weapon.name}}
+    {{weapon.name}}&nbsp;
     <span class="smaller">{{firearm.range}}/{{firearm.maxRange}}</span>
   </div>
   <div class="top">
@@ -11,11 +11,22 @@
   </div>
   <hr />
   <div class="bottom">
-    <button class="status" mat-raised-button [ngClass]="statusClass()" (click)="nextState()">
+    <button
+      class="status"
+      mat-raised-button
+      [ngClass]="statusClass()"
+      (click)="nextState()"
+    >
       {{status()}}
     </button>
     <div class="bullets" [ngClass]="statusClass()">
-      <button class="icon-button" mat-icon-button (click)="fire()">
+      <button
+        class="icon-button"
+        mat-icon-button
+        (click)="fire()"
+        [disabled]="firearm.loaded <= 0"
+        [class.disabled]="firearm.loaded <= 0"
+      >
         <mat-icon svgIcon="crosshair"></mat-icon>
       </button>
       <div class="bullet-count">
@@ -23,7 +34,12 @@
           <mat-checkbox class="radio-like" disabled [checked]="loaded(i)"></mat-checkbox>
         </ng-container>
       </div>
-      <button class="icon-button" mat-icon-button (click)="reload()">
+      <button
+        class="icon-button"
+        mat-icon-button (click)="reload()"
+        [class.disabled]="!firearm.hasAmmo"
+        [disabled]="!firearm.hasAmmo"
+      >
         <mat-icon>refresh</mat-icon>
       </button>
     </div>

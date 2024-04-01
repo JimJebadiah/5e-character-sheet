@@ -82,8 +82,7 @@ export abstract class AbstractListData<T extends ListType> implements OnDestroy 
         val: this.data.data
       }
     }).afterClosed().pipe(takeUntil(this.onDestroyed)).subscribe((item) => {
-      this.data.data.from(item);
-      this.listService.update(this.data.data, this.index, this.listId);
+      if (item !== null) this.listService.update(item ?? this.data.data, this.index, this.listId);
     });
   }
 

@@ -30,7 +30,7 @@
 .field {
   .center();
   background-color: white;
-  width: 95%;
+  width: calc(100% - 20px);
   border-radius: 5px;
   margin: 5px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -51,4 +51,8 @@
 
 button:hover {
   z-index: 2;
+}
+
+.disabled {
+  --gun-color: rgba(0, 0, 0, 0.25) !important;
 }

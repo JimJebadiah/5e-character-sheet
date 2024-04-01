@@ -27,6 +27,14 @@
 
   .bullets {
     .center();
+    width: 100%;
+
+    .bullet-count {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-grow: 1;
+    }
 
     mat-icon {
       color: var(--gun-color) !important;
@@ -34,7 +42,7 @@
   }
 
   .status {
-    width: 100px;
+    min-width: 100px;
     color: black !important;
   }
 }

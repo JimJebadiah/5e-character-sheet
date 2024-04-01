@@ -26,6 +26,7 @@ export interface WeaponJSON {
     range?: number;
     maxRange?: number;
     rangeType?: RangeType;
+    hasAmmo?: boolean;
 
     // Firearm
     rounds?: number;
@@ -125,11 +126,13 @@ export class MeleeWeapon extends Weapon {
 export class RangeWeapon extends Weapon {
   range: number;
   maxRange: number;
+  hasAmmo: boolean;
 
   constructor(json: WeaponJSON) {
     super(json);
     this.range = json.range!;
     this.maxRange = json.maxRange!;
+    this.hasAmmo = json.hasAmmo!;
   }
 
   override getAttribute(): Attributes {
@@ -150,7 +153,8 @@ export class RangeWeapon extends Weapon {
       ...super.json,
       range: this.range,
       maxRange: this.maxRange,
-      rangeType: this.rangeType()
+      rangeType: this.rangeType(),
+      hasAmmo: this.hasAmmo
     };
   }
 }

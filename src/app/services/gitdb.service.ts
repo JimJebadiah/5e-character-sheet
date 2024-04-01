@@ -16,6 +16,8 @@ export class GitdbService {
   private static readonly TOKEN: string = 'auth-token';
   private static readonly USERNAME: string = 'username';
 
+  readonly TIMEOUT = 5000;
+
   private gh: any;
   private latestCommit: string | null = null;
   private repo: any;
@@ -55,11 +57,21 @@ export class GitdbService {
 
     this.heroCacheSubject.next(null);
 
-    this.update$.pipe(debounceTime(5000)).subscribe((hero) => {
+    this.update$.pipe(debounceTime(this.TIMEOUT)).subscribe((hero) => {
       this.saveHero(hero);
     });
 
-    this.saveSubject.next(false);
+    this.saving$.subscribe((saving) => {
+      if (saving) {
+        window.addEventListener('beforeunload', this.savingHandler);
+      } else {
+        window.removeEventListener('beforeunload', this.savingHandler);
+      }
+    });
+  }
+
+  savingHandler(e: BeforeUnloadEvent) {
+    e.preventDefault();
   }
 
   setToken(token: string) {

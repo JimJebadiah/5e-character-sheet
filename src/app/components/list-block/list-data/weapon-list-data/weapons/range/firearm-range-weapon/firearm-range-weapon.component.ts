@@ -29,6 +29,7 @@ export class FirearmRangeWeaponComponent extends AbstractWeaponComponent impleme
   }
 
   statusClass() {
+    if (this.firearm.loaded <= 0 && !this.firearm.hasAmmo) return 'disabled';
     if (this.firearm.status === 'operational') return 'good';
     else if (this.firearm.status === 'jammed') return 'mid';
     else return 'bad';

@@ -7,6 +7,7 @@ import { AbstractBlock } from '../abstract-block';
 import { ListType } from 'src/app/components/list-block/list-data/list-type';
 import { GitdbService } from 'src/app/services/gitdb.service';
 import { swipeAnimation } from '../swipe-animation';
+import { Firearm, RangeWeapon } from 'src/app/domain/weapon';
 
 @Component({
   selector: 'app-inventory-block',
@@ -32,6 +33,12 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
   updateList(event: ListType[]) {
     if (event.filter((i) => i instanceof Item).length === event.length) {
       this.hero.inventory = event as Item[];
+
+      this.hero.weapons.forEach((w) => {
+        if (w instanceof Firearm) w.hasAmmo = this.hasBullets();
+        else if (w instanceof RangeWeapon) w.hasAmmo = this.hasArrows();
+      });
+
       this.dbService.update(this.hero);
     }
   }
@@ -75,5 +82,13 @@ export class InventoryBlockComponent extends AbstractBlock implements OnInit {
       if (curr < 0) curr = 0;
       this.hero.currency.set(k, curr);
     };
+  }
+
+  private hasBullets(): boolean {
+    return this.hero.inventory.filter((i) => i.ammunitionType === 'bullet').length > 0;
+  }
+
+  private hasArrows(): boolean {
+    return this.hero.inventory.filter((i) => i.ammunitionType === 'arrow').length > 0;
   }
 }

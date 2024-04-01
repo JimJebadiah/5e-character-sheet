@@ -12,6 +12,7 @@ import { AbstractBlock, Blocks } from './abstract-block';
 import { FeaturesBlockComponent } from './features-block/features-block.component';
 import { ComponentType } from '@angular/cdk/portal';
 import { isMobile } from 'src/app/app.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-character-sheet-page',
@@ -31,6 +32,7 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     private readonly dbService: GitdbService,
     private readonly cdr: ChangeDetectorRef,
     private readonly router: Router,
+    private readonly snackBar: MatSnackBar
   ) {
     this.blockMap.set(Blocks.STAT, StatBlockComponent);
     this.blockMap.set(Blocks.COMBAT, CombatBlockComponent);
@@ -83,6 +85,19 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
       this.hero = hero;
       this.loaded = true;
       this.blocks = this.hero.blockOrder;
+    });
+
+    this.dbService.saving$.subscribe((s) => {
+      if (s) this.snackBar.open('Saving...', '', {
+        duration: this.dbService.TIMEOUT,
+        verticalPosition: 'top'
+      });
+      else {
+        this.snackBar.open('Saved', '', {
+          duration: 1000,
+          verticalPosition: 'top'
+        });
+      }
     });
   }
 
