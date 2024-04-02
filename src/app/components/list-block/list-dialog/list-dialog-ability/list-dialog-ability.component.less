@@ -1,46 +1,12 @@
 @import '../list-dialog-common.less';
 
-.content {
-  max-width: 400px;
+mat-radio-group {
+  .center();
+  width: 100%;
+  justify-content: space-evenly;
 
-  div {
-    margin-bottom: 15px;
-  }
-
-  div:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  mat-form-field {
-    width: 350px;
-  }
-
-  @height: 200px;
-
-  .textarea {
-    height: @height;
-
-    textarea {
-      font-size: normal !important;
-      height: calc(@height - 60px);
-    }
-  }
-
-  mat-radio-group {
-    .center();
-    width: 100%;
-    justify-content: space-evenly;
-  
-    ::ng-deep .mdc-radio {
-      display: flex !important;
-    }
+  ::ng-deep .mdc-radio {
+    display: flex !important;
   }
 }
 

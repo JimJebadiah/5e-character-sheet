@@ -12,7 +12,7 @@
     <mat-tab label="Ranged" />
     <mat-tab label="Firearm" />
   </mat-tab-group>
-  <div class="content">
+  <div class="content scrollbar">
     <form class="form" [formGroup]="group">
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
@@ -111,14 +111,14 @@
         <span>Proficient?</span>
         <mat-checkbox formControlName="proficient"></mat-checkbox>
       </div>
-      <div [ngSwitch]="weaponIndex">
+      <ng-container [ngSwitch]="weaponIndex">
         <ng-container *ngSwitchCase="1">
           <ng-container [ngTemplateOutlet]="editRange" />
         </ng-container>
         <ng-container *ngSwitchCase="2">
           <ng-container [ngTemplateOutlet]="editFirearm" />
         </ng-container>
-      </div>
+      </ng-container>
     </form>
   </div>
   <div class="buttons">

@@ -13,11 +13,23 @@
         </div>
       </ng-container>
       <ng-template #list>
-        <div class="list" cdkDropList (cdkDropListDropped)="onDrop($event)">
-          <div class="list-container" *ngFor="let item of items; index as index" cdkDrag>
-            <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" />
-          </div>
-        </div>
+        <ng-container *ngIf="isMobile; then mobile; else desktop" />
       </ng-template>
     </div>
   </mat-card>
+
+<ng-template #desktop>
+  <div class="list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+    <div class="list-container" *ngFor="let item of items; index as index" cdkDrag>
+      <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" />
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #mobile>
+  <div class="list">
+    <div class="list-container" *ngFor="let item of items; index as index">
+      <ng-container *ngComponentOutlet="getComponent(); inputs: {data: wrap(item), index: index, listId: listId}" />
+    </div>
+  </div>
+</ng-template>
