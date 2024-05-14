@@ -148,9 +148,19 @@ export class Hero {
     };
   }
 
-  recover(amnt: number) {
-    this.hp += amnt;
-    if (this.hp > this.maxHp) this.hp = this.maxHp;
+  recover(): Setter<number> {
+    return (amnt) => {
+      if (this.hp === 0) {
+        for (const i in [0, 1]) {
+          for (const j in [0, 1, 2]) {
+            this.deathSaves[i][j] = 0;
+          }
+        }
+      }
+
+      this.hp += amnt;
+      if (this.hp > this.maxHp) this.hp = this.maxHp;
+    };
   }
 
   longRest() {

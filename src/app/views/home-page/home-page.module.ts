@@ -5,6 +5,7 @@ import { CharacterModule } from './character/character.module';
 import { CreateCharacterModule } from './create-character/create-character.module';
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {FooterModule} from '../../components/footer/footer.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     CharacterModule,
     CreateCharacterModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   exports: [HomePageComponent]
 })

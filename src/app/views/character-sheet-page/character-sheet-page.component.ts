@@ -88,11 +88,15 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     });
 
     this.dbService.saving$.subscribe((s) => {
-      if (s) this.snackBar.open('Saving...', '', {
-        duration: this.dbService.TIMEOUT,
-        verticalPosition: 'top'
-      });
+      if (s) {
+        if (this.snackBar._openedSnackBarRef === null)
+          this.snackBar.open('Saving...', '', {
+            duration: Number.MAX_SAFE_INTEGER,
+            verticalPosition: 'top'
+          });
+      }
       else {
+        this.snackBar.dismiss();
         this.snackBar.open('Saved', '', {
           duration: 1000,
           verticalPosition: 'top'
@@ -117,30 +121,12 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     this.updateActive();
   }
 
-  subtitles(): string[] {
-    return [
-      `Level ${this.hero.level} ${this.hero.class}`,
-      `Background: ${this.hero.background}`,
-      `Alignment: ${this.hero.alignment}`
-    ];
-  }
-
   tabs(): string[] {
     const list = ['Info'];
     this.blockMap.forEach((v, k) => {
       list.push(this.nameMap.get(k) ?? 'Unknown');
     });
     return list;
-  }
-
-  listConnections(index: number) {
-    const connections = [];
-    for (let i=0;i<this.tabs.length;i++){
-      if(i != index){
-        connections.push('list-'+i);
-      }
-    }
-    return connections;
   }
 
   private updateActive() {

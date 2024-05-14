@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { EditableModule } from 'src/app/directives/editable.module';
+import {MatIconButton} from '@angular/material/button';
 
 
 
@@ -18,6 +19,7 @@ import { EditableModule } from 'src/app/directives/editable.module';
     MatIconModule,
     MatCheckboxModule,
     EditableModule,
+    MatIconButton,
   ],
   exports: [
     HpBlockComponent

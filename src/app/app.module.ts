@@ -24,7 +24,7 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
     HttpClientModule,
     HammerModule,
     CdkScrollableModule,
-    NotFoundModule
+    NotFoundModule,
   ],
   providers: [
   ],
