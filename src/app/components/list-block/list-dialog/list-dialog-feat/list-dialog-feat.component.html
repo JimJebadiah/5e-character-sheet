@@ -6,7 +6,7 @@
 </mat-card>
 
 <ng-template #editBody>
-  <div class="content">
+  <div class="content scrollbar">
     <form class="form" [formGroup]="group">
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
@@ -25,8 +25,8 @@
 </ng-template>
 
 <ng-template #viewBody>
-  <div class="content">
-    <div>
+  <div class="content scrollbar">
+    <div class="description">
       <p *ngFor="let line of descriptionStrings()">{{line}}</p>
     </div>
   </div>

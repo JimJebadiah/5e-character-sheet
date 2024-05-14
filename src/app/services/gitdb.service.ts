@@ -37,7 +37,6 @@ export class GitdbService {
   private heroCacheSubject: ReplaySubject<Hero[] | null> = new ReplaySubject(1);
   private heroCache$ = this.heroCacheSubject.asObservable();
 
-
   constructor(private readonly route: Router) {
     this.token$.subscribe((token) => {
       this.gh = new GitHub({

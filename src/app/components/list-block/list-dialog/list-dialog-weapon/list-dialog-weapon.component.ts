@@ -112,7 +112,6 @@ export class ListDialogWeaponComponent extends AbstractListDialog<Weapon> implem
     this.damageDice.setValue(this.val!.damageDice);
     this.proficient.setValue(this.val!.proficient);
 
-    console.log(this.val!.damageType);
     this.damageType.setValue(this.val!.damageType);
     this.attribute.setValue(this.val!.getAttribute());
 
@@ -136,6 +135,23 @@ export class ListDialogWeaponComponent extends AbstractListDialog<Weapon> implem
 
   isFirearm() {
     return this.val instanceof Firearm;
+  }
+
+  formattedType() {
+    if (this.isFirearm()) return 'Firearm';
+    else return this.val!.type().charAt(0).toUpperCase() + this.val!.type().substring(1);
+  }
+
+  descriptionStrings(): string[] {
+    return (this.descriptionV ?? '').split('\n');
+  }
+
+  rangedVal(): RangeWeapon {
+    return this.val! as RangeWeapon;
+  }
+
+  firearmVal(): Firearm {
+    return this.val! as Firearm;
   }
 
   updateWeaponType(index: number) {
@@ -235,6 +251,8 @@ export class ListDialogWeaponComponent extends AbstractListDialog<Weapon> implem
       type: 'ranged'
     });
   }
+
+  protected readonly RangeWeapon = RangeWeapon;
 }
 
 function uuidv4(): string {

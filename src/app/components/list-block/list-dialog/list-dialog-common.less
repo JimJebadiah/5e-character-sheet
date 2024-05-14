@@ -5,24 +5,33 @@
   min-width: 250px;
   max-width: 400px;
   margin: 0;
+  max-height: 90dvh;
 
   .header {
     .card-header();
   }
 
   .body {
-    .center();
+    display: flex;
     justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 
     .content {
-      .center();
-      height: 100%;;
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
       font-size: x-large;
       text-align: center;
       overflow-y: scroll;
       overflow-x: hidden;
+
+      .description {
+        text-align: left;
+        margin: 15px;
+      }
     }
 
     .empty {
@@ -33,7 +42,7 @@
       .center();
       width: 90%;
       gap: 15px;
-      margin-bottom: 25px;
+      margin: 25px 0;
 
       button {
         width: 60%;
@@ -68,6 +77,10 @@
       height: calc(@height - 60px);
     }
   }
+}
+
+.column {
+  flex-direction: column;
 }
 
 .content {

@@ -108,6 +108,7 @@ export class Weapon extends ListType {
       proficient: this.proficient,
       damageType: this.damageType,
       modifiers: this.modifiers,
+      attribute: this.getAttribute(),
       type: this.type()
     };
   }

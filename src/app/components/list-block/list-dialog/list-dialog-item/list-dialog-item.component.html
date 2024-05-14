@@ -6,7 +6,7 @@
 </mat-card>
 
 <ng-template #editBody>
-  <div class="content">
+  <div class="content scrollbar">
     <form class="form" [formGroup]="group">
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
@@ -41,12 +41,12 @@
 </ng-template>
 
 <ng-template #viewBody>
-  <div class="content">
+  <div class="content scrollbar">
     <div class="list">
       <div>
         {{val!.count}}
       </div>
-      <div>
+      <div class="description">
         {{val!.description}}
       </div>
       <div *ngIf="isAmmunitionV">

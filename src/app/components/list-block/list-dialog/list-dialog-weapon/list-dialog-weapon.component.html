@@ -187,7 +187,7 @@
 
 <!-- View -->
 <ng-template #viewBody>
-  <div class="content">
+  <div class="content scrollbar column">
     <ng-container [ngSwitch]="val?.type()">
       <ng-container *ngSwitchCase="'melee'">
         <ng-container [ngTemplateOutlet]="viewMelee" />
@@ -204,16 +204,36 @@
 
 <!-- Melee -->
 <ng-template #viewMelee>
-  Melee
+  <div>{{formattedType()}}</div>
+  <div class="description" *ngIf="(descriptionV ?? '').length !== 0">
+    <p *ngFor="let line of descriptionStrings()">{{line}}</p>
+  </div>
+  <br />
+  <div>{{this.val!.damageRole}} damage</div>
 </ng-template>
 
 <!-- Range -->
 <ng-template #viewRange>
-  Range
+  <ng-container [ngTemplateOutlet]="viewMelee" />
+  <br />
+  <div class="table">
+    <span>Range:</span>
+    <span>{{rangedVal().range}}</span>
+  </div>
+  <br />
+  <div class="table">
+    <span>Max Range:</span>
+    <span>{{rangedVal().maxRange}}</span>
+  </div>
   <ng-container *ngIf="isFirearm(); then viewFirearm" />
 </ng-template>
 
 <!-- Firearm -->
 <ng-template #viewFirearm>
-  Firearm
+  <br />
+  <div class="table">
+    <span>Misfire Score:</span>
+    <span>{{firearmVal().misfireScore}}</span>
+  </div>
+  <div>{{firearmVal().loaded}} / {{firearmVal().rounds}} Rounds</div>
 </ng-template>
