@@ -1,12 +1,13 @@
 {
   "name": "psc",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check && eslint 'src/app/**/*.ts' --fix",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "python3 deploy.py"
   },
   "private": true,
   "dependencies": {
