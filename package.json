@@ -1,6 +1,6 @@
 {
   "name": "psc",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --disable-host-check && eslint 'src/app/**/*.ts' --fix",
