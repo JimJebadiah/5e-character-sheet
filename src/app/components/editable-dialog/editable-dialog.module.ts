@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { EditableNumberStepDialogComponent } from './editable-number-step-dialog/editable-number-step-dialog.component';
+import {EditableLevelDialogComponent} from './editable-level-dialog/editable-level-dialog.component';
+import {NumberFieldModule} from '../../directives/number-field/number-field.module';
+import {MatCheckbox} from '@angular/material/checkbox';
 
 
 
@@ -17,7 +20,8 @@ import { EditableNumberStepDialogComponent } from './editable-number-step-dialog
   declarations: [
     EditableNumberDialogComponent,
     EditableStringDialogComponent,
-    EditableNumberStepDialogComponent
+    EditableNumberStepDialogComponent,
+    EditableLevelDialogComponent
   ],
   imports: [
     CommonModule,
@@ -27,12 +31,15 @@ import { EditableNumberStepDialogComponent } from './editable-number-step-dialog
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NumberFieldModule,
+    MatCheckbox
   ],
   exports: [
     EditableNumberDialogComponent,
     EditableStringDialogComponent,
-    EditableNumberStepDialogComponent
+    EditableNumberStepDialogComponent,
+    EditableLevelDialogComponent
   ]
 })
 export class EditableDialogModule { }

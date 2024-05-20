@@ -8,7 +8,7 @@
   border-radius: 5px;
   background-color: var(--white);
   margin: 5px 0;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: @box-shadow;
 
   .center();
   flex-direction: column;
@@ -59,7 +59,7 @@ button {
   border-radius: 100%;
   border-color: var(--primary) !important;
   --mdc-checkbox-disabled-selected-icon-color: var(--primary) !important;
-  box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary);
+  box-shadow: @box-shadow;
 
   svg {
     display: none;
@@ -80,4 +80,3 @@ hr {
 .delete {
   color: var(--bad) !important;
 }
-  

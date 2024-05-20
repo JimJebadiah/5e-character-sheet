@@ -28,7 +28,7 @@ export class NumberFieldDirective implements OnInit {
 
     this.control.valueChanges.subscribe((val) => {
       if (this.ref !== undefined) {
-
+        console.log(val);
         if (val! === '') {
           this.value = 1;
           this.ref.value = '';

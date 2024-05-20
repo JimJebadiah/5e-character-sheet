@@ -65,6 +65,12 @@ export class WeaponsBlockComponent implements OnInit {
           firearm.reload(bulletItem!.count);
           this.hero.inventory.splice(index, 1);
         }
+
+        this.hero.weapons.forEach((w) => {
+          if (w instanceof Firearm) w.hasAmmo = this.hasBullets();
+          else if (w instanceof RangeWeapon) w.hasAmmo = this.hasArrows();
+        });
+
         this.dbService.update(this.hero);
       }
     });
@@ -72,12 +78,15 @@ export class WeaponsBlockComponent implements OnInit {
 
   fire() {
     this.rangeService.fire$.subscribe((weaponId) => {
+      console.log('asdf');
       const weapon = this.hero.weapons.find((w) => w.id === weaponId)! as RangeWeapon;
       if (weapon instanceof Firearm) {
         weapon.fire();
       } else if (weapon instanceof RangeWeapon) {
         this.fireArrow();
       }
+
+      console.log(this.hasBullets());
 
       this.hero.weapons.forEach((w) => {
         if (w instanceof Firearm) w.hasAmmo = this.hasBullets();

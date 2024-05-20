@@ -1,0 +1,29 @@
+<mat-card class="edit-number-container">
+  <div class="header">Level Up!</div>
+  <div class="body">
+    <div class="content">
+      <div>Proceeding to Level {{value[0]}}!</div>
+      <form [formGroup]="group">
+        <div class="prof-increase">
+          <span>Proficiency Increase?</span>
+          <mat-checkbox formControlName="profInc"></mat-checkbox>
+        </div>
+        <mat-form-field
+          appearance="outline"
+          appNumberField
+          [formGroup]="group"
+          [name]="'newHp'"
+          [value]="value[1]"
+          (valueChange)="updateHp($event)"
+        >
+          <mat-label>Additional HP</mat-label>
+          <input class="num" matInput required formControlName="newHp"/>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="buttons">
+      <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
+    </div>
+  </div>
+</mat-card>
