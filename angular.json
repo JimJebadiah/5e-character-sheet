@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/psc",
+            "outputPath": "dist/5e-character-sheet",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -123,5 +123,8 @@
     "@schematics/angular:service": {
       "skipTests": true
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
