@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, mergeMap, of, tap } from 'rxjs';
 
-
 declare let GitHub: any;
 
 export const LATEST_COMMIT = 'latest_commit';
@@ -137,6 +136,21 @@ export class GitdbService {
     );
   }
 
+  uploadImage(file: File, heroName: string): Observable<string> {
+    return from(this.createRepo()).pipe(
+      mergeMap(() => from(this.toBase64(file))),
+      mergeMap((fileContents: string) => {
+        return from(this.repo.writeFile(
+          'main',
+          `images/${heroName}.png?time=${Date.now()}`,
+          fileContents,
+          `Uploaded ${heroName}.png to the database`
+        ));
+      }),
+      mergeMap(() => this.getImageString(heroName))
+    );
+  }
+
   setName(user: string) {
     this.usernameSubject.next(user);
     sessionStorage.setItem(GitdbService.USERNAME, user);
@@ -180,5 +194,16 @@ export class GitdbService {
           throw new Error('Fail');
         });
     }
+  }
+
+  toBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+      reader.onerror = reject;
+    });
   }
 }

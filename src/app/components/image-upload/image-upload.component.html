@@ -1,0 +1,29 @@
+<!-- File Input -->
+<input
+  #fileInput
+   type="file"
+   accept="image/jpg,image/png"
+   (change)="selectImage($event)"
+   style="display: none"
+>
+
+<ng-container *ngIf="hasFile() then upload; else select" />
+
+<ng-template #select>
+  <button mat-raised-button (click)="fileInput.click()" color="primary">
+    Select
+  </button>
+</ng-template>
+
+<ng-template #upload>
+  <div class="image-row">
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <span>{{currentFile?.name}}</span>
+    <button mat-raised-button color="primary" (click)="uploadImage()">
+      Upload
+    </button>
+  </div>
+</ng-template>
+

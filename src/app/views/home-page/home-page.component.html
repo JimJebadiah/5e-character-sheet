@@ -1,6 +1,8 @@
 <div class="home-page-container">
   <app-header [title]="'Characters'"></app-header>
 
+  <app-image-upload />
+
   <ng-container *ngIf="loaded; else spinner">
     <div class="home-page-body">
       <ng-container *ngFor="let hero of heroes">

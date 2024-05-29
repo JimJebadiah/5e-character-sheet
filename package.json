@@ -26,6 +26,7 @@
     "fetch-intercept": "^2.4.0",
     "github-api": "^3.4.0",
     "hammerjs": "^2.0.8",
+    "js-base64": "^3.7.7",
     "rxjs": "~7.8.0",
     "smee-client": "^2.0.1",
     "tslib": "^2.3.0",

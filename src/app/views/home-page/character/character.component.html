@@ -5,9 +5,7 @@
       {{hero.name}}
     </div>
     <div class="body">
-      <div class="image">
-        <img [src]="getImageString() | async" default="/assets/blank.png" alt="Character Image">
-      </div>
+      <app-character-image [heroName]="hero.name" />
       <hr />
       <div class="descriptor">
         Level {{hero.level}} {{hero.class}}

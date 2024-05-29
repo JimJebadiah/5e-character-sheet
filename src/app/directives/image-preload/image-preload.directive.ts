@@ -1,21 +1,20 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: 'img[default]',
+  selector: 'img[dataSrc]',
   host: {
     '(error)':'updateUrl()',
     '(load)': 'load()',
-    '[src]':'src'
+    '[src]':'dataSrc'
   }
 })
 export class ImagePreloadDirective {
-  @Input() src?: string | null;
-  @Input() default?: string | null;
+  @Input() dataSrc?: string | null;
   @HostBinding('class') className: string = '';
 
-  updateUrl() {
-    this.src = this.default;
-  }
+  // updateUrl() {
+  //   from
+  // }
 
   load() {
     this.className = 'image-loaded';
