@@ -37,10 +37,6 @@ export class InfoBlockComponent extends AbstractBlock implements OnInit {
     this.languages = this.hero.languages.map((l) => new Basic(l));
   }
 
-  getImageString(): Observable<string> {
-    return this.dbService.getImageString(this.hero.name!);
-  }
-
   goBack() {
     this.router.navigate(['']);
   }

@@ -10,6 +10,7 @@ import { ListBlockModule } from 'src/app/components/list-block/list-block.module
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImagePreloadModule } from 'src/app/directives/image-preload/image-preload.module';
+import {CharacterImageModule} from "../../../components/character-image/character-image.module";
 
 
 
@@ -17,18 +18,19 @@ import { ImagePreloadModule } from 'src/app/directives/image-preload/image-prelo
   declarations: [
     InfoBlockComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    CommonModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterModule,
-    EditableModule,
-    ListBlockModule,
-    CdkScrollableModule,
-    ImagePreloadModule
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        CommonModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterModule,
+        EditableModule,
+        ListBlockModule,
+        CdkScrollableModule,
+        ImagePreloadModule,
+        CharacterImageModule
+    ],
   exports: [
     InfoBlockComponent
   ]

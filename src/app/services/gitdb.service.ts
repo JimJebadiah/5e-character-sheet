@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, mergeMap, of, tap } from 'rxjs';
+import {Base64} from "js-base64";
 
 declare let GitHub: any;
 
@@ -30,7 +31,7 @@ export class GitdbService {
   private updateSubject: Subject<Hero> = new Subject();
   update$ = this.updateSubject.asObservable();
 
-  private saveSubject: Subject<boolean> = new ReplaySubject(1);
+  private saveSubject: Subject<boolean> = new BehaviorSubject(false);
   saving$ = this.saveSubject.asObservable();
 
   private heroCacheSubject: ReplaySubject<Hero[] | null> = new ReplaySubject(1);
@@ -123,23 +124,38 @@ export class GitdbService {
       mergeMap((heroes) => {
         return heroes.pipe(
           mergeMap((h) => {
-            return h === null ? this.retrieveHeros() : of(h);
+            return h === null ? this.retrieveHeroes() : of(h);
           })
         );
       })
     );
   }
 
+  // Images
+
+  private imageCache = new Map<string, string>();
+
+  private imageUpdateSubject = new Subject<[string, string]>();
+  imageUpdate$: Observable<[string, string]> = this.imageUpdateSubject.asObservable();
+
   getImageString(name: string): Observable<string> {
     return this.username$.pipe(
-      map((u) => `https://raw.githubusercontent.com/${u}/5e-db/main/images/${name}.png`),
+      mergeMap((u) => {
+        if (this.imageCache.has(name)) return of(this.imageCache.get(name)!);
+        return from(fetch(`https://raw.githubusercontent.com/${u}/5e-db/main/images/${name}.png?time=${Date.now()}`)).pipe(
+          mergeMap((res) => this.checkBase64(res)),
+          tap((image) => this.imageCache.set(name, image)),
+        );
+      }),
     );
   }
 
   uploadImage(file: File, heroName: string): Observable<string> {
     return from(this.createRepo()).pipe(
-      mergeMap(() => from(this.toBase64(file))),
+      mergeMap(() => from(toDataUrl(file))),
       mergeMap((fileContents: string) => {
+        this.imageCache.set(heroName, fileContents);
+        this.imageUpdateSubject.next([heroName, fileContents]);
         return from(this.repo.writeFile(
           'main',
           `images/${heroName}.png?time=${Date.now()}`,
@@ -147,16 +163,24 @@ export class GitdbService {
           `Uploaded ${heroName}.png to the database`
         ));
       }),
-      mergeMap(() => this.getImageString(heroName))
+      mergeMap(() => '')
     );
   }
+
+  private checkBase64(image: Response): Observable<string> {
+    return image.headers.get('content-type') === 'image/png' ?
+      from(image.blob().then((file) => toDataUrl(file))) :
+      from(image.text());
+  }
+
+  // Other
 
   setName(user: string) {
     this.usernameSubject.next(user);
     sessionStorage.setItem(GitdbService.USERNAME, user);
   }
 
-  private retrieveHeros(): Observable<Hero[]> {
+  private retrieveHeroes(): Observable<Hero[]> {
     return from(this.repo.getContents('main', 'heroes/'))
       .pipe(
         map( (data: any) => {
@@ -169,15 +193,6 @@ export class GitdbService {
         mergeMap((heroes) => forkJoin<Hero[]>(heroes)),
         tap((heroes) => this.heroCacheSubject.next(heroes))
       );
-  }
-
-  async getLatestCommit() {
-    this.latestCommit = localStorage.getItem(LATEST_COMMIT);
-    if (this.latestCommit === null) {
-      await this.createRepo();
-      const commits = await this.repo.listCommits();
-      this.latestCommit = commits.data[0].sha;
-    }
   }
 
   async createRepo() {
@@ -195,15 +210,15 @@ export class GitdbService {
         });
     }
   }
+}
 
-  toBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        resolve(reader.result as string);
-      };
-      reader.onerror = reject;
-    });
-  }
+export function toDataUrl(file: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = reject;
+  });
 }

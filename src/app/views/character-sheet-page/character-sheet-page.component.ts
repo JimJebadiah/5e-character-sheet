@@ -73,6 +73,8 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private saving: boolean = false;
+
   ngOnInit(): void {
     const name = this.route.snapshot.paramMap.get('name') as string;
     this.dbService.getHero(name).pipe(
@@ -94,13 +96,17 @@ export class CharacterSheetPageComponent implements OnInit, AfterViewInit {
             duration: Number.MAX_SAFE_INTEGER,
             verticalPosition: 'top'
           });
+        this.saving = true;
       }
       else {
-        this.snackBar.dismiss();
-        this.snackBar.open('Saved', '', {
-          duration: 1000,
-          verticalPosition: 'top'
-        });
+        if (this.saving) {
+          this.snackBar.dismiss();
+          this.snackBar.open('Saved', '', {
+            duration: 1000,
+            verticalPosition: 'top'
+          });
+          this.saving = false;
+        }
       }
     });
   }
