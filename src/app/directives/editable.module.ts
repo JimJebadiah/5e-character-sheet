@@ -8,13 +8,15 @@ import { EditableDialogModule } from '../components/editable-dialog/editable-dia
 import { EditableStringDirective } from './editable-string/editable-string.directive';
 import { EditableNumberStepDirective } from './editable-number-step/editable-number-step.directive';
 import {EditableLevelDirective} from './ediitable-level/editable-level.directive';
+import {EditablePictureDirective} from './editable-picture/editable-picture.directive';
 
 @NgModule({
   declarations: [
     EditableNumberDirective,
     EditableStringDirective,
     EditableNumberStepDirective,
-    EditableLevelDirective
+    EditableLevelDirective,
+    EditablePictureDirective
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import {EditableLevelDirective} from './ediitable-level/editable-level.directive
     EditableNumberDirective,
     EditableStringDirective,
     EditableNumberStepDirective,
-    EditableLevelDirective
+    EditableLevelDirective,
+    EditablePictureDirective
   ]
 })
 export class EditableModule { }

@@ -177,7 +177,7 @@ export class GitdbService {
           `Uploaded ${heroName}.png to the database`
         ));
       }),
-      mergeMap(() => '')
+      mergeMap(() => 'a')
     );
   }
 

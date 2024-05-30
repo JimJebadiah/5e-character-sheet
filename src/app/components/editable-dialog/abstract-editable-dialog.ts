@@ -16,7 +16,7 @@ export abstract class AbstractEditableDialog<T, R> {
 
   @HostListener('document:keypress', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.canSubmit()) {
       this.confirm();
     }
   }

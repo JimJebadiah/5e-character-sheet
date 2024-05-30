@@ -21,7 +21,8 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
         width: ${this.ref.nativeElement.clientWidth}px;
         height: ${this.ref.nativeElement.clientHeight}px;
         background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 5px
+        border-radius: 5px;
+        bottom: 0;
       `
     );
   }
@@ -34,7 +35,8 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
         position: absolute;
         width: ${this.ref.nativeElement.clientWidth}px;
         height: ${this.ref.nativeElement.clientHeight}px;
-        background-color: transparent
+        background-color: transparent;
+        bottom: 0;
         `
     );
   }
@@ -71,9 +73,12 @@ export abstract class AbstractEditableDirective<T> implements AfterViewInit {
         position: absolute;
         width: ${this.ref.nativeElement.clientWidth}px;
         height: ${this.ref.nativeElement.clientHeight}px;
-        background-color: transparent
+        background-color: transparent;
+        bottom: 0;
       `
     );
+
+    this.ref.nativeElement.style.position = 'relative';
 
     this.renderer.appendChild(this.ref.nativeElement, this.overlay);
   }

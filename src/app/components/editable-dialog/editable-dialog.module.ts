@@ -13,6 +13,9 @@ import { EditableNumberStepDialogComponent } from './editable-number-step-dialog
 import {EditableLevelDialogComponent} from './editable-level-dialog/editable-level-dialog.component';
 import {NumberFieldModule} from '../../directives/number-field/number-field.module';
 import {MatCheckbox} from '@angular/material/checkbox';
+import {EditablePictureDirective} from "../../directives/editable-picture/editable-picture.directive";
+import {EditablePictureComponent} from "./editable-picture/editable-picture.component";
+import {ImageUploadModule} from "../image-upload/image-upload.module";
 
 
 
@@ -21,7 +24,8 @@ import {MatCheckbox} from '@angular/material/checkbox';
     EditableNumberDialogComponent,
     EditableStringDialogComponent,
     EditableNumberStepDialogComponent,
-    EditableLevelDialogComponent
+    EditableLevelDialogComponent,
+    EditablePictureComponent,
   ],
   imports: [
     CommonModule,
@@ -33,13 +37,15 @@ import {MatCheckbox} from '@angular/material/checkbox';
     MatInputModule,
     ReactiveFormsModule,
     NumberFieldModule,
-    MatCheckbox
+    MatCheckbox,
+    ImageUploadModule
   ],
   exports: [
     EditableNumberDialogComponent,
     EditableStringDialogComponent,
     EditableNumberStepDialogComponent,
-    EditableLevelDialogComponent
+    EditableLevelDialogComponent,
+    EditablePictureComponent,
   ]
 })
 export class EditableDialogModule { }

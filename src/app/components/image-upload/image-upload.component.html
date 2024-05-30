@@ -7,7 +7,17 @@
    style="display: none"
 >
 
-<ng-container *ngIf="hasFile() then upload; else select" />
+<ng-container [ngSwitch]="state">
+  <ng-container *ngSwitchCase="'select'">
+    <ng-container *ngTemplateOutlet="select" />
+  </ng-container>
+  <ng-container *ngSwitchCase="'upload'">
+    <ng-container *ngTemplateOutlet="upload" />
+  </ng-container>
+  <ng-container *ngSwitchCase="'success'">
+    <ng-container *ngTemplateOutlet="success" />
+  </ng-container>
+</ng-container>
 
 <ng-template #select>
   <button mat-raised-button (click)="fileInput.click()" color="primary">
@@ -24,6 +34,13 @@
     <button mat-raised-button color="primary" (click)="uploadImage()">
       Upload
     </button>
+  </div>
+</ng-template>
+
+<ng-template #success>
+  <div class="image-row">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{currentFile?.name}}</span>
   </div>
 </ng-template>
 
