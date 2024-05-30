@@ -2,8 +2,22 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Hero, HeroJSON } from '../domain/hero';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, debounceTime, firstValueFrom, forkJoin, from, map, mergeMap, of, tap } from 'rxjs';
-import {Base64} from "js-base64";
+import {
+  BehaviorSubject,
+  Observable,
+  ReplaySubject,
+  Subject,
+  debounceTime,
+  firstValueFrom,
+  forkJoin,
+  from,
+  map,
+  mergeMap,
+  of,
+  tap,
+  zipWith, combineLatestWith
+} from 'rxjs';
+import {atob, Base64} from "js-base64";
 
 declare let GitHub: any;
 
@@ -139,11 +153,11 @@ export class GitdbService {
   imageUpdate$: Observable<[string, string]> = this.imageUpdateSubject.asObservable();
 
   getImageString(name: string): Observable<string> {
-    return this.username$.pipe(
-      mergeMap((u) => {
+    return from(this.createRepo()).pipe(
+      mergeMap(() => {
         if (this.imageCache.has(name)) return of(this.imageCache.get(name)!);
-        return from(fetch(`https://raw.githubusercontent.com/${u}/5e-db/main/images/${name}.png?time=${Date.now()}`)).pipe(
-          mergeMap((res) => this.checkBase64(res)),
+        return from(this.repo.getContents('main', `images/${name}.png?time=${Date.now()}`)).pipe(
+          mergeMap((res: any) => this.checkBase64(res)),
           tap((image) => this.imageCache.set(name, image)),
         );
       }),
@@ -167,10 +181,11 @@ export class GitdbService {
     );
   }
 
-  private checkBase64(image: Response): Observable<string> {
-    return image.headers.get('content-type') === 'image/png' ?
-      from(image.blob().then((file) => toDataUrl(file))) :
-      from(image.text());
+  private checkBase64(image: any): Observable<string> {
+    image = image.data.content as string;
+    return atob(image).startsWith('data:image/png;base64,') ?
+      of(atob(image)) :
+      of(`data:image/png;base64,${image}`);
   }
 
   // Other

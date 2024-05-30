@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Hero } from 'src/app/domain/hero';
 import { GitdbService } from 'src/app/services/gitdb.service';
 
@@ -18,11 +17,7 @@ export class CharacterComponent {
     private readonly dbService: GitdbService
   ) {}
 
-  getImageString(): Observable<string> {
-    return this.dbService.getImageString(this.hero.name);
-  }
-
   goToSheet() {
-    this.router.navigate(['character', this.hero.name]);
+    this.router.navigate(['character', this.hero.name]).then();
   }
 }
